@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Profil Mahasiswa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #333;
+    }
+    .info {
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Profil Mahasiswa</h2>
+    <div class="info" id="nama">Nama: Della</div>
+    <div class="info" id="jurusan">Jurusan: Sosiologi</div>
+    <div class="info" id="kampus">Kampus: Universitas Terbuka</div>
+    <button onclick="ubahNama()">Ubah Nama</button>
+  </div>
+
+  <script>
+    function ubahNama() {
+      const namaBaru = prompt("Masukkan nama baru:");
+      if (namaBaru) {
+        document.getElementById("nama").textContent = "Nama: " + namaBaru;
+      }
+    }
+  </script>
+</body>
+</html>
