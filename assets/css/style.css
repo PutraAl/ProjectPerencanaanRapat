@@ -4,8 +4,19 @@
     box-sizing: border-box;
 }
 
+:root {
+  --biru:#4F98CA;
+  --hijau: #50D890;
+  --putih: #EFFFFB;
+  --hitam: #272727;
+}
 
 
 .navbar-light .navbar-nav .nav-link {
-  color: #000;
+  color: red;
 }
+
+/* .nav-link {
+  color: red;
+}
+ */
