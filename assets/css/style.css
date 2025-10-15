@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x:hidden;
 }
 
 :root {
@@ -13,8 +14,24 @@
 
 
 .navbar-light .navbar-nav .nav-link {
-  color: red;
+  color: var(--biru);
 }
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--hijau);
+}
+
+.wrap-contact {
+  padding: 0 250px;
+  
+}
+
+@media screen and (max-width:720px) {
+  .wrap-contact {
+    padding: 0 100px;
+  }
+}
+
+
 
 /* .nav-link {
   color: red;
