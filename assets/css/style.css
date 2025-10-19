@@ -1,11 +1,87 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
 }
 
 
+:root {
+  --biru: #4F98CA;
+  --hijau: #50D890;
+  --putih: #EFFFFB;
+  --hitam: #272727;
+}
+
+.footer {
+}
+
+.footer-brand img{
+  height: 150px;
+  width: 150px;
+}
+
+.footer-links a{
+  font-weight:bold;
+  color: var(--biru);
+  text-decoration: none;
+}
+
+h1 {
+  overflow: hidden;
+}
+
+hr{
+  width: 100%;
+  background-color: var(--biru);
+  color: var(--biru);
+  height: 1.5px;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+
+.card:hover {
+  box-shadow: 0 0 20px var(--biru); /* warna biru glow */
+  transform: translateY(-5px); /* efek naik sedikit */
+}
+
+.image-wrap img {
+  height: 50px;
+  width: 50px;
+}
 
 .navbar-light .navbar-nav .nav-link {
-  color: #000;
+  color: var(--biru);
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--hijau);
+}
+
+.wrap-contact {
+  padding: 0 100px;
+}
+
+.navbar {
+  background-color: var(--biru);
+}
+
+
+@media screen and (min-width:720px) {
+  .wrap-contact {
+    padding: 0 250px;
+
+  }
+
+  .image-wrap img {
+  height: 100px;
+  width: 100px;
+}
 }
