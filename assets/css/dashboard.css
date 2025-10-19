@@ -1,3 +1,10 @@
+:root {
+  --biru: #4F98CA;
+  --hijau: #50D890;
+  --putih: #EFFFFB;
+  --hitam: #272727;
+}
+
 /* Reset dan dasar */
 * {
   margin: 0;
@@ -20,7 +27,7 @@ body {
   left: 0;
   height: 100vh;                /* full viewport height */
   width: 220px;
-  background-color: #eaeaea;
+  background-color: var(--biru);
   display: flex;                /* make it flexbox */
   flex-direction: column;       /* vertical layout */
   justify-content: space-between; /* push bottom-profile down */

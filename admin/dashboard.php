@@ -1,10 +1,16 @@
+<?php 
+include "../connection/server.php";
+include "../middleware.php";
+$allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
+$allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
     <div class="container">
@@ -15,15 +21,15 @@
             </div>
 
             <nav class="nav-menu">
-                <a href="./dashboard.html" class="menu-item active">
+                <a href="./dashboard.php" class="menu-item active">
                     <span class="icon">🏠</span>
                     <span class="label">Dashboard</span>
                 </a>
-                <a href="rapat.html" class="menu-item">
+                <a href="rapat.php" class="menu-item">
                     <span class="icon">📄</span>
                     <span class="label">Rapat</span>
                 </a>
-                <a href="user.html" class="menu-item">
+                <a href="user.php" class="menu-item">
                     <span class="icon">👤</span>
                     <span class="label">User</span>
                 </a>
@@ -43,11 +49,11 @@
             <div class="stats">
                 <div class="card">
                     <h2>Total User</h2>
-                    <p class="count">159</p>
+                    <p class="count"><?= $allUser->num_rows ?></p>
                 </div>
                 <div class="card">
                     <h2>Total Data</h2>
-                    <p class="count">159</p>
+                    <p class="count"><?= $allRapat->num_rows ?></p>
                 </div>
             </div>
             <div class="description">

@@ -11,7 +11,7 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo-section">
-        <img src="poltek.png" alt="Logo" class="logo-img" />
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img" />
         <hr class="divider" />
       </div>
 

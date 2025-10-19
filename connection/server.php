@@ -1,4 +1,7 @@
 <?php 
 session_start();
-$connection = mysqli_connect("localhost", "root", "", "db_rapat");
+$mysqli = mysqli_connect("localhost", "root", "", "db_rapat");
+if($connection = mysqli_connect_error()) {
+    echo "ERROR CONNECTION";
+}
 ?>
