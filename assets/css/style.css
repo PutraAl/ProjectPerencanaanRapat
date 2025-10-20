@@ -14,16 +14,13 @@
   --hitam: #272727;
 }
 
-.footer {
-}
-
-.footer-brand img{
+.footer-brand img {
   height: 150px;
   width: 150px;
 }
 
-.footer-links a{
-  font-weight:bold;
+.footer-links a {
+  font-weight: bold;
   color: var(--biru);
   text-decoration: none;
 }
@@ -32,7 +29,7 @@ h1 {
   overflow: hidden;
 }
 
-hr{
+hr {
   width: 100%;
   background-color: var(--biru);
   color: var(--biru);
@@ -41,15 +38,17 @@ hr{
 
 .card {
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: all 0.3s ease;
 }
 
 
 .card:hover {
-  box-shadow: 0 0 20px var(--biru); /* warna biru glow */
-  transform: translateY(-5px); /* efek naik sedikit */
+  box-shadow: 0 0 20px var(--biru);
+  /* warna biru glow */
+  transform: translateY(-5px);
+  /* efek naik sedikit */
 }
 
 .image-wrap img {
@@ -81,7 +80,7 @@ hr{
   }
 
   .image-wrap img {
-  height: 100px;
-  width: 100px;
-}
+    height: 100px;
+    width: 100px;
+  }
 }

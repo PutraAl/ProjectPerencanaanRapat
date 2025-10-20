@@ -15,8 +15,7 @@ if(isset($_POST['login'])) {
 
         if($checkRole['role'] == 'admin') {
             $_SESSION['login'] = 'login';
-
-            echo "
+                echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Admin');
             window.location.href = 'admin/dashboard.php';
@@ -32,8 +31,6 @@ if(isset($_POST['login'])) {
             </script>
             ";
         }
-       
-       
     }
      else {
             echo "
