@@ -1,11 +1,20 @@
+<?php
+include "../connection/server.php";
+$query = mysqli_query($mysqli, "SELECT * from tb_rapat");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rapat</title>
-  <link rel="stylesheet" href="rapat.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="../assets/css/rapat.css" />
 </head>
+
 <body>
   <div class="container">
     <!-- SIDEBAR -->
@@ -16,15 +25,15 @@
       </div>
 
       <nav class="nav-menu">
-        <a href="./dashboard.html" class="menu-item">
+        <a href="dashboard.php" class="menu-item">
           <span class="icon">🏠</span>
           <span class="label">Dashboard</span>
         </a>
-        <a href="./rapat.html" class="menu-item active">
+        <a href="rapat.php" class="menu-item active">
           <span class="icon">📄</span>
           <span class="label">Rapat</span>
         </a>
-        <a href="./user.html" class="menu-item">
+        <a href="user.php" class="menu-item">
           <span class="icon">👤</span>
           <span class="label">User</span>
         </a>
@@ -32,7 +41,7 @@
 
       <div class="bottom-profile">
         <hr class="divider" />
-        <a href="./profile.html" class="profile-link">
+        <a href="profile.php" class="profile-link">
           <span class="icon">⚫</span>
           <span class="label">Profile</span>
         </a>
@@ -41,48 +50,64 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-      <div class="rapat-header">
-        <h1 class="rapat-title">Jadwal Rapat</h1>
+      <div class="rapat-header bg-white rounded shadow-sm ">
+        <h1 class="rapat-title my-2">Jadwal Rapat</h1>
         <button class="add-btn" id="addBtn">＋</button>
       </div>
 
-      <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr>
-            <th>Judul</th>
-            <th>Tanggal</th>
-            <th>Waktu</th>
-            <th>Ruangan</th>
-            <th>Peserta Rapat</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Judul Rapat</td><td>12/10/2025</td><td>10:00</td><td>Ruang 101</td><td>Tim A</td>
-            <td>
-              <button class="view-btn">View</button>
-              <button class="edit-btn">Edit</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Evaluasi Bulanan</td><td>13/10/2025</td><td>13:00</td><td>Ruang 202</td><td>Tim B</td>
-            <td>
-              <button class="view-btn">View</button>
-              <button class="edit-btn">Edit</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Perencanaan Proyek</td><td>15/10/2025</td><td>09:00</td><td>Ruang 305</td><td>Tim C</td>
-            <td>
-              <button class="view-btn">View</button>
-              <button class="edit-btn">Edit</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="border bg-white rounded p-3">
+
+        <table class="table table-responsive table-hover table-striped">
+          <thead class="table-primary">
+            <tr>
+              <th>Judul</th>
+              <th>Tanggal</th>
+              <th>Waktu</th>
+              <th>Ruangan</th>
+              <th>Peserta Rapat</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="">
+            <tr>
+              <td>Judul Rapat</td>
+              <td>12/10/2025</td>
+              <td>10:00</td>
+              <td>Ruang 101</td>
+              <td>Tim A</td>
+              <td>
+                <button class="view-btn btn btn-primary">View</button>
+                <button class="edit-btn btn btn-success">Edit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Evaluasi Bulanan</td>
+              <td>13/10/2025</td>
+              <td>13:00</td>
+              <td>Ruang 202</td>
+              <td>Tim B</td>
+              <td>
+                <button class="view-btn btn btn-primary">View</button>
+                <button class="edit-btn btn btn-success">Edit</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Perencanaan Proyek</td>
+              <td>15/10/2025</td>
+              <td>09:00</td>
+              <td>Ruang 305</td>
+              <td>Tim C</td>
+              <td>
+                <button class="view-btn btn btn-primary">View</button>
+                <button class="edit-btn btn btn-success">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
     </main>
   </div>
+  </div>
+
 
   <!-- VIEW POPUP -->
   <div id="viewModal" class="modal">
@@ -120,7 +145,7 @@
   </div>
 
   <!-- EDIT DATA POPUP -->
-  <div id="editModal" class="modal">
+  <div id="editModal-<?= $row['id_rapat'] ?>" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <h2>Edit Data</h2>
@@ -140,46 +165,48 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script>
-  // === ADD MODAL ===
-  const addModal = document.getElementById("popupModal");
-  const addBtn = document.getElementById("addBtn");
-  const addCloseBtn = addModal.querySelector(".close-btn");
+    // === ADD MODAL ===
+    const addModal = document.getElementById("popupModal");
+    const addBtn = document.getElementById("addBtn");
+    const addCloseBtn = addModal.querySelector(".close-btn");
 
-  addBtn.addEventListener("click", () => addModal.style.display = "flex");
-  addCloseBtn.addEventListener("click", () => addModal.style.display = "none");
+    addBtn.addEventListener("click", () => addModal.style.display = "flex");
+    addCloseBtn.addEventListener("click", () => addModal.style.display = "none");
 
-  window.addEventListener("click", (e) => {
-    if (e.target === addModal) addModal.style.display = "none";
-  });
+    window.addEventListener("click", (e) => {
+      if (e.target === addModal) addModal.style.display = "none";
+    });
 
-  document.getElementById("rapatForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    alert("Data berhasil disimpan!");
-    addModal.style.display = "none";
-    this.reset();
-  });
+    document.getElementById("rapatForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Data berhasil disimpan!");
+      addModal.style.display = "none";
+      this.reset();
+    });
 
-  // === VIEW MODAL ===
-  const viewModal = document.getElementById("viewModal");
-  const viewCloseBtn = viewModal.querySelector(".close-btn");
+    // === VIEW MODAL ===
+    const viewModal = document.getElementById("viewModal");
+    const viewCloseBtn = viewModal.querySelector(".close-btn");
 
-  document.querySelectorAll(".view-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const row = e.target.closest("tr");
-      const cells = row.querySelectorAll("td");
+    document.querySelectorAll(".view-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const row = e.target.closest("tr");
+        const cells = row.querySelectorAll("td");
 
-      const judul = cells[0].textContent;
-      const tanggal = cells[1].textContent;
-      const waktu = cells[2].textContent;
-      const ruangan = cells[3].textContent;
-      const peserta = cells[4].textContent;
+        const judul = cells[0].textContent;
+        const tanggal = cells[1].textContent;
+        const waktu = cells[2].textContent;
+        const ruangan = cells[3].textContent;
+        const peserta = cells[4].textContent;
 
-      // Remove old data
-      viewModal.querySelectorAll("p").forEach(p => p.remove());
+        // Remove old data
+        viewModal.querySelectorAll("p").forEach(p => p.remove());
 
-      // Add new data
-      viewModal.querySelector("h2").insertAdjacentHTML("afterend", `
+        // Add new data
+        viewModal.querySelector("h2").insertAdjacentHTML("afterend", `
         <p><strong>Judul:</strong> ${judul}</p>
         <p><strong>Tanggal:</strong> ${tanggal}</p>
         <p><strong>Waktu:</strong> ${waktu}</p>
@@ -187,59 +214,60 @@
         <p><strong>Peserta:</strong> ${peserta}</p>
       `);
 
-      viewModal.style.display = "flex";
+        viewModal.style.display = "flex";
+      });
     });
-  });
 
-  viewCloseBtn.addEventListener("click", () => viewModal.style.display = "none");
-  window.addEventListener("click", (e) => {
-    if (e.target === viewModal) viewModal.style.display = "none";
-  });
-
-  // === EDIT MODAL ===
-  const editModal = document.getElementById("editModal");
-  const editCloseBtn = editModal.querySelector(".close-btn");
-  let currentRow = null;
-
-  document.querySelectorAll(".edit-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      currentRow = e.target.closest("tr");
-      const cells = currentRow.querySelectorAll("td");
-
-      document.getElementById("editJudul").value = cells[0].textContent;
-      document.getElementById("editPeserta").value = cells[4].textContent;
-      document.getElementById("editTanggal").value = formatDateForInput(cells[1].textContent);
-
-      editModal.style.display = "flex";
+    viewCloseBtn.addEventListener("click", () => viewModal.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === viewModal) viewModal.style.display = "none";
     });
-  });
 
-  editCloseBtn.addEventListener("click", () => editModal.style.display = "none");
-  window.addEventListener("click", (e) => {
-    if (e.target === editModal) editModal.style.display = "none";
-  });
+    // === EDIT MODAL ===
+    const editModal = document.getElementById("editModal<?php echo $row['id_rapat'] ?>");
+    const editCloseBtn = editModal.querySelector(".close-btn");
+    let currentRow = null;
 
-  document.getElementById("editForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (currentRow) {
-      const cells = currentRow.querySelectorAll("td");
-      cells[0].textContent = document.getElementById("editJudul").value;
-      cells[1].textContent = formatDateForDisplay(document.getElementById("editTanggal").value);
-      cells[4].textContent = document.getElementById("editPeserta").value;
+    document.querySelectorAll(".edit-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        currentRow = e.target.closest("tr");
+        const cells = currentRow.querySelectorAll("td");
+
+        document.getElementById("editJudul").value = cells[0].textContent;
+        document.getElementById("editPeserta").value = cells[4].textContent;
+        document.getElementById("editTanggal").value = formatDateForInput(cells[1].textContent);
+
+        editModal.style.display = "flex";
+      });
+    });
+
+    editCloseBtn.addEventListener("click", () => editModal.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === editModal) editModal.style.display = "none";
+    });
+
+    document.getElementById("editForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (currentRow) {
+        const cells = currentRow.querySelectorAll("td");
+        cells[0].textContent = document.getElementById("editJudul").value;
+        cells[1].textContent = formatDateForDisplay(document.getElementById("editTanggal").value);
+        cells[4].textContent = document.getElementById("editPeserta").value;
+      }
+      alert("Perubahan berhasil disimpan!");
+      editModal.style.display = "none";
+    });
+
+    function formatDateForInput(dateStr) {
+      const [day, month, year] = dateStr.split("/");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
-    alert("Perubahan berhasil disimpan!");
-    editModal.style.display = "none";
-  });
 
-  function formatDateForInput(dateStr) {
-    const [day, month, year] = dateStr.split("/");
-    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-  }
-
-  function formatDateForDisplay(dateStr) {
-    const [year, month, day] = dateStr.split("-");
-    return `${day}/${month}/${year}`;
-  }
+    function formatDateForDisplay(dateStr) {
+      const [year, month, day] = dateStr.split("-");
+      return `${day}/${month}/${year}`;
+    }
   </script>
 </body>
+
 </html>

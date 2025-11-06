@@ -5,6 +5,11 @@
   --hitam: #272727;
 }
 
+body {
+  background: var(--biru);
+background: linear-gradient(169deg, rgba(79, 152, 202, 1) 0%, rgba(233, 251, 249, 1) 78%, rgba(239, 255, 251, 1) 100%);
+}
+
 .login {
       border: 3px solid var(--biru); 
       background-color: var(--putih); 
@@ -18,6 +23,18 @@
     height: 250px;
 }
 
+.register label {
+  font-size: 0.85rem;
+}
+
+.register a{
+  text-decoration: none;
+  color: var(--biru);
+}
+
+.register a:hover {
+  color: var(--hitam);
+}
 @media screen and (min-width:720px) {
     .login {
       width: 800px;  

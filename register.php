@@ -52,27 +52,34 @@ if(isset($_POST['login'])) {
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
 
-  <div class="row login text-center shadow">
-    <div class="image col-12 col-md-6 ">
-        <img src="assets/img/Polibatam.png" alt="">
-    </div>
-    <div class="col-12 col-md-6">
+  <div class=" login  shadow">
+  
+    <div class="register">
 
-        <h2 class="mb-4 fw-bold mb-5">Login Form</h2>
+        <h2 class="mb-4 fw-bold mb-5 text-center">Register Form</h2>
         <form action="" method="post">
-            <div class="mb-3">
-                <input type="text" name="username" class="form-control" placeholder="Username">
+            <div class="px-5">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
             </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Password">
+            <div class=" px-5">
+                <label for="nama" class="form-label">Nama Lengkap</label>
+                <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap anda" required>
             </div>
-            <div class="mb-3 register">
-                <label for="" class="form-label ">Does'nt have account? 
-                    <a href="register.php">Register now</a>
+            <div class="px-5">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Masukkan email lengkap anda" required>
+            </div>
+            <div class="px-5">
+                <label for="nim" class="form-label">NIM</label>
+                <input type="nim" name="nim" class="form-control" placeholder="Masukkan NIM lengkap anda">
+            </div>
+            
+       
+            <div class="center my-4 justify-content-center align-items-center mx-auto text-center">
 
-                </label>
+                <button type="submit" class="btn btn-primary  w-50" name="login">Register</button>
             </div>
-            <button type="submit" class="btn btn-primary w-100" name="login">Login</button>
         </form>
     </div>
   </div>

@@ -1,171 +1,207 @@
 <?php 
-include "../middleware.php";
+include "../connection/server.php"
+
 ?>
 
+<!-- landing Page -->
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengelolaan Rapat - Dashboard User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/userpage.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengelolaan Rapat Politenik Negeri Batam</title>
+  <!-- Fontawesome Icon CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Css Eksternal -->
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-<!-- Bagian Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-4" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.808 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-            </a>
 
-            <form class="d-flex me-auto" role="search">
-                <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Cari..." aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.085.122l3.08 3.08a1 1 0 0 0 1.414-1.414l-3.08-3.08q-.062-.041-.122-.084m-5.492.541a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
-                        </svg>
-                    </button>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar py-3 navbar-expand-lg justify-content-between fixed-top bg-primary navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img id="MDB-logo" src="../assets/img/Polibatam.png" alt="MDB Logo"
+          draggable="false" height="40" /></a>
+      <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto  align-items-center">
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#!">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <i>|</i>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#!" id="nav-center"></i>About</a>
+          </li>
+          <li class="nav-item">
+            <i>|</i>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#!" id="nav-home">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto  align-items-center">
+
+
+
+          <li class="nav-item ms-3 ">
+            <a class="btn btn-dark btn-rounded py-2 " href="../index.php"><i class="fa-solid fa-user"></i>Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Website Utama -->
+  <div class="row row-cols-12 " style="margin-top: 125px;">
+    <div class="col-12 col-md-6">
+      <h2 class="text-center py-2 overflow-hidden">Pengelolaan Rapat</h2>
+      <p class="px-4 "">
+       Politeknik Negeri Batam (Polibatam) terletak di Pulau Batam, kawasan perdagangan dan pelabuhan
+        bebas yang strategis di perbatasan perairan internasional. Berdiri sejak tahun 2000 berdasarkan Akta Pendirian
+        Notaris Soehendro Gautama, SH, Polibatam terus berkembang sebagai institusi pendidikan vokasi unggulan yang
+        menghasilkan lulusan siap kerja dan berdaya saing global.
+        <br>
+        Dalam mendukung kegiatan akademik dan organisasi kemahasiswaan yang dinamis, Polibatam memerlukan sistem yang
+        efisien untuk mengatur berbagai rapat dan koordinasi antar pihak. Oleh karena itu, Website Pengelolaan Rapat
+        Mahasiswa Polibatam hadir sebagai solusi digital untuk membantu proses perencanaan, penjadwalan, pencatatan, dan
+        dokumentasi rapat agar lebih terorganisir, transparan, dan mudah diakses oleh seluruh civitas akademika.
+        <br>
+        Melalui sistem ini, setiap kegiatan rapat — baik internal organisasi, program studi, maupun antar lembaga —
+        dapat dikelola secara terstruktur, sehingga mendukung semangat profesionalisme dan efisiensi di lingkungan
+        Politeknik Negeri Batam.</p>
+    </div>
+    <div class="col-12 col-md-6 justify-content-center align-content-center align-items-center">
+      <img class="mx-auto d-block" src="../assets/img/Polibatam.png" height="250px" width="250px" alt="">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="image-wrap d-flex justify-content-around py-4">
+    <img src="../assets/img/pol1.png" alt=""  srcset="">
+    <img src="../assets/img/pol2.png" alt=""  srcset="">
+    <img src="../assets/img/pol3.png" alt=""  srcset="">
+    <img src="../assets/img/pol4.png" alt=""  srcset="">
+  </div>
+
+  <hr>
+
+  <div class="container">
+
+
+    <h1 class="text-center my-4">Tujuan Website</h1>
+    <div class="row  justify-content-center g-4">
+
+
+      <div class="col-12 py-4 col-md-4  px-5 px-md-3">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+
+            <h5 class="card-title">Meningkatkan Efisiensi dan Ketepatan Waktu Rapat</h5>
+            <p class="card-text text-center">Website ini bertujuan untuk membantu mahasiswa dan pihak kampus dalam menjadwalkan serta mengelola rapat dengan lebih efisien. Melalui sistem digital, proses pemesanan waktu, pengiriman undangan, dan pengingat rapat dapat dilakukan secara otomatis sehingga meminimalkan keterlambatan dan bentrok jadwal.s
+              content.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 py-4 col-md-4 px-5 px-md-3">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+            <h5 class="card-title">Mempermudah Mengelola Data Rapat</h5>
+            <p class="card-text text-center">Sistem Pengelolaan Rapat ini berguna untuk mempermudah panitia untuk mengelola data-data rapat
+              </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 py-4 col-md-4 px-5 px-md-3">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+
+            <h5 class="card-title">Meningkatkan Koordinasi dan Transparansi antar Pihak</h5>
+            <p class="card-text text-center">Website ini memfasilitasi komunikasi dan koordinasi antara mahasiswa, dosen pembimbing, dan pihak organisasi kampus dalam menyelenggarakan rapat. Informasi rapat dapat diakses secara terbuka oleh pihak yang berwenang, sehingga mendukung transparansi dan akuntabilitas kegiatan organisasi di lingkungan Politeknik Negeri Batam.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <hr>
+
+
+  <div class="contact" id="contact">
+
+    <h1 class="text-center">Contact Us</h1>
+    <p class="text-center">Ada masalah? isi data dibawah ini, semua nya akan kami jawab.</p>
+
+
+    <form>
+      <div class="wrap-contact">
+
+        <div class="mb-3 mt-4 text-center">
+          <label for="exampleInputEmail1" class="form-label fw-bold fs-4">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Masukkan Email Anda" required>
+
+        </div>
+        <div class="mb-3 text-center">
+          <label for="nama" class="form-label fw-bold fs-4">Nama</label>
+          <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Anda" required>
+        </div>
+        <div class="mb-3 text-center">
+          <label for="nama" class="form-label fw-bold fs-4">Keluhan</label>
+          <textarea name="" id="" class="form-control" placeholder="Apa keluhan anda?" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </div>
+    </form>
+  </div>
+
+
+<footer class="footer my-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="footer-brand px-5">
+                  <img src="../assets/img/Polibatam.png" alt="">
                 </div>
-            </form>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a></li>
+             
+            </div>
+
+            <div class="col-md-6 text-md-end">
+                <ul class="footer-links">
+                  <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Terms</a></li>
                 </ul>
             </div>
-
-            <a class="nav-link text-dark ms-3" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.205-5.3"/>
-                </svg>
-            </a>
-        </div>
-    </nav>
-
-<!-- Halaman sidebar -->
-    <div class="container">
-        <div class="sidebar">
-            <div class="logo">Meeting Kampus</div>
-            <ul class="menu">
-                <li class="menu-item active">
-                    <i>📊</i> 
-                    <a href="index.php">Dashboard</a> 
-                </li>
-                <li class="menu-item">
-                    <i>📨</i> 
-                    <a href="undangan.php">Undangan Rapat</a> 
-                    
-                </li>
-                <li class="menu-item">
-                    <i>👤</i> 
-                    <a href="profil.php">Profil</a> 
-
-                </li>
-                <li class="menu-item">
-                    <i>🚪</i> 
-                    <a href="../action/logout.php">Keluar</a> 
-                    
-                </li>
-            </ul>
         </div>
 
-        <div class="main-content">
-            <div class="header">
-                <h1 class="page-title">Dashboard</h1>
-                <div class="user-info">
-                    <div class="user-avatar">U</div>
-                    <span>User</span>
-                </div>
-            </div>
-
-<!-- Halaman Dashboard -->
-            <div class="card mb-3 shadow-sm">
-            <div class="row g-0">
-            <div id="dashboard" class="page active">
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <span class="stat-label">Total Rapat</span>
-                        <span class="stat-value">12</span>
-                        <span>+2 dari bulan lalu</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Rapat Mendatang</span>
-                        <span class="stat-value">3</span>
-                        <span>Dalam 7 hari ke depan</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Kehadiran</span>
-                        <span class="stat-value">85%</span>
-                        <span>Rata-rata kehadiran</span>
-                    </div>
-                </div>
-
-<!-- Rapat-Rapat -->
-                <div class="card">
-                    <h2 class="card-title">Rapat Mendatang</h2>
-                    <ul class="meeting-list">
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Rapat Tim Pengembang</div>
-                                <div class="meeting-time">Hari Ini, 10:00 - 11:30 • Ruang Rapat A</div>
-                            </div>
-                            <span class="badge badge-primary">Akan Datang</span>
-                        </li>
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Review Proyek Q3</div>
-                                <div class="meeting-time">Besok, 14:00 - 16:00 • Ruang Rapat B</div>
-                            </div>
-                            <span class="badge badge-primary">Akan Datang</span>
-                        </li>
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Presentasi XYZ</div>
-                                <div class="meeting-time">Jumat, 09:00 - 10:30 • Ruang Rapat C</div>
-                            </div>
-                            <span class="badge badge-primary">Akan Datang</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2 class="card-title">Rapat Terbaru</h2>
-                    <ul class="meeting-list">
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Briefing Tim Marketing</div>
-                                <div class="meeting-time">Senin, 02 Sep 2023, 13:00 - 14:00</div>
-                            </div>
-                            <span class="badge badge-success">Selesai</span>
-                        </li>
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Rapat Koordinasi Divisi</div>
-                                <div class="meeting-time">Jumat, 30 Agu 2023, 09:00 - 11:00</div>
-                            </div>
-                            <span class="badge badge-success">Selesai</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
- <!-- Halaman Undangan Rapat -->
-            
-            </div>
-        </form>
+        <div class="copyright text-center">
+            © PBL Group 2
         </div>
+    </div>
+</footer>
+  
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 </html>

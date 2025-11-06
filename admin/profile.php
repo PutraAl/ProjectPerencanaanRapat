@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <style>
     /* === Reset and base === */
     * {
@@ -253,16 +255,16 @@
         <hr class="divider" />
       </div>
 
-      <nav class="nav-menu">
-        <a href="./dashboard.html" class="menu-item">
+        <nav class="nav-menu">
+        <a href="dashboard.php" class="menu-item ">
           <span class="icon">🏠</span>
           <span class="label">Dashboard</span>
         </a>
-        <a href="./rapat.html" class="menu-item">
+        <a href="rapat.php" class="menu-item">
           <span class="icon">📄</span>
           <span class="label">Rapat</span>
         </a>
-        <a href="./user.html" class="menu-item">
+        <a href="user.php" class="menu-item">
           <span class="icon">👤</span>
           <span class="label">User</span>
         </a>
@@ -270,7 +272,7 @@
 
       <div class="bottom-profile">
         <hr class="divider" />
-        <a href="./profile.html" class="menu-item active">
+        <a href="./profile.php" class="menu-item active">
           <span class="icon">⚫</span>
           <span class="label">Profile</span>
         </a>

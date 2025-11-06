@@ -10,13 +10,13 @@ $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/rapat.css">
 </head>
 <body>
     <div class="container">
         <aside class="sidebar">
             <div class="logo-section">
-                <img src="poltek.png" alt="Logo" class="logo-img">    
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">    
                 <hr class="divider" />
             </div>
 
@@ -37,7 +37,7 @@ $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
 
             <div class="bottom-profile">
                 <hr class="divider" />
-                <a href="profile.html" class="profile-link">
+                <a href="profile.php" class="profile-link">
                     <span class="icon">⚫</span>
                     <span class="label">Profile</span>
                 </a>
@@ -64,4 +64,6 @@ $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
         </main>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>

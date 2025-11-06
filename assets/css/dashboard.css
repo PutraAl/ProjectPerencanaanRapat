@@ -22,18 +22,17 @@ body {
 }
 
 .sidebar {
-  position: fixed;              /* stick to left side */
+  position: fixed;              
   top: 0;
   left: 0;
-  height: 100vh;                /* full viewport height */
+  height: 100vh;                
   width: 220px;
-  background-color: var(--biru);
-  display: flex;                /* make it flexbox */
-  flex-direction: column;       /* vertical layout */
-  justify-content: space-between; /* push bottom-profile down */
+  background-color: #eaeaea;
+  display: flex;                
+  flex-direction: column;       
+  justify-content: space-between;
   padding: 20px 0;
 }
-
 /* === Logo Section === */
 .logo-section {
   display: flex;
