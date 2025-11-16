@@ -3,16 +3,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
 /* -- Palet Warna --*/
         :root {
-            --primary: #2563eb; 
+            --primary: #4F98CA;; 
             --secondary: #64748b; 
-            --light: #f8fafc; 
-            --dark: #1e293b;      
-            --success: #22c55e;    
+            --light: #EFFFFB; 
+            --dark: #272727;      
+            --success: #50D890;    
             --warning: #f59e0b;    
             --danger: #ef4444;    
         }
@@ -30,106 +30,41 @@
 
         .menu-item a{
             text-decoration: none;
-            color: var(--primary);
-        }
-        
-
-/* -- Header/Navbar -- */
-        .header-navbar {
-            background-color: var(--card-bg);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            color: var(--light);
         }
 
-        .navbar {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+/* HAMBURGER BUTTON --*/
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
 
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .user-icon {
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background-color: var(--background);
-            border-radius: 20px;
-            padding: 5px 15px;
-            width: 250px;
-        }
-
-        .search-bar input {
-            border: none;
-            background: transparent;
-            outline: none;
-            flex-grow: 1;
-            padding: 5px;
-            color: var(--dark);
-        }
-
-        .search-icon {
-            color: var(--secondary);
-            font-style: normal;
-            cursor: pointer;
-        }
-
-        .main-nav {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 500;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .notification-icon {
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--secondary);
-        }
+.hamburger span {
+    width: 27px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.4s;
+}
 
 /* -- Sidebar -- */
         .sidebar {
             width: 250px;
-            background-color: white;
+            color: var(--light);
+            background-color: var(--primary);
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
             padding: 20px 0;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease-in-out;
+            z-index: 100;
             flex-shrink: 0;
         }
 
         .logo {
             text-align: center;
             padding: 20px 0;
-            color: var(--primary);
+            color: var(--light);
             font-size: 24px;
             font-weight: 700;
         }
@@ -149,8 +84,8 @@
         }
 
         .menu-item:hover, .menu-item.active {
-            background-color: #eef2ff;
-            color: var(--primary);
+            background-color: var(--warning);
+            color: var(--light);
             border-left: 4px solid var(--primary);
         }
 
@@ -162,7 +97,7 @@
 
 /* -- Konten Utama -- */
         .main-content {
-            flex: 1;
+            flex-grow: 1;
             padding: 20px 30px;
         }
 

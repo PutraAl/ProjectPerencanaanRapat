@@ -9,7 +9,12 @@
 
 </head>
 <body>
-<!-- Bagian Navbar -->
+        <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+<!-- Bagian Navbar
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand me-4" href="#">
@@ -41,15 +46,15 @@
                     <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us</a></li>
                 </ul>
-            </div>
+            </div> -->
 
-            <a class="nav-link text-dark ms-3" href="#">
+            <!-- <a class="nav-link text-dark ms-3" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.205-5.3"/>
                 </svg>
             </a>
         </div>
-    </nav>
+    </nav> -->
 
 <!-- Halaman sidebar -->
     <div class="container">
@@ -85,7 +90,7 @@
             <div class="profile-avatar">U</div>
             <div class="profile-info">
                 <h2>User</h2>
-                <p>Ketua Rapat</p>
+                <p>Leader</p>
             </div>
         </div>
         
@@ -96,15 +101,15 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" value="user.user@perusahaan.com">
+                    <input type="email" id="email" class="form-control" value="user.user@company.com">
                 </div>
                 <div class="form-group">
                     <label for="department">Departemen</label>
-                    <input type="text" id="department" class="form-control" value="Peserta Rapat">
+                    <input type="text" id="department" class="form-control" value="Teknik Informatika">
                 </div>
                 <div class="form-group">
                     <label for="position">Jabatan</label>
-                    <input type="text" id="position" class="form-control" value="Ketua Rapat">
+                    <input type="text" id="position" class="form-control" value="Ketua">
                 </div>
                 <div class="form-group">
                     <label for="phone">Nomor Telepon</label>
