@@ -1,43 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengelolaan Rapat - Dashboard User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/userpage.css">
 
 </head>
-<body>
-<!-- Tombol Hamburger -->
-<button class="hamburger-btn" onclick="toggleSidebar()">
-    <i class="bi bi-list"></i>
-</button>
 
-<!-- Halaman sidebar -->
-        <div class="container">
-        <div class="sidebar">
+<body>
+    <!-- Tombol Hamburger -->
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+    <!-- Halaman sidebar -->
+    <div class="container">
+        <div class="sidebar" id="sidebar">
             <div class="logo">Meeting Kampus</div>
             <ul class="menu">
                 <li class="menu-item active">
-                    <i>📊</i> 
-                    <a href="index.php">Dashboard</a> 
+                    <i>📊</i>
+                    <a href="index.php">Dashboard</a>
                 </li>
                 <li class="menu-item">
-                    <i>📨</i> 
-                    <a href="undangan.php">Undangan Rapat</a> 
-                    
+                    <i>📨</i>
+                    <a href="undangan.php">Undangan Rapat</a>
                 </li>
                 <li class="menu-item">
-                    <i>👤</i> 
-                    <a href="profil.php">Profil</a> 
-
+                    <i>👤</i>
+                    <a href="profil.php">Profil</a>
                 </li>
                 <li class="menu-item">
-                    <i>🚪</i> 
-                    <a href="../action/logout.php">Keluar</a> 
-                    
+                    <i>🚪</i>
+                    <a href="../action/logout.php">Keluar</a>
                 </li>
             </ul>
         </div>
@@ -51,36 +48,25 @@
                 </div> 
             </div> -->
 
-<!-- Halaman Dashboard -->
-<div class="main-content">
-     <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
 
-            <div class="card mb-3 shadow-sm">
+
+        <div class="card mb-3 shadow-sm">
             <div class="row g-0">
-            <div id="dashboard" class="page active">
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <span class="stat-label">Total Rapat</span>
-                        <span class="stat-value">7</span>
-                        <span>+1 dari bulan lalu</span>
+                <div id="dashboard" class="page active">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <span class="stat-label">Total Rapat</span>
+                            <span class="stat-value">7</span>
+                            <span>+1 dari bulan lalu</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Rapat Mendatang</span>
+                            <span class="stat-value">3</span>
+                            <span>Dalam 7 hari ke depan</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-label">Rapat Mendatang</span>
-                        <span class="stat-value">3</span>
-                        <span>Dalam 7 hari ke depan</span>
-                    </div>
-                    <!-- <div class="stat-card">
-                        <span class="stat-label">Kehadiran</span>
-                        <span class="stat-value">85%</span>
-                        <span>Rata-rata kehadiran</span>
-                    </div> -->
                 </div>
-</div>
-<!-- Rapat-Rapat -->
+                <!-- Rapat-Rapat -->
                 <div class="card">
                     <h2 class="card-title">Rapat Mendatang</h2>
                     <ul class="meeting-list">
@@ -131,8 +117,18 @@
             </div>
 </body>
 <script>
-function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('active');
-}
+    function toggleSidebar() {
+        // document.getElementById("sidebar").classList.toggle("active");
+        const sidebar = document.getElementById("sidebar");
+        const btn = document.getElementById("hamburgerBtn");
+
+        sidebar.classList.toggle("active");
+
+        btn.textContent = sidebar.classList.contains("active") ?
+            "✕" :
+            "☰";
+
+    }
 </script>
+
 </html>

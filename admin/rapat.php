@@ -1,7 +1,7 @@
-<?php
+<!-- <?php
 include "../connection/server.php";
 $query = mysqli_query($mysqli, "SELECT * from tb_rapat");
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,7 +145,7 @@ $query = mysqli_query($mysqli, "SELECT * from tb_rapat");
   </div>
 
   <!-- EDIT DATA POPUP -->
-  <div id="editModal-<?= $row['id_rapat'] ?>" class="modal">
+  <!-- <div id="editModal-<?= $row['id_rapat'] ?>" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <h2>Edit Data</h2>
@@ -163,10 +163,10 @@ $query = mysqli_query($mysqli, "SELECT * from tb_rapat");
         <button type="submit" class="save-btn">Simpan Perubahan</button>
       </form>
     </div>
-  </div>
-
+  </div> -->
+  <!-- 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
   <script>
     // === ADD MODAL ===
     const addModal = document.getElementById("popupModal");

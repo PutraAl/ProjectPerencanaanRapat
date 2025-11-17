@@ -1,9 +1,9 @@
-<?php 
+<!-- <?php 
 include "../connection/server.php";
 include "../middleware.php";
 $allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
 $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,11 +49,11 @@ $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
             <div class="stats">
                 <div class="card">
                     <h2>Total User</h2>
-                    <p class="count"><?= $allUser->num_rows ?></p>
+                    <p class="count"></p>
                 </div>
                 <div class="card">
                     <h2>Total Data</h2>
-                    <p class="count"><?= $allRapat->num_rows ?></p>
+                    <p class="count"></p>
                 </div>
             </div>
             <div class="description">
