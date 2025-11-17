@@ -14,51 +14,15 @@
         <span></span>
         <span></span>
     </div>
-<!-- Bagian Navbar
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-4" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.808 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-            </a>
-
-            <form class="d-flex me-auto" role="search">
-                <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Cari..." aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.085.122l3.08 3.08a1 1 0 0 0 1.414-1.414l-3.08-3.08q-.062-.041-.122-.084m-5.492.541a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11"/>
-                        </svg>
-                    </button>
-                </div>
-            </form>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a></li>
-                </ul>
-            </div> -->
-
-            <!-- <a class="nav-link text-dark ms-3" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.205-5.3"/>
-                </svg>
-            </a>
-        </div>
-    </nav> -->
+  
 
 <!-- Halaman sidebar -->
-    <div class="container">
+        <div class="container">
         <div class="sidebar">
+        <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+        </div>
             <div class="logo">Meeting Kampus</div>
             <ul class="menu">
               <li class="menu-item ">

@@ -17,7 +17,11 @@
 
 <!-- Halaman sidebar -->
         <div class="container">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+        </div>
             <div class="logo">Meeting Kampus</div>
             <ul class="menu">
                 <li class="menu-item active">
