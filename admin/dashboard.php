@@ -1,9 +1,9 @@
-<!-- <?php 
-include "../connection/server.php";
-include "../middleware.php";
-$allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
-$allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
-?> -->
+<?php 
+// include "../connection/server.php";
+// include "../middleware.php";
+// $allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
+// $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,7 +1,7 @@
-<!-- <?php
-include "../connection/server.php";
-$query = mysqli_query($mysqli, "SELECT * from tb_rapat");
-?> -->
+<?php
+// include "../connection/server.php";
+// $query = mysqli_query($mysqli, "SELECT * from tb_rapat");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
