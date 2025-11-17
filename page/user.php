@@ -15,8 +15,8 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" onclick="toggleSidebar()">☰</button>
 
-    <!-- Halaman sidebar -->
-    <div class="container">
+<!-- Halaman sidebar -->
+        <div class="container">
         <div class="sidebar" id="sidebar">
             <div class="logo">Meeting Kampus</div>
             <ul class="menu">
@@ -118,15 +118,15 @@
 </body>
 <script>
     function toggleSidebar() {
-        // document.getElementById("sidebar").classList.toggle("active");
-        const sidebar = document.getElementById("sidebar");
-        const btn = document.getElementById("hamburgerBtn");
+        document.getElementById("sidebar").classList.toggle("active");
+        // const sidebar = document.getElementById("sidebar");
+        // const btn = document.getElementById("hamburgerBtn");
 
-        sidebar.classList.toggle("active");
+        // sidebar.classList.toggle("active");
 
-        btn.textContent = sidebar.classList.contains("active") ?
-            "✕" :
-            "☰";
+        // btn.textContent = sidebar.classList.contains("active") ?
+        //     "✕" :
+        //     "☰";
 
     }
 </script>
