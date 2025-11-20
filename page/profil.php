@@ -9,16 +9,12 @@
 
 </head>
 <body>
-        <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-  
+<!-- Tombol Hamburger -->
+    <button class="hamburger" id="hamburgerBtn">☰</button>
 
 <!-- Halaman sidebar -->
         <div class="container">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
         <div class="logo-section">
         <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
         <hr class="divider">
@@ -99,4 +95,12 @@
         </form>
         </div>
 </body>
+<script>
+    const btn = document.getElementById("hamburgerBtn");
+    const sidebar = document.querySelector(".sidebar");
+
+    btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+    });
+</script>
 </html>

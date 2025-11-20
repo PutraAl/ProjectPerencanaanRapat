@@ -12,12 +12,16 @@
 </head>
 
 <body>
-    <!-- Tombol Hamburger -->
-    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+<!-- Tombol Hamburger -->
+    <button class="hamburger" id="hamburgerBtn">☰</button>
 
 <!-- Halaman sidebar -->
         <div class="container">
         <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+        </div>
             <div class="logo">Meeting Kampus</div>
             <ul class="menu">
                 <li class="menu-item active">
@@ -49,7 +53,7 @@
             </div> -->
 
 
-
+<!-- Halaman Dashboard -->
         <div class="card mb-3 shadow-sm">
             <div class="row g-0">
                 <div id="dashboard" class="page active">
@@ -100,7 +104,7 @@
                         <li class="meeting-item">
                             <div>
                                 <div class="meeting-title">Briefing Tim Marketing</div>
-                                <div class="meeting-time">Senin, 02 Sep 2023, 13:00 - 14:00</div>
+                                <div class="meeting-time">Senin, 02 Sep 2025, 13:00 - 14:00</div>
                             </div>
                             <span class="badge badge-success">Selesai</span>
                         </li>
@@ -108,7 +112,7 @@
                         <li class="meeting-item">
                             <div>
                                 <div class="meeting-title">Rapat Koordinasi Divisi</div>
-                                <div class="meeting-time">Jumat, 30 Agu 2023, 09:00 - 11:00</div>
+                                <div class="meeting-time">Jumat, 30 Agu 2025, 09:00 - 11:00</div>
                             </div>
                             <span class="badge badge-success">Selesai</span>
                         </li>
@@ -117,18 +121,11 @@
             </div>
 </body>
 <script>
-    function toggleSidebar() {
-        document.getElementById("sidebar").classList.toggle("active");
-        // const sidebar = document.getElementById("sidebar");
-        // const btn = document.getElementById("hamburgerBtn");
+    const btn = document.getElementById("hamburgerBtn");
+    const sidebar = document.querySelector(".sidebar");
 
-        // sidebar.classList.toggle("active");
-
-        // btn.textContent = sidebar.classList.contains("active") ?
-        //     "✕" :
-        //     "☰";
-
-    }
+    btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+    });
 </script>
-
 </html>
