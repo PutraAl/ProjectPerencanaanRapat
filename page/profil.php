@@ -34,7 +34,7 @@
             <ul class="menu">
                 <li class="menu-item">
                     <i>📊</i>
-                    <a href="index.php">Dashboard</a>
+                    <a href="user.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item">
