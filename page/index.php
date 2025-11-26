@@ -82,8 +82,8 @@ include "../connection/server.php"
         dapat dikelola secara terstruktur, sehingga mendukung semangat profesionalisme dan efisiensi di lingkungan
         Politeknik Negeri Batam.</p>
     </div>
-    <div class="col-12 col-md-6 justify-content-center align-content-center align-items-center">
-      <img class="mx-auto d-block" src="../assets/img/Polibatam.png" height="250px" width="250px" alt="">
+    <div class="col-12 col-md-6 text-center justify-content-center align-content-center align-items-center">
+     <iframe width="600" height="400" class="embed-responsive" src="https://www.youtube.com/embed/NnqfwN4nPQo" title="Video Profil Program Studi Teknik Informatika" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen autoplay loop></iframe>
     </div>
   </div>
 

@@ -21,7 +21,7 @@
         <div class="container">
         <div class="sidebar">
         <div class="logo-section">
-        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <img src="../assets/img/poltek.png" height="100px" width="100px" alt="Logo" class="logo-img">
         <hr class="divider">
         </div>
             <div class="logo">Meeting Kampus</div>
