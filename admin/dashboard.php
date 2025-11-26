@@ -1,16 +1,16 @@
-<!-- <?php 
-include "../connection/server.php";
-include "../middleware.php";
-$allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
-$allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
-?> -->
+<?php 
+// include "../connection/server.php";
+// include "../middleware.php";
+// $allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat");
+// $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role ='peserta'");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/rapat.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
     <div class="container">

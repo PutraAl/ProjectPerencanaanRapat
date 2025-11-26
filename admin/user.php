@@ -1,7 +1,7 @@
-<!-- <?php 
-include "../connection/server.php";
-include "../middleware.php";
-?> -->
+<?php 
+// include "../connection/server.php";
+// include "../middleware.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,12 +106,7 @@ include "../middleware.php";
             <label for="email">Prodi</label>
             <select name="id_prodi" class="form-control" id="" required>
               <option value="" selected disabled>Pilih Jurusan</option>
-              <?php 
-              $allProdi = mysqli_query($mysqli, "SELECT * FROM tb_prodi");
-              while($row = $allProdi->fetch_array()) {    
-              ?>
-              <option value="<?= $row['id_prodi'] ?>"><?= $row['nama_prodi']?></option>
-              <?php } ?>
+            
             </select>
 
             <label for="role">Role</label>
