@@ -13,37 +13,6 @@
     <link rel="stylesheet" href="../assets/css/userpage.css">
 </head>
 <body>
-        <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <!-- Halaman sidebar -->
-        <div class="container">
-        <div class="sidebar">
-        <div class="logo-section">
-        <img src="../assets/img/poltek.png" height="100px" width="100px" alt="Logo" class="logo-img">
-        <hr class="divider">
-        </div>
-            <div class="logo">Meeting Kampus</div>
-            <ul class="menu">
-              <li class="menu-item ">
-                    <i>📊</i> 
-                    <a href="index.php">Dashboard</a> 
-                </li>
-                <li class="menu-item active">
-                    <i>📨</i> 
-                    <a href="undangan.php">Undangan Rapat</a> 
-                    
-                </li>
-                <li class="menu-item">
-                    <i>👤</i> 
-                    <a href="profil.php">Profil</a> 
-
-
-
-<body>
-
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
