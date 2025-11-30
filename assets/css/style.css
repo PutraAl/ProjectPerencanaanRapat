@@ -14,6 +14,10 @@
   --hitam: #272727;
 }
 
+.angka-satu, .angka-dua, .angka-tiga {
+  font-size: 5.5rem;
+}
+
 .footer-brand img {
   height: 150px;
   width: 150px;

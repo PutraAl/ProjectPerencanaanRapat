@@ -148,6 +148,38 @@
       </li>
     </ul>
   </div>
+  
+  <!-- Formulir Tambah Undangan Rapat -->
+ <div class="card">
+  <div class="card-title">Buat Undangan Rapat Baru</div>
+  <form id="meeting-form">
+    <div class="form-group">
+      <label for="meeting-title">Judul Rapat</label>
+      <input type="text" id="meeting-title" class="form-control" placeholder="Masukkan judul rapat" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-date">Tanggal & Waktu</label>
+      <input type="datetime-local" id="meeting-date" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-location">Lokasi / Platform</label>
+      <input type="text" id="meeting-location" class="form-control" placeholder="Ruang 101 / Zoom / Teams" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-participants">Peserta</label>
+      <input type="text" id="meeting-participants" class="form-control" placeholder="Fakultas / Departemen / Nama" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-method">Metode</label>
+      <select id="meeting-method" class="form-control">
+        <option value="Offline">Offline</option>
+        <option value="Online">Online</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Buat Undangan</button>
+  </form>
+ </div>
 
   <!-- Notulen & Dokumentasi -->
   <div class="card">

@@ -37,7 +37,7 @@
 
                 <li class="menu-item">
                     <i>📨</i>
-                    <a href="rapatnew.php">Rapat</a>
+                    <a href="rapatnew.php"> Data Rapat</a>
                 </li>
 
                 <li class="menu-item">
@@ -67,68 +67,21 @@
         </div>
     </div>
 
-    <!-- Top Bar: Search + Notification -->
-    <div class="top-bar">
-        <div class="search-box">
-            <i class="search-icon">🔍</i>
-            <input type="text" placeholder="Cari rapat...">
-        </div>
-
-        <div class="notif-icon">
-            <i>🔔</i>
-            <span class="notif-count" id="notifCount">2</span>
-        </div>
-    </div>
-
     <!-- Stats -->
     <div class="stats-container">
         <div class="stat-card">
             <div class="stat-value" id="todayMeetingCount">0</div>
-            <div class="stat-label">Rapat Hari Ini</div>
+            <div class="stat-label">Total User</div>
         </div>
 
         <div class="stat-card">
             <div class="stat-value" id="weekMeetingCount">0</div>
-            <div class="stat-label">Rapat Minggu Ini</div>
+            <div class="stat-label">Total Rapat</div>
         </div>
 
         <div class="stat-card">
             <div class="stat-value" id="totalInvitation">0</div>
-            <div class="stat-label">Undangan Masuk</div>
-        </div>
-    </div>
-
-    <!-- Ringkasan Rapat Hari Ini -->
-    <div class="card">
-        <h3 class="card-title">Rapat Hari Ini</h3>
-        <ul class="meeting-list" id="todayMeetingsList"></ul>
-    </div>
-
-    <!-- Ringkasan Rapat Minggu Ini -->
-    <div class="card">
-        <h3 class="card-title">Rapat Minggu Ini</h3>
-        <ul class="meeting-list" id="weekMeetingsList"></ul>
-    </div>
-
-    <!-- Undangan Rapat -->
-    <div class="card">
-        <h3 class="card-title">Notifikasi Undangan</h3>
-
-        <div class="meeting-grid" id="invitationGrid"></div>
-    </div>
-
-    <!-- Shortcut -->
-    <div class="stats-container">
-        <div class="stat-card">
-            <h3 class="stat-label">Jadwal Rapat</h3>
-        </div>
-
-        <div class="stat-card">
-            <h3 class="stat-label">Notulen Rapat</h3>
-        </div>
-
-        <div class="stat-card">
-            <h3 class="stat-label">Ruang Virtual</h3>
+            <div class="stat-label">Total Kontak</div>
         </div>
     </div>
 
