@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perencanaan Rapat - Dashboard User</title>
+    <title>Perencanaan Rapat - profil</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
           rel="stylesheet" 
@@ -34,7 +34,7 @@
             <ul class="menu">
                 <li class="menu-item">
                     <i>📊</i>
-                    <a href="user.php">Dashboard</a>
+                    <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item">
@@ -49,7 +49,7 @@
 
                 <li class="menu-item">
                     <i>🚪</i>
-                    <a href="../action/logout.php">Keluar</a>
+                    <a href="logout.php">Keluar</a>
                 </li>
             </ul>
 
