@@ -18,7 +18,7 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -33,7 +33,7 @@
             <ul class="menu">
                 <li class="menu-item">
                     <i>📊</i>
-                    <a href="user.php">Dashboard</a>
+                    <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item active">

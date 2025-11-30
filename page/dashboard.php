@@ -15,7 +15,7 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">

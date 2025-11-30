@@ -17,7 +17,7 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -71,6 +71,14 @@
 
     
 <script>
+    //hamburger
+         const btn = document.getElementById("hamburgerBtn");
+        const sidebar = document.getElementById("sidebar");
+
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+
 function logout() {
     const card = document.getElementById('logoutCard');
     const notif = document.getElementById('logoutNotif');
@@ -92,6 +100,7 @@ function logout() {
 function batal() {
     window.location.href = "dashboard.php";
 }
+
 </script>
 
 
