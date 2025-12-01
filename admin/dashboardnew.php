@@ -1,3 +1,11 @@
+<?php 
+include "../connection/server.php";
+$username = $_SESSION['username'];
+$allUser = mysqli_query($mysqli, "SELECT * FROM tb_user where role != 'admin' ");
+$allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat ");
+$allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -65,7 +73,7 @@
         <h2 class="page-title">Dashboard Admin</h2>
 
         <div class="user-info">
-            <span>Admin</span>
+            <span><?=  $username ?></span>
             <div class="user-avatar">A</div>
         </div>
     </div>
@@ -73,18 +81,18 @@
     <!-- Stats -->
     <div class="stats-container">
         <div class="stat-card">
-            <div class="stat-value" id="todayMeetingCount">0</div>
+            <div class="stat-value" id="todayMeetingCount"><?= $allUser->num_rows ?></div>
             <div class="stat-label">Total User</div>
         </div>
 
         <div class="stat-card">
-            <div class="stat-value" id="weekMeetingCount">0</div>
+            <div class="stat-value" id="weekMeetingCount"><?= $allRapat->num_rows ?></div>
             <div class="stat-label">Total Rapat</div>
         </div>
 
         <div class="stat-card">
-            <div class="stat-value" id="totalInvitation">0</div>
-            <div class="stat-label">Total Kontak</div>
+            <div class="stat-value" id="totalInvitation"><?= $allUndangan->num_rows ?></div>
+            <div class="stat-label">Total Undangan</div>
         </div>
     </div>
 

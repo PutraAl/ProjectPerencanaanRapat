@@ -61,7 +61,7 @@
                 <p>Apakah yakin ingin mengakhiri sesi dan keluar dari sistem?</p>
 
                 <div class="logout-actions">
-                    <button onclick="logout()" class="btn-logout">Keluar</button>
+                    <a href="../action/logout.php" onclick="logout()" class="btn-logout">Keluar</a>
                     <button onclick="batal()" class="btn-cancel">Batal</button>
                 </div>
             </div>

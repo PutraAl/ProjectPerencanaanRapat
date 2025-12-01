@@ -1,3 +1,7 @@
+<?php 
+include "../connection/server.php";
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 

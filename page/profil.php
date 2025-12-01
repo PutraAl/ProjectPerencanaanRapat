@@ -1,3 +1,8 @@
+<?php 
+require_once("../connection/session.php");
+middleware();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 

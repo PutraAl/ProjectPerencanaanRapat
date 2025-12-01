@@ -1,3 +1,10 @@
+<?php 
+
+include "../connection/server.php";
+$dataRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat ");
+// $rapat = $dataRapat->fetch_array();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -88,14 +95,19 @@
   <div class="card">
     <div class="card-title">Manajemen Jadwal Rapat</div>
     <div class="meeting-grid">
+
+    <?php 
+    while($row = $dataRapat->fetch_array()){
+    ?>
+
       <div class="meeting-card">
-        <div class="meeting-header">Rapat Akademik</div>
+        <div class="meeting-header"><?= $row['judul'] ?></div>
         <div class="meeting-body">
           <div class="meeting-detail">
-            <i>📅</i> 28 Nov 2025, 09:00 - 11:00
+            <i>📅</i> <?= $row['tanggal'] ?>, <?= $row['waktu'] ?>
           </div>
           <div class="meeting-detail">
-            <i>📍</i> Ruang 101
+            <i>📍</i> <?= $row['lokasi'] ?>
           </div>
           <div class="meeting-detail">
             <i>👥</i> Fakultas Teknik
@@ -106,25 +118,8 @@
           </div>
         </div>
       </div>
-
-      <div class="meeting-card">
-        <div class="meeting-header">Rapat Penelitian</div>
-        <div class="meeting-body">
-          <div class="meeting-detail">
-            <i>📅</i> 29 Nov 2025, 14:00 - 16:00
-          </div>
-          <div class="meeting-detail">
-            <i>💻</i> Zoom / Teams
-          </div>
-          <div class="meeting-detail">
-            <i>👥</i> Fakultas Sains
-          </div>
-          <div class="button-group">
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-outline">Hapus</button>
-          </div>
-        </div>
-      </div>
+<?php } ?>
+      
     </div>
   </div>
 

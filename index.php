@@ -1,46 +1,4 @@
-<?php 
-include "connection/server.php";
 
-if(isset($_POST['login'])) {
-    $username = mysqli_real_escape_string($mysqli, $_POST['username']);
-    $password = mysqli_real_escape_string($mysqli, md5($_POST['password']));
-    $checkLogin = mysqli_query($mysqli, "SELECT * FROM tb_user where username = '$username' AND password = '$password';");
-    $checkRole = $checkLogin->fetch_assoc();
-
-   
-
-    if($checkLogin->num_rows>0) {
-        $row = $checkLogin->fetch_assoc();
-        $row['username'] = $_SESSION['username'];
-
-        if($checkRole['role'] == 'admin') {
-            $_SESSION['login'] = 'login';
-                echo "
-            <script>
-            alert('Selamat anda berhasil Login sebagai Admin');
-            window.location.href = 'admin/dashboard.php';
-            </script>
-            ";
-        }
-        elseif($checkRole['role'] == 'peserta') {
-            $_SESSION['login'] = 'login';
-             echo "
-            <script>
-            alert('Selamat anda berhasil Login sebagai Peserta');
-            window.location.href = 'page/index.php';
-            </script>
-            ";
-        }
-    }
-     else {
-            echo "
-            <script>
-            alert('Username atau Password Salah!');
-            </script>
-            ";
-        }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +17,7 @@ if(isset($_POST['login'])) {
     <div class="col-12 col-md-6">
 
         <h2 class="mb-4 fw-bold mb-5">Login Form</h2>
-        <form action="" method="post">
+        <form action="action/login.php" method="post">
             <div class="mb-3">
                 <input type="text" name="username" class="form-control" placeholder="Username">
             </div>
