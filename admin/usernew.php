@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../assets/css/adminpagenew.css">
+    <link rel="stylesheet" href="../assets/css/userpage.css">
 </head>
 
 <body>
@@ -17,7 +17,8 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+       <div class="container-fluid d-flex p-0">
+
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -30,7 +31,7 @@
             <div class="logo">Meeting Kampus</div>
 
             <ul class="menu">
-                <li class="menu-item active">
+                <li class="menu-item">
                     <i>📊</i>
                     <a href="dashboardnew.php">Dashboard</a>
                 </li>
@@ -45,7 +46,7 @@
                     <a href="profilnew.php">Profil</a>
                 </li>
 
-                <li class="menu-item">
+                <li class="menu-item active">
                     <i>👥</i>
                     <a href="usernew.php">User</a>
                 </li>
@@ -60,25 +61,15 @@
         <!-- End Sidebar -->
    <!-- MAIN CONTENT -->
    <main class="main-content">
-      <div class="rapat-header bg-white rounded shadow-sm ">
-        <h1 class="rapat-title my-2">User Management</h1>
-        <div style="
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    width: 55px;
-    height: 55px;
-    background: gray;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-">
-    +
-</div>
+      <!-- Header -->
+    <div class="header">
+       <h2 class="page-title">User Management</h2>
+
+        <div class="user-info">
+            <span>Admin</span>
+            <div class="user-avatar">A</div>
+        </div>
+    </div>
 
         <div class="border bg-white rounded p-3">
        <table class="table table-responsive table-hover table-striped">
@@ -97,8 +88,8 @@
         <tbody id="userTableBody">
           <tr>
             <td>1</td>
-            <td>Aulia Ramadhani</td>
-            <td>auliyara</td>
+            <td>Ayaraa</td>
+            <td>ayaraaa</td>
             <td>auliyara@gmail.com</td>
             <td>Teknik Informatika</td>
             <td>Teknik Informatika</td>

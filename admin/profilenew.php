@@ -9,95 +9,125 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../assets/css/adminpagenew.css">
+    <link rel="stylesheet" href="../assets/css/userpage.css">
 </head>
 
 <body>
 
-    <!-- Tombol Hamburger -->
-    <button class="hamburger" id="hamburgerBtn">☰</button>
+<!-- Tombol Hamburger -->
+<button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+        <div class="logo-section">
+            <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+            <hr class="divider">
+        </div>
 
-            <div class="logo">Meeting Kampus</div>
+         <div class="logo">Meeting Kampus</div>
 
-            <ul class="menu">
-                <li class="menu-item active">
-                    <i>📊</i>
-                    <a href="dashboardnew.php">Dashboard</a>
-                </li>
+        <ul class="menu">
+            <li class="menu-item">
+                 <i>📊</i>
+                 <a href="dashboardnew.php">Dashboard</a>
+            </li>
 
-                <li class="menu-item">
-                    <i>📨</i>
-                    <a href="rapatnew.php">Rapat</a>
-                </li>
+             <li class="menu-item">
+                <i>📨</i>
+                <a href="rapatnew.php">Rapat</a>
+            </li>
 
-                <li class="menu-item">
-                    <i>👤</i>
-                    <a href="profilenew.php">Profil</a>
-                </li>
+            <li class="menu-item active">
+                <i>👤</i>
+                <a href="profilenew.php">Profil</a>
+            </li>
 
-                <li class="menu-item">
-                    <i>👥</i>
-                    <a href="usernew.php">User</a>
-                </li>
+            <li class="menu-item">
+                <i>👥</i>
+                <a href="usernew.php">User</a>
+            </li>
 
-                <li class="menu-item">
-                    <i>🚪</i>
-                    <a href="../action/logout.php">Keluar</a>
+            <li class="menu-item">
+                <i>🚪</i>
+                <a href="../action/logout.php">Keluar</a>
                 </li>
 
             </ul>
         </div>
         <!-- End Sidebar -->
-<style>
-       <div class="main-content">
 
-    <div class="content-header">
-        <h2>Profil Pengguna</h2>
-        <p>Kelola dan perbarui informasi akun Anda.</p>
+<!-- Main Content -->
+        <div class="main-content">
+
+            <div class="profile-container">
+
+                <div class="card profile-card">
+
+                    <!-- Header -->
+    <div class="header">
+        <h2 class="page-title">Profile</h2>
+
+        <div class="user-info">
+            <span>Admin</span>
+            <div class="user-avatar">A</div>
+        </div>
     </div>
 
-    <div class="profile-card">
-        <h3>Informasi Dasar</h3>
-        
-        <form action="update_profil.php" method="POST">
-            
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" value="Budi Santoso" readonly>
+                    <!-- Form Profil -->
+                    <form>
+
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" class="form-control" value="User">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" value="user.user@company.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">Departemen</label>
+                            <input type="text" id="department" class="form-control" value="Teknik Informatika">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="position">Jabatan</label>
+                            <input type="text" id="position" class="form-control" value="Ketua">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" class="form-control" value="081234567890">
+                        </div>
+
+                        <div class="form-group my-2">
+                            <button type="submit" class="form-control btn-primary">Edit</button>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
 
-            <div class="form-group">
-                <label for="nim_nip">NIM/NIP</label>
-                <input type="text" id="nim_nip" name="nim_nip" value="190401001" readonly>
-            </div>
+        </div>
+        <!-- End Main Content -->
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="budi.santoso@polibatam.ac.id">
-            </div>
-
-            <div class="form-group">
-                <label for="jabatan">Jabatan</label>
-                <input type="text" id="jabatan" name="jabatan" value="Dosen/Staff Admin" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="unit">Unit/Jurusan</label>
-                <input type="text" id="unit" name="unit" value="Jurusan Teknik Informatika" readonly>
-            </div>
-
-            <button type="button">Ubah Password</button>
-            <button type="submit">Simpan Perubahan</button>
-        </form>
     </div>
-    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const btn = document.getElementById("hamburgerBtn");
+        const sidebar = document.querySelector(".sidebar");
+
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+    </script>
+
+</body>
+
+</html>
