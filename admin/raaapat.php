@@ -17,7 +17,7 @@
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -37,19 +37,18 @@
 
                 <li class="menu-item active">
                     <i>📨</i>
-                    <a href="rapatnew.php">Rapat</a>
+                    <a href="rapatnew.php">Data Rapat</a>
                 </li>
 
                 <li class="menu-item">
                     <i>👤</i>
-                    <a href="profilenew.php">Profile</a>
+                    <a href="profil.php">User</a>
                 </li>
 
                 <li class="menu-item">
                     <i>👤</i>
-                    <a href="usernew.php">User</a>
+                    <a href="profil.php">Profil</a>
                 </li>
-
             </ul>
         </div>
         <!-- End Sidebar -->
@@ -60,7 +59,7 @@
   <div class="header">
     <div class="page-title">Pengelolaan Data Rapat</div>
     <div class="user-info">
-      <div class="user-avatar">U</div>
+      <div class="user-avatar">A</div>
       <span>Admin</span>
     </div>
   </div>
@@ -149,6 +148,38 @@
       </li>
     </ul>
   </div>
+  
+  <!-- Formulir Tambah Undangan Rapat -->
+ <div class="card">
+  <div class="card-title">Buat Undangan Rapat Baru</div>
+  <form id="meeting-form">
+    <div class="form-group">
+      <label for="meeting-title">Judul Rapat</label>
+      <input type="text" id="meeting-title" class="form-control" placeholder="Masukkan judul rapat" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-date">Tanggal & Waktu</label>
+      <input type="datetime-local" id="meeting-date" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-location">Lokasi / Platform</label>
+      <input type="text" id="meeting-location" class="form-control" placeholder="Ruang 101 / Zoom / Teams" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-participants">Peserta</label>
+      <input type="text" id="meeting-participants" class="form-control" placeholder="Fakultas / Departemen / Nama" required>
+    </div>
+    <div class="form-group">
+      <label for="meeting-method">Metode</label>
+      <select id="meeting-method" class="form-control">
+        <option value="Offline">Offline</option>
+        <option value="Online">Online</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Buat Undangan</button>
+  </form>
+ </div>
 
   <!-- Notulen & Dokumentasi -->
   <div class="card">
@@ -178,36 +209,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Tindak Lanjut & Monitoring -->
-  <div class="card">
-    <div class="card-title">Tindak Lanjut & Monitoring</div>
-    <ul class="meeting-list">
-      <li class="meeting-item">
-        <div>
-          <div class="meeting-title">Tugas: Persiapan Proposal</div>
-          <div class="meeting-time">Deadline: 30 Nov 2025</div>
-        </div>
-        <span class="badge badge-primary">Sedang</span>
-      </li>
-      <li class="meeting-item">
-        <div>
-          <div class="meeting-title">Tugas: Laporan Penelitian</div>
-          <div class="meeting-time">Deadline: 05 Des 2025</div>
-        </div>
-        <span class="badge badge-warning">Belum Dikerjakan</span>
-      </li>
-      <li class="meeting-item">
-        <div>
-          <div class="meeting-title">Tugas: Review Notulen</div>
-          <div class="meeting-time">Deadline: 27 Nov 2025</div>
-        </div>
-        <span class="badge badge-success">Selesai</span>
-      </li>
-    </ul>
-  </div>
-
-</div>
 
           <!-- JavaScript -->
     <script>

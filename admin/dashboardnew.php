@@ -42,7 +42,12 @@
 
                 <li class="menu-item">
                     <i>👤</i>
-                    <a href="profil.php">Profil</a>
+                    <a href="profilnew.php">Profil</a>
+                </li>
+
+                <li class="menu-item">
+                    <i>👤</i>
+                    <a href="usernew.php">User</a>
                 </li>
 
                 <li class="menu-item">
