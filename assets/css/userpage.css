@@ -18,13 +18,14 @@
     --blue: #bbe0f8;
     --green: #b6f1d1;
     --white: #f9f9f9;
-    --gray: #e7e3e3;
+    --gray: #e0e0e0;
+    --darkgray: #606060;
 }
 
-body {
-    background-color: var(--white);
-    color: var(--dark);
-    min-height: 100vh;
+.html,.body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Tombol hamburger */
@@ -49,8 +50,12 @@ body {
     width: 250px;
     color: var(--light);
     background-color: var(--primary);
+    min-height: 100vh;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     padding: 20px 0;
+    position: fixed;          
+    left: 0;
+    top: 0;
     transition: transform 0.3s ease-in-out;
     z-index: 200;
     flex-shrink: 0;
@@ -92,7 +97,7 @@ body {
 
 .menu-item:hover,
 .menu-item.active {
-    background-color: var(--warning);
+    background-color: var(--blue);
     color: var(--light);
     border-left: 4px solid var(--primary);
 }
@@ -116,41 +121,66 @@ body {
     transform: translateX(5px);
 }
 
+.menu-item.active {
+  background: linear-gradient(to right, rgba(254, 254, 254, 0.25), rgba(255, 255, 255, 0.1));
+  color: var(--light);
+  border-left: 4px solid var(--light);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
 
 /* -- Container layout -- */
 .container {
-    display: flex;
+    margin-left: 250px !important;
+    padding: 20px;
+    width: calc(100% - 250px) !important;
     min-height: 100vh;
-    margin-left: 0 !important;
-    width: 100% !important;
+    display: block !important;  /* INI YANG BENER */
 }
 
 /* -- Responsive Mobile -- */
 @media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 20px;
+    }
 
-/* -- sidebar -- */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    transform: translateX(-100%);
+    /* Sidebar disembunyikan */
+    .sidebar {
+        position: fixed;
+        width: 250px;
+        transform: translateX(-100%);
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 200;
+        transition: 0.3s ease-in-out;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Konten jadi full-width (biar gak kecil) */
+    .container {
+        margin-left: 0 !important;
+        width: 100% !important;
+        display: block;
+    }
+
+    /* Tombol hamburger muncul */
+    .hamburger {
+        display: block;
+    }
 }
 
-.sidebar.active {
-    transform: translateX(0);
-}
-
-/* -- hamburger -- */
-.hamburger {
-    display: block;
-}
-}
 
 /* -- Konten Utama -- */
 .main-content {
+    margin-left: 250px;
     flex-grow: 1;
-    padding: 20px 30px;
+    padding: 40px;
+    width: calc(100% - 260px);
 }
 
 .header {
@@ -226,7 +256,7 @@ body {
     display: flex;
     align-items: center;
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid var(--gray);
     border-radius: 10px;
     padding: 8px 14px;
     width: 350px;
@@ -235,7 +265,7 @@ body {
 
 .search-icon {
     font-size: 18px;
-    color: #666;
+    color: var();
     margin-right: 10px;
 }
 
@@ -255,7 +285,7 @@ body {
 }
 
 .notif-icon i {
-    color: #333;
+    color: var(--dark);
     transition: 0.3s;
 }
 
@@ -269,12 +299,48 @@ body {
     position: absolute;
     top: -6px;
     right: -6px;
-    background: red;
-    color: white;
+    background: var(--danger);
+    color: var(--white);
     font-size: 11px;
     padding: 2px 6px;
     border-radius: 50%;
     font-weight: bold;
+}
+
+/* -- Shortcut -- */
+.shortcut-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-soft);
+    border-top: 4px solid var(--primary);
+    transition: transform .18s ease, box-shadow .18s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.shortcut-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.shortcut-card .icon {
+    font-size: 28px;
+}
+
+.shortcut-card h5 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0;
+}
+
+.shortcut-card a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 6px;
 }
 
 /* -- Dashboard Section -- */
@@ -314,6 +380,44 @@ body {
     text-transform: uppercase;
 }
 
+.label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.label::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--primary);
+    margin-top: 6px;
+    border-radius: 2px;
+}
+
+.value {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 12px 0;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover .value {
+    transform: scale(1.1);
+}
+
+.desc {
+    font-size: 14px;
+    color: var(--gray);
+    font-style: italic;
+    line-height: 1.4;
+}
+
 .meeting-list {
     list-style: none;
 }
@@ -349,19 +453,12 @@ body {
     text-transform: uppercase;
 }
 
-.badge-primary {
-    background-color: var(--blue);
-    color: var(--primary);
+.badge-upcoming {
+    background: var(--primary);
 }
 
 .badge-success {
-    background-color: var(--green);
-    color: var(--success);
-}
-
-.badge-warning {
-    background-color: var(--warning);
-    color: var(--warning);
+    background: var(--success);
 }
 
 /* -- Undangan Section -- */
@@ -404,7 +501,7 @@ body {
 .meeting-body p {
     margin-top: 10px;
     font-size: 14px;
-    color: var(--dark);
+    color: var(--primary);
 }
 
 .meeting-detail {
@@ -438,7 +535,7 @@ body {
 
 .btn-primary {
     background-color: var(--primary);
-    color: white;
+    color: var(--white);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -550,4 +647,106 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+}
+
+/* Container untuk halaman logout */
+.logout-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* Kartu logout */
+.logout-card {
+    background: var(--white);
+    padding: 35px 40px;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    animation: fadeInLogout 0.5s ease;
+}
+
+/* Animasi */
+@keyframes fadeInLogout {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Judul */
+.logout-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+/* Deskripsi */
+.logout-card p {
+    font-size: 15px;
+    color: var(--darkgray);
+    margin-bottom: 25px;
+}
+
+/* Wrapper tombol */
+.logout-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Tombol Logout */
+.btn-logout {
+    background:var(--danger);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background: var(--danger);
+}
+
+/* Tombol Batal */
+.btn-cancel {
+    background: var(--gray);
+    color: var(--white);
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    background: var(--darkgray);
+}
+
+/* NOTIF LOGOUT */
+.logout-notif {
+    position: fixed;
+    top: -60px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 9999;
+}
+
+.logout-notif.show {
+    top: 15px;   
+    opacity: 1;
 }

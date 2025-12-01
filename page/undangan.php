@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perencanaan Rapat - Dashboard User</title>
+    <title>Perencanaan Rapat - Undangan Rapat</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,42 +12,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/userpage.css">
 </head>
-<body>
-        <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <!-- Halaman sidebar -->
-        <div class="container">
-        <div class="sidebar">
-        <div class="logo-section">
-        <img src="../assets/img/poltek.png" height="100px" width="100px" alt="Logo" class="logo-img">
-        <hr class="divider">
-        </div>
-            <div class="logo">Meeting Kampus</div>
-            <ul class="menu">
-              <li class="menu-item ">
-                    <i>📊</i> 
-                    <a href="index.php">Dashboard</a> 
-                </li>
-                <li class="menu-item active">
-                    <i>📨</i> 
-                    <a href="undangan.php">Undangan Rapat</a> 
-                    
-                </li>
-                <li class="menu-item">
-                    <i>👤</i> 
-                    <a href="profil.php">Profil</a> 
-
-
 
 <body>
 
     <!-- Tombol Hamburger -->
     <button class="hamburger" id="hamburgerBtn">☰</button>
 
-    <div class="container">
+    <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
@@ -62,7 +33,7 @@
             <ul class="menu">
                 <li class="menu-item">
                     <i>📊</i>
-                    <a href="user.php">Dashboard</a>
+                    <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item active">
@@ -77,12 +48,13 @@
 
                 <li class="menu-item">
                     <i>🚪</i>
-                    <a href="../action/logout.php">Keluar</a>
+                    <a href="logout.php">Keluar</a>
                 </li>
             </ul>
 
-        </div>
+</div>
         <!-- End Sidebar -->
+
 
         <!-- Main Content -->
         <div class="main-content">
@@ -105,7 +77,7 @@
 
                     <div class="notif-icon">
                         <i class="bi bi-bell"></i>
-                        <span class="notif-count">0</span>
+                        <span class="notif-count">2</span>
                     </div>
 
                 </div>

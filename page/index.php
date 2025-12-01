@@ -18,6 +18,9 @@ include "../connection/server.php"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <!-- Css Eksternal -->
   <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- AOS CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
 </head>
 
 <body>
@@ -65,7 +68,7 @@ include "../connection/server.php"
 
   <!-- Website Utama -->
   <div class="row row-cols-12 " style="margin-top: 125px;">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-6" data-aos="fade-right">
       <h2 class="text-center py-2 overflow-hidden">Pengelolaan Rapat</h2>
       <p class="px-4 "">
        Politeknik Negeri Batam (Polibatam) terletak di Pulau Batam, kawasan perdagangan dan pelabuhan
@@ -82,18 +85,21 @@ include "../connection/server.php"
         dapat dikelola secara terstruktur, sehingga mendukung semangat profesionalisme dan efisiensi di lingkungan
         Politeknik Negeri Batam.</p>
     </div>
-    <div class="col-12 col-md-6 text-center justify-content-center align-content-center align-items-center">
-     <iframe width="600" height="400" class="embed-responsive" src="https://www.youtube.com/embed/NnqfwN4nPQo" title="Video Profil Program Studi Teknik Informatika" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen autoplay loop></iframe>
+    <div class=" col-12 col-md-6 text-center justify-content-center align-content-center align-items-center " data-aos="fade-left">
+        <iframe width="600" height="400" class="embed-responsive" src="https://www.youtube.com/embed/NnqfwN4nPQo"
+          title="Video Profil Program Studi Teknik Informatika" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen autoplay loop></iframe>
     </div>
   </div>
 
   <hr>
 
-  <div class="image-wrap d-flex justify-content-around py-4">
-    <img src="../assets/img/pol1.png" alt=""  srcset="">
-    <img src="../assets/img/pol2.png" alt=""  srcset="">
-    <img src="../assets/img/pol3.png" alt=""  srcset="">
-    <img src="../assets/img/pol4.png" alt=""  srcset="">
+  <div class="image-wrap d-flex justify-content-around py-4" data-aos="fade-up">
+    <img src="../assets/img/pol1.png" alt="" srcset="">
+    <img src="../assets/img/pol2.png" alt="" srcset="">
+    <img src="../assets/img/pol3.png" alt="" srcset="">
+    <img src="../assets/img/pol4.png" alt="" srcset="">
   </div>
 
   <hr>
@@ -105,34 +111,43 @@ include "../connection/server.php"
     <div class="row  justify-content-center g-4">
 
 
-      <div class="col-12 py-4 col-md-4  px-5 px-md-3">
+      <div class="col-12 py-4 col-md-4  px-5 px-md-3" data-aos="zoom-in">
         <div class="card text-center">
           <div class="card-body">
-            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+            <i class="fa-solid fa-1 text-center angka-satu mb-4"></i>
 
             <h5 class="card-title">Meningkatkan Efisiensi dan Ketepatan Waktu Rapat</h5>
-            <p class="card-text text-center">Website ini bertujuan untuk membantu mahasiswa dan pihak kampus dalam menjadwalkan serta mengelola rapat dengan lebih efisien. Melalui sistem digital, proses pemesanan waktu, pengiriman undangan, dan pengingat rapat dapat dilakukan secara otomatis sehingga meminimalkan keterlambatan dan bentrok jadwal.s
+            <p class="card-text text-center">Website ini bertujuan untuk membantu mahasiswa dan pihak kampus dalam
+              menjadwalkan serta mengelola rapat dengan lebih efisien. Melalui sistem digital, proses pemesanan waktu,
+              pengiriman undangan, dan pengingat rapat dapat dilakukan secara otomatis sehingga meminimalkan
+              keterlambatan dan bentrok jadwal.s
               content.</p>
           </div>
         </div>
       </div>
-      <div class="col-12 py-4 col-md-4 px-5 px-md-3">
+      <div class="col-12 py-4 col-md-4 px-5 px-md-3" data-aos="zoom-in">
         <div class="card text-center">
           <div class="card-body">
-            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+            <i class="fa-solid fa-2 text-center angka-dua mb-4"></i>
+
             <h5 class="card-title">Mempermudah Mengelola Data Rapat</h5>
-            <p class="card-text text-center">Sistem Pengelolaan Rapat ini berguna untuk mempermudah panitia untuk mengelola data-data rapat
-              </p>
+            <p class="card-text text-center">Sistem Pengelolaan Rapat ini berguna untuk mempermudah panitia untuk
+              mengelola data-data rapat
+            </p>
           </div>
         </div>
       </div>
-      <div class="col-12 py-4 col-md-4 px-5 px-md-3">
+      <div class="col-12 py-4 col-md-4 px-5 px-md-3" data-aos="zoom-in">
         <div class="card text-center">
           <div class="card-body">
-            <img src="../assets/img/Polibatam.png" class="card-img-top img-fluid" alt="...">
+            <i class="fa-solid fa-3 text-center angka-tiga mb-4"></i>
+
 
             <h5 class="card-title">Meningkatkan Koordinasi dan Transparansi antar Pihak</h5>
-            <p class="card-text text-center">Website ini memfasilitasi komunikasi dan koordinasi antara mahasiswa, dosen pembimbing, dan pihak organisasi kampus dalam menyelenggarakan rapat. Informasi rapat dapat diakses secara terbuka oleh pihak yang berwenang, sehingga mendukung transparansi dan akuntabilitas kegiatan organisasi di lingkungan Politeknik Negeri Batam.</p>
+            <p class="card-text text-center">Website ini memfasilitasi komunikasi dan koordinasi antara mahasiswa, dosen
+              pembimbing, dan pihak organisasi kampus dalam menyelenggarakan rapat. Informasi rapat dapat diakses secara
+              terbuka oleh pihak yang berwenang, sehingga mendukung transparansi dan akuntabilitas kegiatan organisasi
+              di lingkungan Politeknik Negeri Batam.</p>
           </div>
         </div>
       </div>
@@ -145,28 +160,28 @@ include "../connection/server.php"
   <hr>
 
 
-  <div class="contact" id="contact">
+  <div class="contact" id="contact" data-aos="fade-up">
 
     <h1 class="text-center">Contact Us</h1>
     <p class="text-center">Ada masalah? isi data dibawah ini, semua nya akan kami jawab.</p>
 
 
-    <form>
+    <form method="post" action="../action/insertcontact.php">
       <div class="wrap-contact">
 
         <div class="mb-3 mt-4 text-center">
           <label for="exampleInputEmail1" class="form-label fw-bold fs-4">Email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="Masukkan Email Anda" required>
 
         </div>
         <div class="mb-3 text-center">
           <label for="nama" class="form-label fw-bold fs-4">Nama</label>
-          <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Anda" required>
+          <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Anda" required>
         </div>
         <div class="mb-3 text-center">
           <label for="nama" class="form-label fw-bold fs-4">Keluhan</label>
-          <textarea name="" id="" class="form-control" placeholder="Apa keluhan anda?" rows="5"></textarea>
+          <textarea name="keluhan" id="" class="form-control" placeholder="Apa keluhan anda?" rows="5"></textarea>
         </div>
         <button type="submit" class="btn btn-primary w-100">Submit</button>
       </div>
@@ -174,34 +189,41 @@ include "../connection/server.php"
   </div>
 
 
-<footer class="footer my-5">
+  <footer class="footer my-5">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="footer-brand px-5">
-                  <img src="../assets/img/Polibatam.png" alt="">
-                </div>
-             
-            </div>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="footer-brand px-5">
+            <img src="../assets/img/Polibatam.png" alt="">
+          </div>
 
-            <div class="col-md-6 text-md-end">
-                <ul class="footer-links">
-                  <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Terms</a></li>
-                </ul>
-            </div>
         </div>
 
-        <div class="copyright text-center">
-            © PBL Group 2
+        <div class="col-md-6 text-md-end">
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
         </div>
+      </div>
+
+      <div class="copyright text-center">
+        © PBL Group 2
+      </div>
     </div>
-</footer>
-  
-</body>
+  </footer>
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,   // durasi animasi
+    once: true       // animasi hanya jalan sekali
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
 
 </html>
