@@ -55,7 +55,7 @@
 
                  <li class="menu-item">
                      <i>🚪</i>
-                     <a href="<?= logout() ?>">Keluar</a>
+                     <a href="">Keluar</a>
                  </li>
              </ul>
 
