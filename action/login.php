@@ -9,11 +9,9 @@ if(isset($_POST['login'])) {
 
 
     if($checkLogin->num_rows>0) {
-        $_SESSION['username'] = $checkRole['username'];
         $_SESSION['id_user'] = $checkRole['id_user'];
-
+        $_SESSION['username'] = $checkRole['username'];
         if($checkRole['role'] == 'admin') {
-            $_SESSION['login'] = 'login';
             echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Admin');
@@ -22,7 +20,6 @@ if(isset($_POST['login'])) {
             ";
         }
         elseif($checkRole['role'] == 'peserta') {
-            $_SESSION['login'] = 'login';
              echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Peserta');
@@ -35,6 +32,7 @@ if(isset($_POST['login'])) {
             echo "
             <script>
             alert('Username atau Password Salah!');
+            window.location.href = '../login.php';
             </script>
             ";
         }

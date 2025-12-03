@@ -9,4 +9,15 @@ function middleware(){
 //     ";
 // }
 }
+
+function logout() {
+    session_destroy();
+    header("location:../login.php");
+    // echo "
+    // <script>
+    // alert('Berhasil Logout');
+    // window.location.href = '../login.php';
+    // </script>
+    // ";
+}
 ?>
