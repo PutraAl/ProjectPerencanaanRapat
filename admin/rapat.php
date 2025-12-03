@@ -111,13 +111,20 @@ if(isset($_GET['edit'])) {
 
         <li class="menu-item">
           <i>👤</i>
-          <a href="profil.php">User</a>
+          <a href="profilenew.php">Profil</a>
         </li>
 
         <li class="menu-item">
-          <i>👤</i>
-          <a href="profil.php">Profil</a>
+          <i>👥</i>
+          <a href="usernew.php">User</a>
         </li>
+
+        <li 
+        class="menu-item">
+          <i>🚪</i>
+          <a href="../action/logout.php">Keluar</a>
+          </li>
+
       </ul>
     </div>
     <!-- End Sidebar -->
