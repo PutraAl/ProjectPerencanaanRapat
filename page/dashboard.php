@@ -1,6 +1,5 @@
 <?php 
 include "../connection/server.php";
-include "../connection/session.php";
 $id_user = $_SESSION['id_user'];
 $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peserta = '$id_user'");
 ?>
@@ -52,7 +51,7 @@ $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peser
 
                 <li class="menu-item">
                     <i>🚪</i>
-                    <a href="<?= logout() ?>">Keluar</a>
+                    <a href="">Keluar</a>
                 </li>
             </ul>
 
