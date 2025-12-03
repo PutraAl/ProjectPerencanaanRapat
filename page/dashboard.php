@@ -1,5 +1,8 @@
 <?php 
 include "../connection/server.php";
+include "../connection/session.php";
+$id_user = $_SESSION['id_user'];
+$totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peserta = '$id_user'");
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +52,7 @@ include "../connection/server.php";
 
                 <li class="menu-item">
                     <i>🚪</i>
-                    <a href="logout.php">Keluar</a>
+                    <a href="<?= logout() ?>">Keluar</a>
                 </li>
             </ul>
 
@@ -61,7 +64,7 @@ include "../connection/server.php";
 
             <!-- Notifikasi -->
             <div class="alert alert-info shadow-sm mb-4">
-                🔔 Anda memiliki <strong>2 undangan rapat baru</strong>.  
+                🔔 Anda memiliki <strong><?= $totalUndangan->num_rows <= 0 ? '0' : $totalUndangan->num_rows  ?> undangan rapat baru</strong>.  
                 <a href="undangan.php" class="alert-link">Lihat sekarang</a>.
             </div>
 

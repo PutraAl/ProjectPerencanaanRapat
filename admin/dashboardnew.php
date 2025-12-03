@@ -65,49 +65,51 @@ $allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
         </div>
         <!-- End Sidebar -->
 
-    <!-- Main Content: Pengelolaan Data Rapat -->
-<div class="main-content">
+        <!-- Main Content: Pengelolaan Data Rapat -->
+        <div class="main-content">
 
-    <!-- Header -->
-    <div class="header">
-        <h2 class="page-title">Dashboard Admin</h2>
+            <!-- Header -->
+            <div class="header">
+                <h2 class="page-title">Dashboard Admin</h2>
 
-        <div class="user-info">
-            <span><?=  $username ?></span>
-            <div class="user-avatar">A</div>
+                <div class="user-info">
+                    <span><?=  $username ?></span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-container">
+                <a href="usernew.php" style="text-decoration: none;">
+                    <div class="stat-card" >
+                        <div class="stat-value" id="todayMeetingCount"><?= $allUser->num_rows ?></div>
+                        <div class="stat-label">Total User</div>
+                    </div>
+                </a>
+                <a href="raaapat.php" style="text-decoration: none;">
+                <div class="stat-card">
+                    <div class="stat-value" id="weekMeetingCount"><?= $allRapat->num_rows ?></div>
+                    <div class="stat-label">Total Rapat</div>
+                </div>
+                </a>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalInvitation"><?= $allUndangan->num_rows ?></div>
+                    <div class="stat-label">Total Undangan</div>
+                </div>
+            </div>
+
         </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-container">
-        <div class="stat-card">
-            <div class="stat-value" id="todayMeetingCount"><?= $allUser->num_rows ?></div>
-            <div class="stat-label">Total User</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-value" id="weekMeetingCount"><?= $allRapat->num_rows ?></div>
-            <div class="stat-label">Total Rapat</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-value" id="totalInvitation"><?= $allUndangan->num_rows ?></div>
-            <div class="stat-label">Total Undangan</div>
-        </div>
-    </div>
-
-</div>
 
 
-   <!-- JavaScript -->
-    <script>
-        const btn = document.getElementById("hamburgerBtn");
-        const sidebar = document.querySelector(".sidebar");
+        <!-- JavaScript -->
+        <script>
+            const btn = document.getElementById("hamburgerBtn");
+            const sidebar = document.querySelector(".sidebar");
 
-        btn.addEventListener("click", () => {
-            sidebar.classList.toggle("active");
-        });
-    </script>
+            btn.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+            });
+        </script>
 
 </body>
 
