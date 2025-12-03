@@ -11,6 +11,7 @@ if(isset($_POST['login'])) {
     if($checkLogin->num_rows>0) {
         $_SESSION['id_user'] = $checkRole['id_user'];
         $_SESSION['username'] = $checkRole['username'];
+        $_SESSION['login'] = 'login';
         if($checkRole['role'] == 'admin') {
             echo "
             <script>
