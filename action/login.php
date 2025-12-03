@@ -10,6 +10,8 @@ if(isset($_POST['login'])) {
 
     if($checkLogin->num_rows>0) {
         $_SESSION['username'] = $checkRole['username'];
+        $_SESSION['id_user'] = $checkRole['id_user'];
+
         if($checkRole['role'] == 'admin') {
             $_SESSION['login'] = 'login';
             echo "

@@ -14,33 +14,41 @@ $row = mysqli_fetch_assoc($result);
 
 // Jika tombol edit ditekan
 if (isset($_POST['edit'])) {
-    $nama   = $_POST['nama'];
-    $email  = $_POST['email'];
+    $nama       = $_POST['nama'];
+    $email      = $_POST['email'];
+    $departemen = $_POST['departemen'];
+    $jabatan    = $_POST['jabatan'];
+    $telepon    = $_POST['telepon'];
 
     $update = mysqli_prepare($mysqli, 
         "UPDATE tb_user 
-         SET nama = ?, email = ?
-         WHERE id_user = ?"
+         SET nama_lengkap=?, email=?, departemen=?, jabatan=?, telepon=? 
+         WHERE id_user=?"
     );
 
     mysqli_stmt_bind_param(
         $update,
-        "ssi",
-        $nama, $email, $id
+        "sssssi",
+        $nama, $email, $departemen, $jabatan, $telepon, $id
     );
 
     mysqli_stmt_execute($update);
 
-    if (mysqli_stmt_affected_rows($update) > 0) {
-        echo "<script>
-                alert('Profil berhasil diperbarui!');
-                window.location='profil.php';
-              </script>";
-    } else {
-        echo "<script>
-                alert('Tidak ada perubahan data!');
-              </script>";
-    }
+    echo "<script>
+            alert('Profil berhasil diperbarui!');
+            window.location='profil.php';
+          </script>";
+
+if (mysqli_stmt_affected_rows($update) > 0) {
+    echo "<script>
+            alert('Profil berhasil diperbarui!');
+            window.location='profil.php';
+          </script>";
+} else {
+    echo "<script>
+            alert('Tidak ada perubahan data!');
+          </script>";
+}
 }
 ?>
 
@@ -121,38 +129,41 @@ if (isset($_POST['edit'])) {
                     </div>
 
                     <!-- Form Profil -->
-                    <form>
+<form method="POST">
 
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" id="name" class="form-control" value="User">
-                        </div>
+    <div class="form-group">
+        <label for="name">Nama Lengkap</label>
+        <input type="text" name="nama" class="form-control" value="<?= $row['nama_lengkap']; ?>">
+    </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" value="user.user@company.com">
-                        </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" value="<?= $row['email']; ?>">
+    </div>
 
-                        <div class="form-group">
-                            <label for="department">Departemen</label>
-                            <input type="text" id="department" class="form-control" value="Teknik Informatika">
-                        </div>
+    <div class="form-group">
+        <label for="department">Departemen</label>
+        <input type="text" name="departemen" class="form-control" value="<?= $row['departemen']; ?>">
+    </div>
 
-                        <div class="form-group">
-                            <label for="position">Jabatan</label>
-                            <input type="text" id="position" class="form-control" value="Ketua">
-                        </div>
+    <div class="form-group">
+        <label for="position">Jabatan</label>
+        <input type="text" name="jabatan" class="form-control" value="<?= $row['jabatan']; ?>">
+    </div>
 
-                        <div class="form-group">
-                            <label for="phone">Nomor Telepon</label>
-                            <input type="tel" id="phone" class="form-control" value="081234567890">
-                        </div>
+    <div class="form-group">
+        <label for="phone">Nomor Telepon</label>
+        <input type="tel" name="telepon" class="form-control" value="<?= $row['telepon']; ?>">
+    </div>
 
-                        <div class="form-group my-2">
-                            <button type="submit" class="form-control btn-primary">Edit</button>
-                        </div>
+    <div class="form-group my-2">
+        <button type="submit" name="edit" class="form-control btn-primary">
+            Simpan Perubahan
+        </button>
+    </div>
 
-                    </form>
+</form>
+
                 </div>
 
             </div>
