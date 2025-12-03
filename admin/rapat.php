@@ -168,7 +168,7 @@ if(isset($_GET['edit'])) {
       <div class="form-section <?php echo $editMode ? 'show' : ''; ?>" id="formSection">
         <h4 class="mb-4"><?php echo $editMode ? 'Edit Data Rapat' : 'Tambah Data Rapat Baru'; ?></h4>
         
-        <form action="<?php echo $editMode ? 'action/proses_edit_rapat.php' : 'action/tambah_rapat.php'; ?>" method="POST" id="meeting-form">
+        <form action="<?php echo $editMode ? '../action/proses_edit_rapat.php' : '../action/tambah_rapat.php'; ?>" method="POST" id="meeting-form">
           
           <?php if($editMode): ?>
           <input type="hidden" name="id_rapat" value="<?= $rapatEdit['id_rapat'] ?>">
