@@ -35,6 +35,7 @@ $allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
 
             <div class="logo">Meeting Kampus</div>
 
+
             <ul class="menu">
                 <li class="menu-item active">
                     <i>📊</i>
@@ -43,16 +44,16 @@ $allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
 
                 <li class="menu-item">
                     <i>📨</i>
-                    <a href="rapatnew.php"> Data Rapat</a>
+                    <a href="rapat.php">Rapat</a>
                 </li>
 
                 <li class="menu-item">
                     <i>👤</i>
-                    <a href="profilnew.php">Profil</a>
+                    <a href="profilenew.php">Profil</a>
                 </li>
 
                 <li class="menu-item">
-                    <i>👤</i>
+                    <i>👥</i>
                     <a href="usernew.php">User</a>
                 </li>
 
@@ -86,7 +87,7 @@ $allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
                         <div class="stat-label">Total User</div>
                     </div>
                 </a>
-                <a href="raaapat.php" style="text-decoration: none;">
+                <a href="rapat.php" style="text-decoration: none;">
                 <div class="stat-card">
                     <div class="stat-value" id="weekMeetingCount"><?= $allRapat->num_rows ?></div>
                     <div class="stat-label">Total Rapat</div>

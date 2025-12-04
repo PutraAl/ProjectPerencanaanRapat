@@ -38,12 +38,12 @@
 
                 <li class="menu-item">
                     <i>📨</i>
-                    <a href="rapatnew.php">Rapat</a>
+                    <a href="rapat.php">Rapat</a>
                 </li>
 
                 <li class="menu-item">
                     <i>👤</i>
-                    <a href="profilnew.php">Profil</a>
+                    <a href="profilenew.php">Profil</a>
                 </li>
 
                 <li class="menu-item active">
