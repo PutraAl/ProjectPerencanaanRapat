@@ -14,9 +14,9 @@ if(isset($_GET['edit'])) {
     $rapatEdit = mysqli_fetch_array($queryEdit);
     
     // Ambil peserta yang sudah terpilih
-    $queryPesertaTerpilih = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE id_rapat = '$id_edit'");
+    $queryPesertaTerpilih = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_rapat = '$id_edit'");
     while($row = mysqli_fetch_array($queryPesertaTerpilih)) {
-        $pesertaTerpilih[] = $row['id_user'];
+        $pesertaTerpilih[] = $row['id_peserta'];
     }
 }
 ?>
@@ -41,44 +41,6 @@ if(isset($_GET['edit'])) {
   
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
   
-  <style>
-    .select2-container {
-      width: 100% !important;
-    }
-    
-    .select2-container--bootstrap-5 .select2-selection--multiple {
-      min-height: 38px;
-    }
-    
-    .form-section {
-      background: white;
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: none;
-    }
-    
-    .form-section.show {
-      display: block;
-      animation: slideDown 0.3s ease-out;
-    }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .btn-toggle {
-      margin-bottom: 15px;
-    }
-  </style>
 </head>
 
 <body>
@@ -229,7 +191,7 @@ if(isset($_GET['edit'])) {
                 while($row = mysqli_fetch_array($dataPeserta)) {
                     $selected = ($editMode && in_array($row['id_user'], $pesertaTerpilih)) ? 'selected' : '';
                 ?>
-                <option value="<?= $row['id_user'] ?>" <?= $selected ?>><?= $row['nama'] ?></option>
+                <option value="<?= $row['id_user'] ?>" <?=  $selected ?>><?= $row['nama'] ?></option>
                 <?php } ?>
               </select>
               <small class="form-text text-muted">Pilih satu atau lebih peserta</small>
