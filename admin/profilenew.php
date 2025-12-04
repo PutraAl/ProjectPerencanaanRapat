@@ -1,3 +1,10 @@
+<?php 
+include "../connection/server.php";
+$id_user = $_SESSION['id_user'];
+$data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
+
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -6,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perencanaan Rapat - Profile Admin</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../assets/css/userpage.css">
 </head>
@@ -77,12 +83,12 @@
 
                             <div class="profile-card text-center mt-3">
                                 <img src="https://via.placeholder.com/120" alt="Profile Picture">
-                                <h3 id="nameDisplay">Yoda Pratama</h3>
-                                <p id="emailDisplay">Yodapratama@gmail.com</p>
-                                <p id="positionDisplay">Staff</p>
+                                <h3 id="nameDisplay"><?= $data['nama'] ?></h3>
+                                <p id="emailDisplay"><?= $data['email'] ?></p>
+                                <p id="positionDisplay"><?= $data['role'] ?></p>
                                 
                                 <!-- Tombol Edit Profile di bawah tulisan Staff -->
-                                <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
+                                <button id="editProfileBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
                             </div>
                     
                 </div>
@@ -96,7 +102,7 @@
     </div>
                 
 <!-- Modal Edit Profile -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       
@@ -109,11 +115,15 @@
         <form id="editProfileForm">
           <div class="mb-3">
             <label for="nameInput" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nameInput" value="Yoda Pratama">
+            <input type="text" class="form-control" id="nameInput" value="<?= $data['nama'] ?>">
           </div>
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailInput" value="Yodapratama@gmail.com">
+            <input type="email" class="form-control" id="emailInput" value="<?= $data['email'] ?>">
+          </div>
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Password</label>
+            <input type="text" class="form-control" name="password" id="password">
           </div>
           <div class="mb-3">
             <label for="positionInput" class="form-label">Jabatan</label>
@@ -131,9 +141,7 @@
   </div>
 </div>
 
-    <!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <script>
     const btn = document.getElementById("hamburgerBtn");
@@ -143,27 +151,7 @@
         sidebar.classList.toggle("active");
     });
 
-    const editBtn = document.getElementById("editProfileBtn");
-    const saveBtn = document.getElementById("saveProfileBtn");
-    const nameDisplay = document.getElementById("nameDisplay");
-    const emailDisplay = document.getElementById("emailDisplay");
-    const positionDisplay = document.getElementById("positionDisplay");
-
-    // Bootstrap 5 modal
-    const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
-
-    // Tampilkan modal saat tombol diklik
-    editBtn.addEventListener("click", () => {
-        editProfileModal.show();
-    });
-
-    // Simpan perubahan dan update tampilan
-    saveBtn.addEventListener("click", () => {
-        nameDisplay.textContent = document.getElementById("nameInput").value;
-        emailDisplay.textContent = document.getElementById("emailInput").value;
-        positionDisplay.textContent = document.getElementById("positionInput").value;
-        editProfileModal.hide();
-    });
+    
 </script>
 
 </body>
