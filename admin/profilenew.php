@@ -114,6 +114,10 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
       <div class="modal-body">
         <form id="editProfileForm">
           <div class="mb-3">
+            <label for="id_user" class="form-label">ID User</label>
+            <input type="number" class="form-control" id="id_user" value="<?= $data['id_user'] ?> ">
+          </div>
+          <div class="mb-3">
             <label for="nameInput" class="form-label">Nama</label>
             <input type="text" class="form-control" id="nameInput" value="<?= $data['nama'] ?>">
           </div>
@@ -151,8 +155,46 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
         sidebar.classList.toggle("active");
     });
 
-    
+    // -------------------------------
+    // Aksi tombol Simpan di Modal Edit
+    // -------------------------------
+    document.getElementById("saveProfileBtn").addEventListener("click", function () {
+
+        let id_user = document.getElementById("id_user").innerText; 
+        let nama     = document.getElementById("nameInput").value;
+        let email    = document.getElementById("emailInput").value;
+        let password = document.getElementById("password").value;
+        let jabatan  = document.getElementById("positionInput").value;
+
+        // Siapkan data
+        let formData = new FormData();
+        formData.append("id_user", id_user);
+        formData.append("nama", nama);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("jabatan", jabatan);
+
+        // Kirim menggunakan fetch
+        fetch("update_profile.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+
+            // Jika sukses, tutup modal dan refresh halaman
+            alert("Profil berhasil diperbarui!");
+            location.reload();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Terjadi kesalahan, coba lagi.");
+        });
+
+    });
 </script>
+
 
 </body>
 
