@@ -1,5 +1,6 @@
 <?php 
-
+    session_start();
+    session_unset();
     session_destroy();
     
     // header("location:../index.php");
@@ -7,5 +8,5 @@
 
 <script>
     alert('Berhasil Logout')
-    window.locati
+    window.location.href = '../index.php';
 </script>

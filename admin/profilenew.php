@@ -75,14 +75,14 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
                         <h2 class="page-title">Profile</h2> 
                      <div class="user-info">
                         <span>Admin</span>
-                        <div class="user-avatar">A</div>
+                        <div class="use3r-avatar">A</div>
                      </div>
                     </div>
 
                     <!-- Form Profil -->
 
                             <div class="profile-card text-center mt-3">
-                                <img src="https://via.placeholder.com/120" alt="Profile Picture">
+                                <!-- <img src="https://via.placeholder.com/120" alt="Profile Picture"> -->
                                 <h3 id="nameDisplay"><?= $data['nama'] ?></h3>
                                 <p id="emailDisplay"><?= $data['email'] ?></p>
                                 <p id="positionDisplay"><?= $data['role'] ?></p>
@@ -112,18 +112,19 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
       </div>
       
       <div class="modal-body">
-        <form id="editProfileForm">
-          <div class="mb-3">
-            <label for="id_user" class="form-label">ID User</label>
-            <input type="number" class="form-control" id="id_user" value="<?= $data['id_user'] ?> ">
-          </div>
+        <form action="../action/edit_profile_admin.php" method="post" id="editProfileForm">
+            <input type="hidden" name="id_user" class="form-control" id="id_user" value="<?= $data['id_user'] ?>" >
           <div class="mb-3">
             <label for="nameInput" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nameInput" value="<?= $data['nama'] ?>">
+            <input type="text" name="nama" class="form-control" id="nameInput" value="<?= $data['nama'] ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="nameInput" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="nameInput" value="<?= $data['username'] ?>" required>
           </div>
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailInput" value="<?= $data['email'] ?>">
+            <input type="email" name="email" class="form-control" id="emailInput" value="<?= $data['email'] ?>" required>
           </div>
           <div class="mb-3">
             <label for="emailInput" class="form-label">Password</label>
@@ -131,14 +132,14 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
           </div>
           <div class="mb-3">
             <label for="positionInput" class="form-label">Jabatan</label>
-            <input type="text" class="form-control" id="positionInput" value="Staff">
+            <input type="text" class="form-control" id="positionInput" value="<?= $data['role'] ?>" readonly>
           </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="input" class="btn btn-primary" id="saveProfileBtn">Simpan</button>
         </form>
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary" id="saveProfileBtn">Simpan</button>
       </div>
       
     </div>
@@ -148,51 +149,49 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <script>
-    const btn = document.getElementById("hamburgerBtn");
-    const sidebar = document.querySelector(".sidebar");
+    // const btn = document.getElementById("hamburgerBtn");
+    // const sidebar = document.querySelector(".sidebar");
 
-    btn.addEventListener("click", () => {
-        sidebar.classList.toggle("active");
-    });
+    // btn.addEventListener("click", () => {
+    //     sidebar.classList.toggle("active");
+    // });
 
-    // -------------------------------
-    // Aksi tombol Simpan di Modal Edit
-    // -------------------------------
-    document.getElementById("saveProfileBtn").addEventListener("click", function () {
+    // // -------------------------------
+    // // Aksi tombol Simpan di Modal Edit
+    // // -------------------------------
+    // document.getElementById("saveProfileBtn").addEventListener("click", function () {
 
-        let id_user = document.getElementById("id_user").innerText; 
-        let nama     = document.getElementById("nameInput").value;
-        let email    = document.getElementById("emailInput").value;
-        let password = document.getElementById("password").value;
-        let jabatan  = document.getElementById("positionInput").value;
+    //     let id_user = document.getElementById("id_user").innerText; 
+    //     let nama     = document.getElementById("nameInput").value;
+    //     let email    = document.getElementById("emailInput").value;
+    //     let password = document.getElementById("password").value;
 
-        // Siapkan data
-        let formData = new FormData();
-        formData.append("id_user", id_user);
-        formData.append("nama", nama);
-        formData.append("email", email);
-        formData.append("password", password);
-        formData.append("jabatan", jabatan);
+    //     // Siapkan data
+    //     let formData = new FormData();
+    //     formData.append("id_user", id_user);
+    //     formData.append("nama", nama);
+    //     formData.append("email", email);
+    //     formData.append("password", password);
 
-        // Kirim menggunakan fetch
-        fetch("update_profile.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(result => {
-            console.log(result);
+    //     // Kirim menggunakan fetch
+    //     fetch("../action/edit_profile_admin.php", {
+    //         method: "POST",
+    //         body: formData
+    //     })
+    //     .then(response => response.text())
+    //     .then(result => {
+    //         console.log(result);
 
-            // Jika sukses, tutup modal dan refresh halaman
-            alert("Profil berhasil diperbarui!");
-            location.reload();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Terjadi kesalahan, coba lagi.");
-        });
+    //         // Jika sukses, tutup modal dan refresh halaman
+    //         alert("Profil berhasil diperbarui!");
+    //         location.reload();
+    //     })
+    //     .catch(error => {
+    //         console.error("Error:", error);
+    //         alert("Terjadi kesalahan, coba lagi.");
+    //     });
 
-    });
+    // });
 </script>
 
 

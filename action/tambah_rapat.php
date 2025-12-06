@@ -12,7 +12,7 @@ $peserta =  $_POST['peserta'];
 $waktu = $_POST['waktu'];
 $jadwal = mysqli_real_escape_string($mysqli, $_POST['status']);
 
-$queryRapat = mysqli_query($mysqli, "INSERT INTO tb_rapat VALUES (NULL, '$judul', '$deskripsi', '$tanggal', '$waktu', '$lokasi', 1, NULL, '$status')");
+$queryRapat = mysqli_query($mysqli, "INSERT INTO tb_rapat VALUES (NULL, '$judul', '$deskripsi', '$tanggal', '$waktu', '$lokasi', 1, NULL, '$status', NULL)");
 
 if($queryRapat) {
 
