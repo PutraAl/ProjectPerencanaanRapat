@@ -104,73 +104,124 @@ if (isset($_POST['edit'])) {
         <!-- End Sidebar -->
 
         <!-- Main Content -->
-        <div class="main-content">
+<div class="main-content">
 
-            <div class="profile-container">
+    <div class="profile-container">
 
-                <div class="card profile-card">
+        <div class="card profile-card">
 
-                    <!-- Header Profil -->
-                    <div class="profile-header">
-                        <div class="profile-avatar">U</div>
+            <!-- Header Profil -->
+            <div class="profile-header">
+                <div class="profile-avatar">U</div>
 
-                        <div class="profile-info">
-                            <h2>User</h2>
-                            <p>Leader</p>
-                        </div>
-                    </div>
-
-                    <!-- Form Profil -->
-                    <form>
-
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" id="name" class="form-control" value="User">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" value="user.user@company.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="department">Departemen</label>
-                            <input type="text" id="department" class="form-control" value="Teknik Informatika">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="position">Jabatan</label>
-                            <input type="text" id="position" class="form-control" value="Ketua">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Nomor Telepon</label>
-                            <input type="tel" id="phone" class="form-control" value="081234567890">
-                        </div>
-
-                        <div class="form-group my-2">
-                            <button type="submit" class="form-control btn-primary">Edit</button>
-                        </div>
-
-                    </form>
+                <div class="profile-info">
+                    <h2>User</h2>
+                    <p>Leader</p>
                 </div>
-
             </div>
 
+            <!-- Form Profil -->
+            <form id="profileForm" method="POST" action="update_profile.php">
+
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" class="form-control" value="User" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" value="user.user@company.com" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Departemen</label>
+                    <input type="text" id="department" class="form-control" value="Teknik Informatika" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Jabatan</label>
+                    <input type="text" id="position" class="form-control" value="Ketua" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <input type="tel" id="phone" class="form-control" value="081234567890" readonly>
+                </div>
+
+                <!-- Tombol (default hanya EDIT yang muncul) -->
+                <div class="form-group my-2" id="buttonArea">
+                    <button type="button" id="btnEdit" class="form-control btn-primary">Edit</button>
+
+                    <div id="editActions" class="d-none mt-2">
+                        <button type="submit" id="btnSave" class="btn btn-success w-100 mb-2">Simpan</button>
+                        <button type="button" id="btnCancel" class="btn btn-secondary w-100">Batal</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
-        <!-- End Main Content -->
 
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        const btn = document.getElementById("hamburgerBtn");
-        const sidebar = document.querySelector(".sidebar");
+</div>
+<!-- End Main Content -->
 
-        btn.addEventListener("click", () => {
-            sidebar.classList.toggle("active");
+
+<!-- JavaScript -->
+<script>
+    const btn = document.getElementById("hamburgerBtn");
+    const sidebar = document.querySelector(".sidebar");
+
+    btn?.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+    });
+
+    // ===========================
+    // LOGIC UNTUK EDIT PROFIL
+    // ===========================
+
+    const editBtn = document.getElementById("btnEdit");
+    const cancelBtn = document.getElementById("btnCancel");
+    const saveBtn = document.getElementById("btnSave");
+    const editActions = document.getElementById("editActions");
+
+    const inputs = document.querySelectorAll("#profileForm input");
+
+    // Simpan nilai awal (untuk tombol batal)
+    let initialValues = {};
+
+    editBtn.addEventListener("click", () => {
+
+        // Simpan data awal
+        inputs.forEach(input => {
+            initialValues[input.id] = input.value;
         });
-    </script>
+
+        // Aktifkan input
+        inputs.forEach(input => {
+            input.removeAttribute("readonly");
+        });
+
+        // Sembunyikan tombol Edit, tampilkan tombol Simpan & Batal
+        editBtn.classList.add("d-none");
+        editActions.classList.remove("d-none");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+
+        // Kembalikan nilai awal
+        inputs.forEach(input => {
+            input.value = initialValues[input.id];
+            input.setAttribute("readonly", true);
+        });
+
+        // Kembalikan tampilan tombol
+        editBtn.classList.remove("d-none");
+        editActions.classList.add("d-none");
+    });
+
+</script>
+
 
 </body>
 
