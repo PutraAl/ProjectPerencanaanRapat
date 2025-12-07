@@ -170,7 +170,7 @@ if(isset($_GET['edit'])) {
 
         <li class="menu-item">
           <i>👥</i>
-          <a href="usernew.php">User</a>
+          <a href="user.php">User</a>
         </li>
 
         <li class="menu-item">

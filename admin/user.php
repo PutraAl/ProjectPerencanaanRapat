@@ -52,7 +52,7 @@ $id_user = $_SESSION['id_user'];
 
         <li class="menu-item active">
           <i>👥</i>
-          <a href="usernew.php">User</a>
+          <a href="user.php">User</a>
         </li>
 
         <li class="menu-item">
@@ -136,15 +136,60 @@ $id_user = $_SESSION['id_user'];
                   <td><?= $row['email'] ?></td>
                   <td><?= $row['role'] ?></td>
                   <td>
-                    <button class="view-btn btn btn-sm btn-primary">
+                    <button class="view-btn btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edituser-<?= $row['id_user'] ?>">
                       Edit
                     </button>
 
-                    <button class="edit-btn btn btn-sm btn-danger">
+                    <a href="../action/edit_user.php?id=<?= $row['id_user'] ?>" name="delete" class="edit-btn btn btn-sm btn-danger">
                       Delete
-                    </button>
+                    </a>
                   </td>
                 </tr>
+                <!-- Modal edit user -->
+                <div class="modal fade" id="edituser-<?= $row['id_user'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <form action="../action/edit_user.php" method="POST">
+                        <div class="modal-body">
+                          <input type="hidden" name="id_user" value="<?= $row['id_user'] ?>">
+                          <label>Nama</label>
+                          <input type="text" name="nama" class="form-control mb-2" value="<?= $row['nama'] ?>" required>
+
+                          <label>Username</label>
+                          <input type="text" name="username" class="form-control mb-2" value="<?= $row['username'] ?>" required>
+
+                          <label>Email</label>
+                          <input type="email" name="email" class="form-control mb-2" value="<?= $row['email'] ?>" required>
+
+                          <label>Password</label>
+                          <input type="password" name="password" class="form-control mb-2">
+
+                          <label>Role</label>
+                          <select name="role" class="form-control mb-2" required>
+                            <option value="admin" <?= $row['role'] == 'admin' ? 'selected' : "" ?>>Admin</option>
+                            <option value="peserta" <?= $row['role'] == 'peserta' ? 'selected' : "" ?>>Peserta</option>
+                          </select>
+
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                          <button type="input" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+
+
                 <?php
               $no++;
               }?>
