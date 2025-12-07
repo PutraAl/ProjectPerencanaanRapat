@@ -92,7 +92,7 @@
                  <!-- Grid Undangan -->
                  <div class="meeting-grid" id="invitations-grid">
                 <?php 
-                $data = mysqli_query($mysqli, "SELECT * FROM tb_undangan a JOIN tb_rapat b ON a.id_rapat = b.id_rapat where id_peserta = $id_user");
+                $data = mysqli_query($mysqli, "SELECT * FROM tb_undangan a JOIN tb_rapat b ON a.id_rapat = b.id_rapat where id_peserta = $id_user ORDER BY status ASC ");
                 while($row = mysqli_fetch_array($data)) {
 ?>
                      <!-- Card 1 -->
@@ -112,20 +112,31 @@
                                  <div class="meeting-detail"><i>📅</i> <span><?= $row['tanggal'] ?></span></div>
                                  <div class="meeting-detail"><i>⏰</i> <span><?= $row['waktu'] ?></span></div>
                                  <div class="meeting-detail"><i>📍</i> <span><?= $row['lokasi'] ?></span></div>
-                                 <div class="meeting-detail"><i>👥</i> <span><?= $row['dibuat_oleh'] ? "" : "Tidak diketahui" ?></span></div>
+                                 <div class="meeting-detail"><i>Status :</i> <span><?= ucfirst($row['status']) ?></span></div>
 
                                  <div class="content-hidden" id="detail-wisuda-<?= $row['id_undangan'] ?>">
                                      <p>
                                         <?= $row['deskripsi'] ?>
                                      </p>
                                  </div>
+                                 <div class="content-hidden" id="detail-notulen-<?= $row['id_undangan'] ?>">
+                                     <p>
+                                        <?= $row['notulen'] ?>
+                                     </p>
+                                 </div>
 
                              </div>
-
+                            <?php 
+                            if($row['status'] != 'selesai') {
+                            ?>
                              <button class="toggle-button" onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
                                  Tampilkan Detail
                              </button>
-
+                            <?php } else {?>
+ <button class="toggle-button" onclick="toggleDetail('detail-notulen-<?= $row['id_undangan'] ?>')">
+                                 Lihat Notulen
+                             </button>
+                                <?php } ?>
                          </div>
                      </div>
 

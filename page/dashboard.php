@@ -2,6 +2,11 @@
 include "../connection/server.php";
 $id_user = $_SESSION['id_user'];
 $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peserta = '$id_user'");
+$rapatSelesai = mysqli_query($mysqli, "SELECT * FROM tb_rapat a join tb_undangan b ON a.id_rapat = b.id_rapat WHERE id_peserta = $id_user AND status = 'selesai';");
+$hari = date('y-m-d');
+$rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat a join tb_undangan b on a.id_rapat = b.id_rapat WHERE tanggal >= '$hari' AND id_peserta = $id_user AND status = 'dijadwalkan';");
+$rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b ON a.id_rapat = b.id_rapat WHERE id_peserta = $id_user AND tanggal = '$hari' AND status = 'dijadwalkan'");
+
 ?>
 
 <!DOCTYPE html>
@@ -99,8 +104,8 @@ $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peser
                 <div class="col-md-4">
                     <div class="stat-card shadow-sm">
                         <div class="label">Rapat Hari Ini</div>
-                        <div class="value">2</div>
-                        <span class="desc">Ada 2 rapat berlangsung</span>
+                        <div class="value"><?= $rapatToday->num_rows ?></div>
+                        <span class="desc">Ada <?= $rapatToday->num_rows ?> rapat berlangsung</span>
                     </div>
                 </div>
 
@@ -126,29 +131,17 @@ $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peser
                 <div class="card-body">
                     <h4 class="card-title">Rapat Mendatang</h4>
                     <ul class="meeting-list">
+                        <?php 
+                        while ($row = $rapatMendatang->fetch_array()) {
+                        ?>
                         <li class="meeting-item">
                             <div>
-                                <div class="meeting-title">Rapat Tim Pengembang</div>
-                                <div class="meeting-time">Hari Ini, 10:00 - 11:30 • Ruang A</div>
+                                <div class="meeting-title"><?= $row['judul'] ?></div>
+                                <div class="meeting-time"><?= $row['tanggal'] ?>, <?= $row['waktu'] ?> • <?= $row['lokasi'] ?></div>
                             </div>
                             <span class="badge badge-upcoming">Akan Datang</span>
                         </li>
-
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Review Proyek Q3</div>
-                                <div class="meeting-time">Besok, 14:00 - 16:00 • Ruang B</div>
-                            </div>
-                            <span class="badge badge-upcoming">Akan Datang</span>
-                        </li>
-
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Presentasi XYZ</div>
-                                <div class="meeting-time">Jumat, 09:00 - 10:30 • Ruang C</div>
-                            </div>
-                            <span class="badge badge-upcoming">Akan Datang</span>
-                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -158,22 +151,19 @@ $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peser
                 <div class="card-body">
                     <h4 class="card-title">Rapat Terlaksana</h4>
                     <ul class="meeting-list">
+                        <?php 
+                        while ($row = $rapatSelesai->fetch_array()) {
+                        ?>
 
                         <li class="meeting-item">
                             <div>
-                                <div class="meeting-title">Briefing Tim Marketing</div>
-                                <div class="meeting-time">Senin, 02 Sep 2025, 13:00 - 14:00</div>
+                                <div class="meeting-title"><?= $row['judul'] ?></div>
+                                <div class="meeting-time"><?= $row['tanggal'] ?>, <?= $row['waktu'] ?></div>
                             </div>
                             <span class="badge badge-success">Selesai</span>
                         </li>
-
-                        <li class="meeting-item">
-                            <div>
-                                <div class="meeting-title">Rapat Koordinasi Divisi</div>
-                                <div class="meeting-time">Jumat, 30 Agu 2025, 09:00 - 11:00</div>
-                            </div>
-                            <span class="badge badge-success">Selesai</span>
-                        </li>
+<?php } ?>
+                       
 
                     </ul>
                 </div>
