@@ -4,44 +4,9 @@ require_once("../connection/session.php");
 middleware();
 
 $id = $_SESSION['id_user'];
-
 // Ambil data user
-$query = mysqli_prepare($mysqli, "SELECT * FROM tb_user WHERE id_user = ?");
-mysqli_stmt_bind_param($query, "i", $id);
-mysqli_stmt_execute($query);
-$result = mysqli_stmt_get_result($query);
-$row = mysqli_fetch_assoc($result);
-
-// Jika tombol edit ditekan
-if (isset($_POST['edit'])) {
-    $nama   = $_POST['nama'];
-    $email  = $_POST['email'];
-
-    $update = mysqli_prepare($mysqli, 
-        "UPDATE tb_user 
-         SET nama = ?, email = ?
-         WHERE id_user = ?"
-    );
-
-    mysqli_stmt_bind_param(
-        $update,
-        "ssi",
-        $nama, $email, $id
-    );
-
-    mysqli_stmt_execute($update);
-
-    if (mysqli_stmt_affected_rows($update) > 0) {
-        echo "<script>
-                alert('Profil berhasil diperbarui!');
-                window.location='profil.php';
-              </script>";
-    } else {
-        echo "<script>
-                alert('Tidak ada perubahan data!');
-              </script>";
-    }
-}
+$query = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id'");
+$row = $query->fetch_array();
 ?>
 
 
@@ -112,11 +77,11 @@ if (isset($_POST['edit'])) {
 
             <!-- Header Profil -->
             <div class="profile-header">
-                <div class="profile-avatar">U</div>
+                <div class="profile-avatar"><?= substr($row['username'], 0, 3) ?></div>
 
                 <div class="profile-info">
-                    <h2>User</h2>
-                    <p>Leader</p>
+                    <h2><?= ucfirst($row['username']) ?></h2>
+                    <p><?= $row['role'] ?></p>
                 </div>
             </div>
 
@@ -124,28 +89,28 @@ if (isset($_POST['edit'])) {
             <form id="profileForm" method="POST" action="update_profile.php">
 
                 <div class="form-group">
+                    <label for="name">Username</label>
+                    <input type="text" name="username" id="name" class="form-control" value="<?= $row['username'] ?>" required>
+                </div>
+
+                <div class="form-group">
                     <label for="name">Nama Lengkap</label>
-                    <input type="text" id="name" class="form-control" value="User" readonly>
+                    <input type="text" name="nama" id="name" class="form-control" value="<?= $row['nama'] ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" value="user.user@company.com" readonly>
+                    <input type="email" id="email" class="form-control" value="<?= $row['email'] ?>" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="department">Departemen</label>
-                    <input type="text" id="department" class="form-control" value="Teknik Informatika" readonly>
+                    <label for="department">Password</label>
+                    <input type="text" name="password" id="password" class="form-control" >
                 </div>
 
                 <div class="form-group">
                     <label for="position">Jabatan</label>
-                    <input type="text" id="position" class="form-control" value="Ketua" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Nomor Telepon</label>
-                    <input type="tel" id="phone" class="form-control" value="081234567890" readonly>
+                    <input type="text" id="position" class="form-control" value="<?= $row['role'] ?>" readonly>
                 </div>
 
                 <!-- Tombol (default hanya EDIT yang muncul) -->

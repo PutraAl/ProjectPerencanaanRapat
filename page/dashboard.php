@@ -1,11 +1,13 @@
 <?php 
 include "../connection/server.php";
 $id_user = $_SESSION['id_user'];
+$hari = date('y-m-d');
+$target = date('y-m-d', strtotime('+ 7 days'));
 $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan WHERE id_peserta = '$id_user'");
 $rapatSelesai = mysqli_query($mysqli, "SELECT * FROM tb_rapat a join tb_undangan b ON a.id_rapat = b.id_rapat WHERE id_peserta = $id_user AND status = 'selesai';");
-$hari = date('y-m-d');
 $rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat a join tb_undangan b on a.id_rapat = b.id_rapat WHERE tanggal >= '$hari' AND id_peserta = $id_user AND status = 'dijadwalkan';");
 $rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b ON a.id_rapat = b.id_rapat WHERE id_peserta = $id_user AND tanggal = '$hari' AND status = 'dijadwalkan'");
+$rapatMinggu = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b ON a.id_rapat = b.id_rapat WHERE tanggal >= '$hari' and tanggal <= '$target' and id_peserta = $id_user and status ='dijadwalkan'");
 
 ?>
 
@@ -112,7 +114,7 @@ $rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b
                 <div class="col-md-4">
                     <div class="stat-card shadow-sm">
                         <div class="label">Rapat Minggu Ini</div>
-                        <div class="value">5</div>
+                        <div class="value"><?= $rapatMinggu->num_rows ?></div>
                         <span class="desc">Total selama 7 hari</span>
                     </div>
                 </div>
@@ -120,8 +122,8 @@ $rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b
                 <div class="col-md-4">
                     <div class="stat-card shadow-sm">
                         <div class="label">Rapat Mendatang</div>
-                        <div class="value">3</div>
-                        <span class="desc">Dalam 7 hari ke depan</span>
+                        <div class="value"><?= $rapatMendatang->num_rows ?></div>
+                        <span class="desc">Dalam beberapa hari ke depan</span>
                     </div>
                 </div>
             </div>
