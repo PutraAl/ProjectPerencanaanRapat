@@ -1,0 +1,14 @@
+{
+    "name": "palam/proyek-pbl",
+    "description": "PBL PROJEK",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Putra Al",
+            "email": "palamsyah55@gmail.com"
+        }
+    ],
+    "require": {
+        "sendgrid/sendgrid": "^8.1"
+    }
+}

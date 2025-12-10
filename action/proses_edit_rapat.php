@@ -1,5 +1,9 @@
 <?php 
 include "../connection/server.php";
+require_once "../services/SendGridService.php";
+
+// API Key SendGrid 
+$SENDGRID_API_KEY = '';
 
 // Ambil data dari form
 $id_rapat = mysqli_real_escape_string($mysqli, $_POST['id_rapat']);
@@ -42,13 +46,18 @@ if($queryUpdate) {
         $pesertaLama[] = $row['id_peserta'];
     }
     
-    // Cari peserta yang akan dihapus (ada di lama tapi tidak ada di baru)
+    // Cari peserta yang akan dihapus dan yang akan ditambah
     $pesertaHapus = array_diff($pesertaLama, $peserta);
-    
-    // Cari peserta yang akan ditambah (ada di baru tapi tidak ada di lama)
     $pesertaBaru = array_diff($peserta, $pesertaLama);
     
     $successUpdate = true;
+    
+    // Inisialisasi SendGrid Service
+    $sendGrid = new SendGridService($SENDGRID_API_KEY);
+    
+    // Ambil data rapat untuk email
+    $queryRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE id_rapat = '$id_rapat'");
+    $rapatData = mysqli_fetch_assoc($queryRapat);
     
     // Hapus hanya peserta yang tidak dipilih lagi
     if(!empty($pesertaHapus)) {
@@ -62,21 +71,35 @@ if($queryUpdate) {
         }
     }
     
-    // Insert hanya peserta baru
+    // Insert hanya peserta baru dan kirim email
     if($successUpdate && !empty($pesertaBaru)) {
         foreach($pesertaBaru as $id_user) {
+            // Insert ke database
             $queryUndangan = mysqli_query($mysqli, "INSERT INTO tb_undangan VALUES (NULL, '$id_rapat', '$id_user', 'belum_dikonfirmasi', NULL)");
             
             if(!$queryUndangan) {
                 $successUpdate = false;
                 break;
             }
+            
+            // Ambil data user untuk email
+            $queryUser = mysqli_query($mysqli, "SELECT nama, email FROM tb_user WHERE id_user = '$id_user'");
+            $userData = mysqli_fetch_assoc($queryUser);
+            
+            // Kirim email ke peserta baru
+            if($userData && !empty($userData['email'])) {
+                $sendGrid->kirimNotifikasiDitambahkan(
+                    $userData['email'],
+                    $userData['nama'],
+                    $rapatData
+                );
+            }
         }
     }
     
     if($successUpdate) {
         echo "<script>
-                alert('Data rapat berhasil diupdate!');
+                alert('Data rapat berhasil diupdate! Email telah dikirim ke peserta baru.');
                 window.location.href='../admin/rapat.php';
               </script>";
     } else {
