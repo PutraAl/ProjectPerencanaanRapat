@@ -1,5 +1,7 @@
 <?php 
 include "../connection/server.php";
+require_once "../connection/middleware.php" ;
+middlewareAdmin();
 $id_user = $_SESSION['id_user'];
 ?>
 <!DOCTYPE html>
@@ -40,7 +42,7 @@ $id_user = $_SESSION['id_user'];
       <ul class="menu">
         <li class="menu-item">
           <i>📊</i>
-          <a href="dashboardnew.php">Dashboard</a>
+          <a href="dashboard.php">Dashboard</a>
         </li>
 
         <li class="menu-item">
@@ -50,7 +52,7 @@ $id_user = $_SESSION['id_user'];
 
         <li class="menu-item">
           <i>👤</i>
-          <a href="profilenew.php">Profil</a>
+          <a href="profile.php">Profil</a>
         </li>
 
         <li class="menu-item active">

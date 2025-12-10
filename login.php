@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +6,44 @@
   <title>Login Page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/login.css">
+ 
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100">
+<body>
 
-  <div class="row login text-center shadow">
-    <div class="image col-12 col-md-6 ">
-        <img src="assets/img/Polibatam.png" alt="">
-    </div>
-    <div class="col-12 col-md-6">
-
-        <h2 class="mb-4 fw-bold mb-5">Login Form</h2>
+  <div class="login-container">
+    <div class="login-wrapper">
+      <div class="image-section">
+        <img src="assets/img/Polibatam.png" alt="Polibatam">
+      </div>
+      <div class="form-section">
+        <h2>Welcome Back</h2>
+        <p class="form-subtitle">Sign in to your account</p>
+        
         <form action="action/login.php" method="post">
-            <div class="mb-3">
-                <input type="text" name="username" class="form-control" placeholder="Username" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
-            </div>
-            <div class="mb-3 register">
-                <label for="" class="form-label ">Does'nt have account? 
-                    <a href="register.php">Register now</a>
+          <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+            <span class="input-icon">✓</span>
+          </div>
+          
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <span class="input-icon">✓</span>
+          </div>
 
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary w-100" name="login">Login</button>
+          <div class="register-section">
+            <label>Don't have an account? 
+              <a href="register.php">Register now</a>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-login w-100" name="login">Login</button>
         </form>
+      </div>
     </div>
   </div>
+
+  <script src="assets/js/login.js">
+  </script>
 
 </body>
 </html>

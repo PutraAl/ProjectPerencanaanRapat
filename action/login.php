@@ -17,7 +17,7 @@ if(isset($_POST['login'])) {
             echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Admin');
-            window.location.href = '../admin/dashboardnew.php';
+            window.location.href = '../admin/dashboard.php';
             </script>
             ";
         }

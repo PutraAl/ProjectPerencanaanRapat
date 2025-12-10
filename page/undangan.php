@@ -1,7 +1,8 @@
  <?php 
  include "../connection/server.php";
+ require_once "../connection/middleware.php";
+middlewareUser();
  $id_user = $_SESSION['id_user'];
-
  $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan where id_peserta = $id_user");
  ?>
 
@@ -12,21 +13,16 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Perencanaan Rapat - Undangan Rapat</title>
-
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
      <link rel="stylesheet" href="../assets/css/userpage.css">
  </head>
 
  <body>
-
      <!-- Tombol Hamburger -->
      <button class="hamburger" id="hamburgerBtn">☰</button>
-
      <div class="container-fluid d-flex p-0">
-
          <!-- Sidebar -->
          <div class="sidebar" id="sidebar">
 
@@ -61,8 +57,6 @@
 
          </div>
          <!-- End Sidebar -->
-
-
          <!-- Main Content -->
          <div class="main-content">
 
@@ -84,13 +78,12 @@
                              onkeyup="filterUndangan()">
                      </div>
 
-                     <div class="notif-icon">
+                     <!-- <div class="notif-icon">
                          <i class="bi bi-bell"></i>
                          <span class="notif-count">2</span>
-                     </div>
+                     </div> -->
 
                  </div>
-
                  <!-- Grid Undangan -->
                  <div class="meeting-grid" id="invitations-grid">
                      <?php 
@@ -115,7 +108,8 @@
                                  <div class="meeting-detail"><i>⏰</i> <span><?= $row['waktu'] ?></span></div>
                                  <div class="meeting-detail"><i>📍</i> <span><?= $row['lokasi'] ?></span></div>
                                  <div class="meeting-detail"><i>Absensi :</i>
-                                     <span><?= $row['status_kehadiran'] ?></span></div>
+                                     <span><?= ($row['status_kehadiran'] == 'hadir') ? 'Hadir' :
+     (($row['status_kehadiran'] == 'tidak_hadir') ? 'Tidak Hadir' : 'Belum Dikonfirmasi');?></span></div>
                                  <div class="meeting-detail"><i>Status :</i> <span><?= ucfirst($row['status']) ?></span>
                                  </div>
 
@@ -138,21 +132,22 @@
                                  onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
                                  Tampilkan Detail
                              </button>
-                             <?php } else if($row['status_kehadiran'] == 'belum_dikonfirmasi') {?>
-                           
-                             <form action="../action/konfirmasi_kehadiran.php" method="post">
-                                <input type="hidden" name="id_user" value="<?= $id_user ?>">
-                                <input type="hidden" name="id_undangan" value="<?= $row['id_undangan'] ?>">
-                                <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi Kehadiran</button>
-                             </form>
-                             <?php }else{ ?>
+                             <?php } else if($row['status_kehadiran'] == 'belum_dikonfirmasi' || $row['status_kehadiran'] == 'tidak_hadir' ) {?>
 
-                                  <button class="toggle-button"
-                                 onclick="toggleDetail('detail-notulen-<?= $row['id_undangan'] ?>')">
+                             <form action="../action/konfirmasi_kehadiran.php" method="post">
+                                 <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                                 <input type="hidden" name="id_undangan" value="<?= $row['id_undangan'] ?>">
+                                 <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi
+                                     Kehadiran</button>
+                             </form>
+                             <?php }else if($row['status'] == 'selesai'){ ?>
+
+                             <button class="toggle-button"
+                                 onclick="toggleDetails('detail-notulen-<?= $row['id_undangan'] ?>')">
                                  Lihat Notulen
                              </button>
 
-                           <?php  } ?>
+                             <?php  } ?>
                          </div>
                      </div>
 
@@ -167,47 +162,7 @@
      </div> <!-- End Container -->
 
      <!-- JavaScript -->
-     <script>
-         // responsive hamburger
-         const btn = document.getElementById("hamburgerBtn");
-         const sidebar = document.querySelector(".sidebar");
-
-         btn.addEventListener("click", () => {
-             sidebar.classList.toggle("active");
-         });
-
-         // filter search
-         function filterUndangan() {
-             const input = document.getElementById('searchInput');
-             const filter = input.value.toLowerCase();
-             const cards = document.querySelectorAll('.meeting-card');
-
-             cards.forEach(card => {
-                 const title = card.querySelector('h3').innerText.toLowerCase();
-                 const body = card.querySelector('.meeting-body').innerText.toLowerCase();
-
-                 card.style.display = (title.includes(filter) || body.includes(filter)) ?
-                     "" :
-                     "none";
-             });
-         }
-
-         // sidebar toggle
-         function toggleSidebar() {
-             document.getElementById("sidebar").classList.toggle("active");
-         }
-
-         // detail toggle
-         function toggleDetail(id) {
-             const content = document.getElementById(id);
-             const button = event.target;
-
-             content.classList.toggle('active');
-             button.textContent = content.classList.contains('active') ?
-                 'Sembunyikan Detail' :
-                 'Tampilkan Detail';
-         }
-     </script>
+     <script src="../assets/js/undanganuser.js"></script>
 
  </body>
 

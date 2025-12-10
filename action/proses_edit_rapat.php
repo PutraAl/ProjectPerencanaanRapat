@@ -10,7 +10,7 @@ $lokasi = mysqli_real_escape_string($mysqli, $_POST['lokasi']);
 $status = mysqli_real_escape_string($mysqli, $_POST['status']);
 $peserta = $_POST['peserta'];
 $waktu = $_POST['waktu'];
-$notulen = mysqli_real_escape_string($mysqli, $_POST['notulen']); // Ambil notulen
+$notulen = mysqli_real_escape_string($mysqli, $_POST['notulen']);
 
 // Validasi data
 if(empty($id_rapat) || empty($judul) || empty($tanggal) || empty($waktu) || empty($lokasi) || empty($peserta)) {
@@ -34,21 +34,47 @@ $queryUpdate = mysqli_query($mysqli, "UPDATE tb_rapat SET
 
 if($queryUpdate) {
     
-    // Hapus peserta lama dari tb_undangan
-    mysqli_query($mysqli, "DELETE FROM tb_undangan WHERE id_rapat = '$id_rapat'");
+    // Ambil peserta lama dari database
+    $queryPesertaLama = mysqli_query($mysqli, "SELECT id_peserta FROM tb_undangan WHERE id_rapat = '$id_rapat'");
+    $pesertaLama = array();
     
-    // Insert peserta baru
-    $successPeserta = true;
-    foreach($peserta as $id_user) {
-        $queryUndangan = mysqli_query($mysqli, "INSERT INTO tb_undangan VALUES (NULL, '$id_rapat', '$id_user', 'belum_dikonfirmasi', NULL)");
-        
-        if(!$queryUndangan) {
-            $successPeserta = false;
-            break;
+    while($row = mysqli_fetch_assoc($queryPesertaLama)) {
+        $pesertaLama[] = $row['id_peserta'];
+    }
+    
+    // Cari peserta yang akan dihapus (ada di lama tapi tidak ada di baru)
+    $pesertaHapus = array_diff($pesertaLama, $peserta);
+    
+    // Cari peserta yang akan ditambah (ada di baru tapi tidak ada di lama)
+    $pesertaBaru = array_diff($peserta, $pesertaLama);
+    
+    $successUpdate = true;
+    
+    // Hapus hanya peserta yang tidak dipilih lagi
+    if(!empty($pesertaHapus)) {
+        foreach($pesertaHapus as $id_user) {
+            $queryDelete = mysqli_query($mysqli, "DELETE FROM tb_undangan WHERE id_rapat = '$id_rapat' AND id_peserta = '$id_user'");
+            
+            if(!$queryDelete) {
+                $successUpdate = false;
+                break;
+            }
         }
     }
     
-    if($successPeserta) {
+    // Insert hanya peserta baru
+    if($successUpdate && !empty($pesertaBaru)) {
+        foreach($pesertaBaru as $id_user) {
+            $queryUndangan = mysqli_query($mysqli, "INSERT INTO tb_undangan VALUES (NULL, '$id_rapat', '$id_user', 'belum_dikonfirmasi', NULL)");
+            
+            if(!$queryUndangan) {
+                $successUpdate = false;
+                break;
+            }
+        }
+    }
+    
+    if($successUpdate) {
         echo "<script>
                 alert('Data rapat berhasil diupdate!');
                 window.location.href='../admin/rapat.php';

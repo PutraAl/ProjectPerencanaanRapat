@@ -1,6 +1,8 @@
 <?php
 include "../connection/server.php";
 require_once "../action/data_rapat.php";
+require_once "../connection/middleware.php" ;
+middlewareAdmin();
 
 ?>
 
@@ -85,7 +87,7 @@ require_once "../action/data_rapat.php";
       <ul class="menu">
         <li class="menu-item">
           <i>📊</i>
-          <a href="dashboardnew.php">Dashboard</a>
+          <a href="dashboard.php">Dashboard</a>
         </li>
 
         <li class="menu-item active">
@@ -95,7 +97,7 @@ require_once "../action/data_rapat.php";
 
         <li class="menu-item">
           <i>👤</i>
-          <a href="profilenew.php">Profil</a>
+          <a href="profile.php">Profil</a>
         </li>
 
         <li class="menu-item">
@@ -129,16 +131,16 @@ require_once "../action/data_rapat.php";
           <div class="stat-label">Rapat Hari Ini</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">5</div>
+          <div class="stat-value"><?= $rapatMinggu->num_rows ?></div>
           <div class="stat-label">Rapat Minggu Ini</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">8</div>
+          <div class="stat-value"><?= $rapatMendatang->num_rows ?></div>
           <div class="stat-label">Rapat Mendatang</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Tugas Belum Selesai</div>
+          <div class="stat-value"><?= $rapatBelumSelesai->num_rows ?></div>
+          <div class="stat-label">Rapat Belum Selesai</div>
         </div>
       </div>
 
