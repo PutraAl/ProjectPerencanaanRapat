@@ -13,7 +13,7 @@ if(isset($_POST['login'])) {
         $_SESSION['username'] = $checkRole['username'];
         $_SESSION['login'] = 'login';
         if($checkRole['role'] == 'admin') {
-
+        $_SESSION['role'] = 'admin';  
             echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Admin');
@@ -22,7 +22,7 @@ if(isset($_POST['login'])) {
             ";
         }
         elseif($checkRole['role'] == 'peserta') {
-
+        $_SESSION['role'] = 'peserta';  
              echo "
             <script>
             alert('Selamat anda berhasil Login sebagai Peserta');

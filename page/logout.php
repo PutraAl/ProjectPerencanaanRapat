@@ -98,7 +98,8 @@ function logout() {
 }
 
 function batal() {
-    window.location.href = "dashboard.php";
+    // window.location.href = "dashboard.php";
+    window.history.back()
 }
 
 </script>

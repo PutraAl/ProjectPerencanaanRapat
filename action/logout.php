@@ -8,5 +8,5 @@
 
 <script>
     alert('Berhasil Logout')
-    window.location.href = '../index.php';
+    window.location.href = '../login.php';
 </script>

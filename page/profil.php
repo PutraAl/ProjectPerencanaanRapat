@@ -77,17 +77,17 @@ $row = $query->fetch_array();
 
             <!-- Header Profil -->
             <div class="profile-header">
-                <div class="profile-avatar"><?= substr($row['username'], 0, 3) ?></div>
+                <div class="profile-avatar"><?= substr($row['nama'], 0, 3) ?></div>
 
                 <div class="profile-info">
-                    <h2><?= ucfirst($row['username']) ?></h2>
+                    <h2><?= ucfirst($row['nama']) ?></h2>
                     <p><?= $row['role'] ?></p>
                 </div>
             </div>
 
             <!-- Form Profil -->
-            <form id="profileForm" method="POST" action="update_profile.php">
-
+            <form id="profileForm" method="POST" action="../action/edit_profile_user.php">
+    <input type="hidden" name="id_user" value="<?= $row['id_user'] ?>">
                 <div class="form-group">
                     <label for="name">Username</label>
                     <input type="text" name="username" id="name" class="form-control" value="<?= $row['username'] ?>" required>
@@ -100,17 +100,12 @@ $row = $query->fetch_array();
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" value="<?= $row['email'] ?>" required>
+                    <input type="email" name="email" id="email" class="form-control" value="<?= $row['email'] ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="department">Password</label>
                     <input type="text" name="password" id="password" class="form-control" >
-                </div>
-
-                <div class="form-group">
-                    <label for="position">Jabatan</label>
-                    <input type="text" id="position" class="form-control" value="<?= $row['role'] ?>" readonly>
                 </div>
 
                 <!-- Tombol (default hanya EDIT yang muncul) -->
