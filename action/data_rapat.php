@@ -1,9 +1,9 @@
 <?php 
 $today = date('y-m-d');
-$rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat a join tb_undangan b on a.id_rapat = b.id_rapat WHERE tanggal >= '$today' AND status = 'dijadwalkan';");
-$rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_rapat where tanggal ='$today' and status = 'dijadwalkan' ");
 $target = date('y-m-d', strtotime('+ 7 days'));
-$rapatMinggu = mysqli_query($mysqli, "SELECT * FROM tb_undangan a join tb_rapat b ON a.id_rapat = b.id_rapat WHERE tanggal >= '$today' and tanggal <= '$target' and status ='dijadwalkan'");
+$rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE tanggal >= '$today' AND status = 'dijadwalkan';");
+$rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_rapat where tanggal ='$today' and status = 'dijadwalkan' ");
+$rapatMinggu = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE tanggal >= '$today' and tanggal <= '$target' and status ='dijadwalkan'");
 $rapatBelumSelesai = mysqli_query($mysqli, "SELECT * FROM tb_rapat where status = 'dijadwalkan'");
 // Ambil parameter filter dari GET
 $filterTanggalDari = isset($_GET['tanggal_dari']) ? $_GET['tanggal_dari'] : '';

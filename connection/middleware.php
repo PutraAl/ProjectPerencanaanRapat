@@ -32,7 +32,7 @@ function middlewareUser() {
         ";
         exit;
     }
-    else if($_SESSION['role'] != 'user') {
+    else if($_SESSION['role'] != 'peserta') {
         echo "
         <script>
         alert('Jangan coba-coba mau masuk ya adik!')
