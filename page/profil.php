@@ -71,16 +71,16 @@ $row = $query->fetch_array();
 <div class="main-content">
 
 
+<!-- header -->
+<div class="header">
+    <h2 class="page-title">Profil User</h2>
 
-            <!-- Header -->
-            <div class="header">
-                <h2 class="page-title">Profil User</h2>
+    <div class="user-info">
+        <span><?= htmlspecialchars($row['nama']) ?></span>
+        <div class="user-avatar"><?= substr($row['nama'], 0, 3) ?></div>
+    </div>
+</div>
 
-            <div class="user-info">
-                <span><?= $user['nama'] ?></span>
-                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
-            </div>
-            </div>
 
                 <div class="profile-container">
         <div class="card profile-card">

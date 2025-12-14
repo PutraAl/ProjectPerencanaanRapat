@@ -154,6 +154,12 @@
         padding: 20px;
     }
 
+    .meeting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
     /* Sidebar disembunyikan */
     .sidebar {
         position: fixed;
@@ -423,14 +429,20 @@
 
 .meeting-list {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .meeting-item {
-    padding: 15px 0;
-    border-bottom: 1px solid var(--gray);
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid #f0f0f0;
+    transition: all 0.25s ease;
 }
 
 .meeting-item:last-child {
@@ -439,6 +451,7 @@
 
 .meeting-title {
     font-weight: 600;
+    font-size: 0.95rem;
     color: var(--dark);
 }
 
@@ -545,6 +558,12 @@
     background-color: var(--primary);
 }
 
+.btn-outline-primary {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+}
+
 .btn-outline {
     background-color: transparent;
     border: 1px solid var(--primary);
@@ -646,8 +665,6 @@
     outline: none;
 }
 
-
-
 /* Container untuk halaman logout */
 .logout-container {
     flex: 1;
@@ -748,4 +765,45 @@
 .logout-notif.show {
     top: 15px;   
     opacity: 1;
+}
+
+.back-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--light);
+    color: var(--primary);
+}
+
+.back-link:hover {
+    background: var(--gray)
+}
+/* notulen page */
+.notulen-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.notulen-card .card-header {
+    background: linear-gradient(135deg,  var(--white));
+    border-bottom: none;
+}
+
+.notulen-card h3 {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.notulen-meta {
+    font-size: 0.9rem;
+    color:var(--darkgray)
+}
+
+.notulen-content {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--dark)
 }

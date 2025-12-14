@@ -2,6 +2,17 @@
 include "../connection/server.php";
 require_once "../action/data_user.php";
 
+session_start();
+
+$id_user = $_SESSION['id_user'];
+
+$queryUser = mysqli_query(
+    $mysqli,
+    "SELECT nama FROM tb_user WHERE id_user = '$id_user'"
+);
+
+$user = mysqli_fetch_assoc($queryUser);
+
 ?>
 
 <!DOCTYPE html>
@@ -122,9 +133,10 @@ require_once "../action/data_user.php";
                     <div class="shortcut-card shadow-sm">
                         <i class="fa-solid fa-file-lines icon"></i>
                         <h5>Notulen Rapat</h5>
-                        <a href="notulen.php">Lihat Notulen →</a>
+                        <a href="notulen.php?list=1">Lihat Notulen →</a>
                     </div>
                 </div>
+</div>
 
                 <!-- <div class="col-md-4">
                     <div class="shortcut-card shadow-sm">
@@ -137,7 +149,7 @@ require_once "../action/data_user.php";
 
 
             <!-- Rapat Mendatang -->
-            <div class="card mb-4 shadow-sm">
+            <!-- <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h4 class="card-title">Rapat Mendatang</h4>
                     <ul class="meeting-list">
@@ -154,9 +166,9 @@ require_once "../action/data_user.php";
                         <?php } ?>
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
-            <!-- Rapat Terlaksana -->
+            <!-- Rapat Terlaksana
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h4 class="card-title">Rapat Terlaksana</h4>
@@ -172,51 +184,13 @@ require_once "../action/data_user.php";
                             </div>
                             <span class="badge badge-success">Selesai</span>
                         </li>
-
-                        <!-- Notulen Rapat -->
-<div class="card shadow-sm mt-4">
-    <div class="card-body">
-        <h4 class="card-title">
-            <i class="fa-solid fa-file-lines me-1"></i> Notulen Rapat
-        </h4>
-
-        <?php if (mysqli_num_rows($dataNotulen) > 0): ?>
-            <ul class="meeting-list">
-                <?php while ($n = mysqli_fetch_assoc($dataNotulen)): ?>
-                    <li class="meeting-item">
-                        <div>
-                            <div class="meeting-title"><?= $n['judul'] ?></div>
-                            <div class="meeting-time">
-                                <?= date('d M Y', strtotime($n['tanggal'])) ?>, <?= $n['waktu'] ?>
-                            </div>
-                            <small class="text-muted">
-                                <?= substr(strip_tags($n['notulen']), 0, 100) ?>
-                                <?= strlen($n['notulen']) > 100 ? '...' : '' ?>
-                            </small>
-                        </div>
-
-                        <a href="notulen.php?id=<?= $n['id_rapat'] ?>" class="btn btn-sm btn-primary">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        <?php else: ?>
-            <p class="text-muted">Belum ada notulen rapat.</p>
-        <?php endif; ?>
-    </div>
-</div>
-
-
-<?php } ?>
-                       
-
+                    <?php } ?>
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
-        </main>
-    </div>
+                     
+
 
     <script>
         const btn = document.getElementById("hamburgerBtn");

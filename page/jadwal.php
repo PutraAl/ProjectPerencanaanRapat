@@ -117,9 +117,42 @@ $rapatMendatang = mysqli_query($mysqli, "
                 </div>
             </div>
         </div>
+            
+        
+<!-- rapat mendatang -->
+        <div id="upcoming-meetings" class="page mt-4">
+            <div class="card">
+                <h2 class="card-title">Rapat Mendatang</h2>
+                <?php if ($rapatMendatang->num_rows > 0) { ?>
+                    <ul class="meeting-list">
+                        <?php while ($row = mysqli_fetch_assoc($rapatMendatang)) { ?>
+                            <?php
+                           
+                           // Ambil detail rapat
+                            $rapatId = $row['id_rapat'];
+                            $rapatDetailQuery = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE id_rapat = '$rapatId'");
+                            $rapatDetail = mysqli_fetch_assoc($rapatDetailQuery);
+                            ?>
+                            <li class="meeting-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="meeting-title"><?= htmlspecialchars($rapatDetail['judul']) ?></div>
+                                    <div class="meeting-datetime">
+                                        <?= htmlspecialchars($rapatDetail['tanggal']) ?> |
+                                        <?= htmlspecialchars($rapatDetail['waktu']) ?>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                <?php } else { ?>
+                    <p class="no-meetings">Tidak ada rapat mendatang.</p>
+                <?php } ?>
+            </div>
+        </div>
 
     </main>
-</div>
+    <!-- End Main Content -->
+
 
 </body>
 </html>
