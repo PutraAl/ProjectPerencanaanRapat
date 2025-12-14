@@ -42,7 +42,7 @@ $row = $query->fetch_array();
 
             <div class="logo">Meeting Kampus</div>
 
-            <ul class="menu">
+            <!-- <ul class="menu"> -->
                 <li class="menu-item">
                     <i>📊</i>
                     <a href="dashboard.php">Dashboard</a>
@@ -70,19 +70,21 @@ $row = $query->fetch_array();
         <!-- Main Content -->
 <div class="main-content">
 
-    <div class="profile-container">
 
+
+            <!-- Header -->
+            <div class="header">
+                <h2 class="page-title">Profil User</h2>
+
+            <div class="user-info">
+                <span><?= $user['nama'] ?></span>
+                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
+            </div>
+            </div>
+
+                <div class="profile-container">
         <div class="card profile-card">
 
-            <!-- Header Profil -->
-            <div class="profile-header">
-                <div class="profile-avatar"><?= substr($row['nama'], 0, 3) ?></div>
-
-                <div class="profile-info">
-                    <h2><?= ucfirst($row['nama']) ?></h2>
-                    <p><?= $row['role'] ?></p>
-                </div>
-            </div>
 
             <!-- Form Profil -->
             <form id="profileForm" method="POST" action="../action/edit_profile_user.php">

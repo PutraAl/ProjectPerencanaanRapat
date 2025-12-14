@@ -29,7 +29,7 @@
 
             <div class="logo">Meeting Kampus</div>
 
-            <ul class="menu">
+            <!-- <ul class="menu"> -->
                 <li class="menu-item">
                     <i>📊</i>
                     <a href="dashboard.php">Dashboard</a>
@@ -98,8 +98,8 @@ function logout() {
 }
 
 function batal() {
-    // window.location.href = "dashboard.php";
-    window.history.back()
+    window.location.href = "dashboard.php";
+    //window.history.back()
 }
 
 </script>

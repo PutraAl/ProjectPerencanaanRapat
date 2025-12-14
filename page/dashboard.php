@@ -14,6 +14,7 @@ require_once "../action/data_user.php";
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/userpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -24,38 +25,40 @@ require_once "../action/data_user.php";
     <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
+<div class="sidebar" id="sidebar">
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+    <div class="logo-section">
+        <img src="../assets/img/polteklogo.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+    </div>
 
-            <div class="logo">Meeting Kampus</div>
+    <div class="logo">Meeting Kampus</div>
 
-            <ul class="menu">
-                <li class="menu-item active">
-                    <i>📊</i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+    <!-- <ul class="menu"> -->
+        <li class="menu-item active">
+            <i class="fa-solid fa-chart-line"></i>
+            <a href="dashboard.php">Dashboard</a>
+        </li>
 
-                <li class="menu-item">
-                    <i>📨</i>
-                    <a href="undangan.php">Undangan Rapat</a>
-                </li>
+        <li class="menu-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="undangan.php">Undangan Rapat</a>
+        </li>
 
-                <li class="menu-item">
-                    <i>👤</i>
-                    <a href="profil.php">Profil</a>
-                </li>
+        <li class="menu-item">
+            <i class="fa-solid fa-user"></i>
+            <a href="profil.php">Profil</a>
+        </li>
 
-                <li class="menu-item">
-                    <i>🚪</i>
-                    <a href="">Keluar</a>
-                </li>
-            </ul>
+        <li class="menu-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <a href="logout.php">Keluar</a>
+        </li>
+    </ul>
 
 </div>
+
+
         <!-- End Sidebar -->
 
         <!-- Main Content -->
@@ -63,39 +66,23 @@ require_once "../action/data_user.php";
 
             <!-- Notifikasi -->
             <div class="alert alert-info shadow-sm mb-4">
-                🔔 Anda memiliki <strong><?= $totalUndangan->num_rows <= 0 ? '0' : $totalUndangan->num_rows  ?> undangan rapat baru</strong>.  
+                <i class="fa-solid fa-bell me-1"></i> Anda memiliki <strong><?= $totalUndangan->num_rows <= 0 ? '0' : $totalUndangan->num_rows  ?> undangan rapat baru</strong>.  
                 <a href="undangan.php" class="alert-link">Lihat sekarang</a>.
             </div>
 
-            <!-- Shortcut -->
-            <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="shortcut-card shadow-sm">
-                        <i class="icon">🗓️</i>
-                        <h5>Jadwal Rapat</h5>
-                        <a href="jadwal.php">Lihat Jadwal →</a>
-                    </div>
-                </div>
+            <!-- Header -->
+            <div class="header">
+                <h2 class="page-title">Dashboard User</h2>
 
-                <div class="col-md-4">
-                    <div class="shortcut-card shadow-sm">
-                        <i class="icon">📝</i>
-                        <h5>Notulen Rapat</h5>
-                        <a href="notulen.php">Lihat Notulen →</a>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="shortcut-card shadow-sm">
-                        <i class="icon">💻</i>
-                        <h5>Ruang Virtual</h5>
-                        <a href="virtual.php">Masuk Ruang →</a>
-                    </div>
-                </div>
+            <div class="user-info">
+                <span><?= $user['nama'] ?></span>
+                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
             </div>
 
+            </div>
+ 
             <!-- Statistik -->
-            <div class="row g-3 mb-4">
+            <!-- <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="stat-card shadow-sm">
                         <div class="label">Rapat Hari Ini</div>
@@ -119,7 +106,35 @@ require_once "../action/data_user.php";
                         <span class="desc">Dalam beberapa hari ke depan</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+            <!-- Shortcut -->
+            <div class="row g-3 mb-4">
+               <div class="col-md-6">
+                    <div class="shortcut-card shadow-sm">
+                        <i class="fa-regular fa-calendar-days icon"></i>
+                        <h5>Jadwal Rapat</h5>
+                        <a href="jadwal.php">Lihat Jadwal →</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="shortcut-card shadow-sm">
+                        <i class="fa-solid fa-file-lines icon"></i>
+                        <h5>Notulen Rapat</h5>
+                        <a href="notulen.php">Lihat Notulen →</a>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                    <div class="shortcut-card shadow-sm">
+                        <i class="icon">💻</i>
+                        <h5>Ruang Virtual</h5>
+                        <a href="virtual.php">Masuk Ruang →</a>
+                    </div>
+                </div>
+            </div> -->
+
 
             <!-- Rapat Mendatang -->
             <div class="card mb-4 shadow-sm">
@@ -157,6 +172,42 @@ require_once "../action/data_user.php";
                             </div>
                             <span class="badge badge-success">Selesai</span>
                         </li>
+
+                        <!-- Notulen Rapat -->
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h4 class="card-title">
+            <i class="fa-solid fa-file-lines me-1"></i> Notulen Rapat
+        </h4>
+
+        <?php if (mysqli_num_rows($dataNotulen) > 0): ?>
+            <ul class="meeting-list">
+                <?php while ($n = mysqli_fetch_assoc($dataNotulen)): ?>
+                    <li class="meeting-item">
+                        <div>
+                            <div class="meeting-title"><?= $n['judul'] ?></div>
+                            <div class="meeting-time">
+                                <?= date('d M Y', strtotime($n['tanggal'])) ?>, <?= $n['waktu'] ?>
+                            </div>
+                            <small class="text-muted">
+                                <?= substr(strip_tags($n['notulen']), 0, 100) ?>
+                                <?= strlen($n['notulen']) > 100 ? '...' : '' ?>
+                            </small>
+                        </div>
+
+                        <a href="notulen.php?id=<?= $n['id_rapat'] ?>" class="btn btn-sm btn-primary">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+        <?php else: ?>
+            <p class="text-muted">Belum ada notulen rapat.</p>
+        <?php endif; ?>
+    </div>
+</div>
+
+
 <?php } ?>
                        
 

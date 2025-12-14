@@ -18,7 +18,7 @@
     --blue: #bbe0f8;
     --green: #b6f1d1;
     --white: #f9f9f9;
-    --gray: #e0e0e0;
+    --gray: #c1c0c0;
     --darkgray: #606060;
 }
 
@@ -47,12 +47,12 @@
 
 /* -- Sidebar -- */
 .sidebar {
-    width: 250px;
+    width: 200px;
     color: var(--light);
     background-color: var(--primary);
     min-height: 100vh;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-    padding: 20px 0;
+    padding: 10px 0;
     position: fixed;          
     left: 0;
     top: 0;
@@ -65,16 +65,16 @@
 .logo {
     text-align: center;
     color: var(--light);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
 }
 
 .logo-section {
-    padding: 10px 0;
+    padding: 5px ;
 }
 
 .logo-img {
-    width: 120px;      
+    width: 150px;      
     height: auto;
     display: block;
     margin: 0 auto;
@@ -83,16 +83,18 @@
 /* -- menu -- */
 .menu {
     list-style: none;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .menu-item {
-    padding: 15px 25px;
+    width: 100%;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
     cursor: pointer;
     transition: all 0.3s;
-    font-weight: 500;
+    font-weight: 400;
+    gap: 12px
 }
 
 .menu-item:hover,
@@ -105,7 +107,7 @@
 .menu-item i {
     margin-right: 10px;
     font-style: normal;
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: var(--light) !important;
 }
 
@@ -128,6 +130,13 @@
   box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
+/* -- setting icon -- */
+.shortcut-card .icon {
+    font-size: 0.9em;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
 /* -- Container layout -- */
 .container {
     margin-left: 250px !important;
@@ -148,7 +157,7 @@
     /* Sidebar disembunyikan */
     .sidebar {
         position: fixed;
-        width: 250px;
+        width: 220px;
         transform: translateX(-100%);
         left: 0;
         top: 0;
@@ -223,18 +232,12 @@
 .card {
     background-color: var(--white);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     padding: 20px;
     margin-bottom: 20px;
     display: grid;
     transition: transform 0.3s, opacity 0.5s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
 
 .card-title {
     font-size: 18px;
@@ -643,11 +646,7 @@
     outline: none;
 }
 
-.form-control:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
+
 
 /* Container untuk halaman logout */
 .logout-container {

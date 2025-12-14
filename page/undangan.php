@@ -1,9 +1,14 @@
- <?php 
- include "../connection/server.php";
- require_once "../connection/middleware.php";
+<?php 
+include "../connection/server.php";
+require_once "../connection/middleware.php";
 middlewareUser();
- $id_user = $_SESSION['id_user'];
- $totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan where id_peserta = $id_user");
+$id_user = $_SESSION['id_user'];
+$totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan where id_peserta = $id_user");
+ 
+$dataUser = mysqli_query($mysqli, "SELECT nama FROM tb_user WHERE id_user = '$id_user'");
+$user = mysqli_fetch_assoc($dataUser);
+
+
  ?>
 
  <!DOCTYPE html>
@@ -33,7 +38,6 @@ middlewareUser();
 
              <div class="logo">Meeting Kampus</div>
 
-             <ul class="menu">
                  <li class="menu-item">
                      <i>📊</i>
                      <a href="dashboard.php">Dashboard</a>
@@ -56,11 +60,25 @@ middlewareUser();
              </ul>
 
          </div>
-         <!-- End Sidebar -->
-         <!-- Main Content -->
+        <!-- End Sidebar -->
+
+        <!-- Main Content -->
          <div class="main-content">
 
-             <div id="invitations" class="page">
+        <!-- Header -->
+            <div class="header">
+                <h2 class="page-title">Pengelolaan Undangan Rapat</h2>
+
+            <div class="user-info">
+                <span><?= $user['nama'] ?></span>
+                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
+            </div>
+
+            </div>
+
+        <!-- undangan rapat -->
+            <div id="invitations" class="page">
+
 
                  <div class="card">
                      <h2 class="card-title">Undangan Rapat</h2>
@@ -132,18 +150,17 @@ middlewareUser();
                                  onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
                                  Tampilkan Detail
                              </button>
-                             <?php } else if($row['status_kehadiran'] == 'belum_dikonfirmasi' || $row['status_kehadiran'] == 'tidak_hadir' ) {?>
+                             <?php } else if($row['status_kehadiran'] == NULL || $row['status_kehadiran'] == 'tidak_hadir' ) {?>
 
                              <form action="../action/konfirmasi_kehadiran.php" method="post">
                                  <input type="hidden" name="id_user" value="<?= $id_user ?>">
                                  <input type="hidden" name="id_undangan" value="<?= $row['id_undangan'] ?>">
-                                 <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi
-                                     Kehadiran</button>
+                                 <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi Kehadiran</button>
                              </form>
                              <?php }else if($row['status'] == 'selesai'){ ?>
 
                              <button class="toggle-button"
-                                 onclick="toggleDetails('detail-notulen-<?= $row['id_undangan'] ?>')">
+                                 onclick="toggleDetail('detail-notulen-<?= $row['id_undangan'] ?>')">
                                  Lihat Notulen
                              </button>
 
