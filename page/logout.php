@@ -29,7 +29,7 @@
 
             <div class="logo">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->
+            <ul class="menu">
                 <li class="menu-item">
                     <i>📊</i>
                     <a href="dashboard.php">Dashboard</a>
@@ -55,7 +55,7 @@
         <!-- End Sidebar -->
 
         <!-- Halaman Logout -->
-        <div class="logout-container">
+        <div class="main-content logout-container">
             <div class="logout-card" id="logoutCard">
                 <h3>Keluar dari Akun?</h3>
                 <p>Apakah yakin ingin mengakhiri sesi dan keluar dari sistem?</p>

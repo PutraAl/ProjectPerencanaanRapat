@@ -89,7 +89,7 @@ $rapatMendatang = mysqli_query($mysqli, "
     <!-- Main Content -->
     <main class="main-content">
         <div class="page-header d-flex align-items-center mb-4">
-    <a href="undangan.php" class="back-link me-3">
+    <a href="dashboard.php" class="back-link me-3">
         <i class="fa-solid fa-arrow-left"></i>
     </a>
     <h2 class="page-title mb-0">Jadwal Rapat Saya</h2>

@@ -87,14 +87,89 @@ $user = mysqli_fetch_assoc($dataUser);
                          undangan rapat</p>
                  </div>
 
+                       <!-- Form Filter/Search -->
+                        
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="mb-3"> Filter & Pencarian Rapat</h5>
+
+          <div class="top-bar d-flex align-items-center gap-2">
+
+    <!-- Search -->
+    <div class="search-box flex-grow-1">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" id="searchInput"
+            placeholder="Cari judul rapat..."
+            onkeyup="filterUndangan()">
+    </div>
+
+    <!-- Button Jadwal -->
+    <a href="jadwal.php"
+       class="btn btn-outline-primary btn-sm icon-btn"
+       title="Jadwal Rapat">
+        <i class="bi bi-calendar-event"></i>
+    </a>
+
+    <!-- Button Notulen -->
+    <a href="notulen.php"
+       class="btn btn-outline-success btn-sm icon-btn"
+       title="Notulen Rapat">
+        <i class="bi bi-journal-text"></i>
+    </a>
+
+    </div>
+          <form action="" method="GET" id="filterForm">
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="tanggal_dari" class="form-label">Tanggal Dari</label>
+                <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control"
+                  value="<?= $filterTanggalDari ?>">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="tanggal_sampai" class="form-label">Tanggal Sampai</label>
+                <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control"
+                  value="<?= $filterTanggalSampai ?>">
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" id="status" class="form-control">
+                  <option value="">Semua Status</option>
+                  <option value="dijadwalkan" <?= $filterStatus == 'dijadwalkan' ? 'selected' : '' ?>>Dijadwalkan</option>
+                  <option value="selesai" <?= $filterStatus == 'selesai' ? 'selected' : '' ?>>Selesai</option>
+                  <option value="dibatalkan" <?= $filterStatus == 'dibatalkan' ? 'selected' : '' ?>>Dibatalkan</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+                <a href="rapat.php" class="btn btn-secondary flex-fill">Reset</a>
+              </div>
+            </div>
+          </form>
+
+          <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus)): ?>
+            <div class="alert alert-info mt-3 mb-0">
+              <strong>Filter Aktif:</strong>
+              <?php if (!empty($filterTanggalDari)): ?>
+                Dari: <?= date('d M Y', strtotime($filterTanggalDari)) ?>
+              <?php endif; ?>
+              <?php if (!empty($filterTanggalSampai)): ?>
+                Sampai: <?= date('d M Y', strtotime($filterTanggalSampai)) ?>
+              <?php endif; ?>
+              <?php if (!empty($filterStatus)): ?>
+                | Status: <span class="badge bg-primary"><?= ucfirst($filterStatus) ?></span>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+
                  <!-- Search + Notif -->
                  <div class="top-bar">
 
-                     <div class="search-box">
-                         <i class="bi bi-search search-icon"></i>
-                         <input type="text" id="searchInput" placeholder="Cari judul atau tanggal..."
-                             onkeyup="filterUndangan()">
-                     </div>
+
+
+</div>
+
 
                      <!-- <div class="notif-icon">
                          <i class="bi bi-bell"></i>
@@ -143,6 +218,7 @@ $user = mysqli_fetch_assoc($dataUser);
                                  </div>
 
                              </div>
+                             
                              <?php 
                             if($row['status'] != 'selesai') {
                             ?>

@@ -147,7 +147,7 @@
 }
 
 /* -- Responsive Mobile -- */
-@media (max-width: 768px) {
+@media (max-width: 1500px) {
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
@@ -192,6 +192,7 @@
 
 /* -- Konten Utama -- */
 .main-content {
+    max-width: 1500px;
     margin-left: 250px;
     flex-grow: 1;
     padding: 40px;
@@ -241,6 +242,7 @@
     padding: 20px;
     margin-bottom: 20px;
     display: grid;
+    width: 100%;
     transition: transform 0.3s, opacity 0.5s;
 }
 
@@ -672,7 +674,15 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
+    padding-left: 0px; /* LEBAR SIDEBAR + JARAK */
 }
+
+@media (max-width: 768px) {
+    .logout-container {
+        padding-left: 20px;
+    }
+}
+
 
 /* Kartu logout */
 .logout-card {
@@ -681,7 +691,7 @@
     border-radius: 14px;
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 420px;
+    max-width: 1500px;
     width: 100%;
     animation: fadeInLogout 0.5s ease;
 }

@@ -88,26 +88,47 @@ if ($id_rapat) {
                 <h2 class="page-title mb-0">Rapat Selesai</h2>
 </div>
 
-                    <div class="container mt-4">
-
-            <!-- Detail Notulen -->
-            <?php if (isset($rapat)) { ?>
-            <div class="card mb-4 notulen-card">
-
-                <div class="card-header">
-                    <h3>Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?></h3>
-                    <p class="notulen-meta">
-                        <?= htmlspecialchars($rapat['tanggal']) ?> |
-                        <?= htmlspecialchars($rapat['waktu']) ?>
-                    </p>
-                </div>
-                <div class="card-body notulen-body">
-                    <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
-                </div>
-            </div>
-            <?php } ?>
+<div class="container-fluid mt-4 px-4">
 
 
+<!-- Detail Notulen -->
+<?php if (isset($rapat)) { ?>
+<div class="card mb-4 notulen-card">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <!-- Kiri: Judul & Meta -->
+        <div>
+            <h3 class="mb-1">
+                Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?>
+            </h3>
+            <p class="notulen-meta mb-0">
+                <?= htmlspecialchars($rapat['tanggal']) ?> |
+                <?= htmlspecialchars($rapat['waktu']) ?>
+            </p>
+        </div>
+
+        <!-- Kanan: Download -->
+    <a href="download_notulen.php?id=<?= $id_rapat ?>" 
+    class="btn btn-outline-success btn-sm" 
+    title="Download Notulen"> 
+    <i class="fa-solid fa-download"></i> </a>
+
+    </div>
+
+    <div class="card-body notulen-body">
+        <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
+    </div>
+
+</div>
+<?php } ?>
+
+
+
+
+
+
+            
             <!-- Rapat Terlaksana -->
             <div class="card shadow-sm">
                 <div class="card-body">
