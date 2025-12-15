@@ -88,6 +88,8 @@ $user = mysqli_fetch_assoc($dataUser);
                  </div>
 
                        <!-- Form Filter/Search -->
+<div class="filter-bar">
+                        
                         
       <div class="card mb-3">
         <div class="card-body">
@@ -162,13 +164,9 @@ $user = mysqli_fetch_assoc($dataUser);
           <?php endif; ?>
         </div>
       </div>
-
+            
                  <!-- Search + Notif -->
-                 <div class="top-bar">
-
-
-
-</div>
+      
 
 
                      <!-- <div class="notif-icon">
@@ -176,7 +174,7 @@ $user = mysqli_fetch_assoc($dataUser);
                          <span class="notif-count">2</span>
                      </div> -->
 
-                 </div>
+                 <!-- </div> -->
                  <!-- Grid Undangan -->
                  <div class="meeting-grid" id="invitations-grid">
                      <?php 

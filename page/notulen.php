@@ -123,11 +123,6 @@ if ($id_rapat) {
 </div>
 <?php } ?>
 
-
-
-
-
-
             
             <!-- Rapat Terlaksana -->
             <div class="card shadow-sm">
@@ -157,7 +152,14 @@ if ($id_rapat) {
     <!-- End Main Content -->
 
 </div>
+<script>
+            const btn = document.getElementById("hamburgerBtn");
+        const sidebar = document.getElementById("sidebar");
 
+        btn.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+    </script>
 <script src="../assets/js/userpage.js"></script>
 </body>
 
