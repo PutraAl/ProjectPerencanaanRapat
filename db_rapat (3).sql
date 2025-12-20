@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 03, 2025 at 12:38 PM
+-- Generation Time: Dec 11, 2025 at 10:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -56,17 +56,24 @@ CREATE TABLE `tb_rapat` (
   `lokasi` varchar(255) DEFAULT NULL,
   `id_admin` int DEFAULT NULL,
   `dibuat_oleh` varchar(255) DEFAULT NULL,
-  `status` enum('dijadwalkan','selesai','dibatalkan') DEFAULT NULL
+  `status` enum('dijadwalkan','selesai','dibatalkan') DEFAULT NULL,
+  `notulen` varchar(355) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tb_rapat`
 --
 
-INSERT INTO `tb_rapat` (`id_rapat`, `judul`, `deskripsi`, `tanggal`, `waktu`, `lokasi`, `id_admin`, `dibuat_oleh`, `status`) VALUES
-(1, 'Rapat seluruh mahasiswa', 'Rapat ini diagendakan untuk seluruh mahasiswa', '2025-10-20', '19.00 WIB', 'Poltek', 1, NULL, 'dijadwalkan'),
-(2, 'Rapat mahasiswa Jurusan Teknik Informatika', 'Rapat penting', '2025-10-19', '21.00 WIB', 'Batamindo', 1, NULL, 'dijadwalkan'),
-(3, 'Rapat mahasiswa Prodi Rpl', 'RPL HAHA', '2025-10-20', '22.00 WIB', 'Kafe', 1, NULL, 'dijadwalkan');
+INSERT INTO `tb_rapat` (`id_rapat`, `judul`, `deskripsi`, `tanggal`, `waktu`, `lokasi`, `id_admin`, `dibuat_oleh`, `status`, `notulen`) VALUES
+(3, 'Rapat Terkait Jurusan IF', 'lokljkjkjjkhkjkjjjkjk', '2025-12-23', '01:50', 'gu 770', 1, NULL, 'selesai', 'rapat jlek'),
+(4, 'Rapat MAHASISWA JURUSAN MESIN', 'SOLID SOLID SOLID', '2025-12-08', '21:45', 'RUANG HMM', 1, NULL, 'selesai', 'gd'),
+(6, 'Rapat Terkait Jurusan mb', 'Rapat Terkait Jurusan mb', '2025-12-23', '21:52', 'gu 770', 1, NULL, 'selesai', 'Terbaik memang'),
+(8, 'Rapat terkait baju PDH IF YANG TIDAK JADI JADI', 'DIDUGA PAKDENYA LAMA KALI KERJA', '2025-12-10', '22:13', 'Poltek BATAMINDO', 1, NULL, 'selesai', 'hahahaha'),
+(9, 'Rapat MAHASISWA JURUSAN MESIN', 'MESIN JAYA JAYA JAYA', '2025-12-27', '23:08', 'ZOOM', 1, NULL, 'dijadwalkan', ''),
+(10, 'Rapat kegiatan mahasiswa pencinta alam', 'Diharapkan hadir semua nya!', '2025-12-14', '17:00', 'Gedung Utama 701', NULL, NULL, 'dijadwalkan', ''),
+(11, 'Rapat kegiatan mahasiswa pencinta takwa', 'hadir ya', '2025-12-12', '00:45', 'gu 777', NULL, NULL, 'dijadwalkan', ''),
+(12, 'Wajib Militer Poltek', 'Harus ikut semua mahasiswa', '2025-12-12', '10:10', 'kormil', NULL, NULL, 'dijadwalkan', 'parkah'),
+(13, 'Rapat terkait Putra Ganteng', 'kok bisa putra seganteng itu? makanya harus di bincang ini', '2025-12-14', '01:00', 'Tanjung Uma', NULL, NULL, 'dijadwalkan', NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +83,7 @@ INSERT INTO `tb_rapat` (`id_rapat`, `judul`, `deskripsi`, `tanggal`, `waktu`, `l
 
 CREATE TABLE `tb_undangan` (
   `id_undangan` int NOT NULL,
-  `id_rapat` int NOT NULL,
+  `id_rapat` int DEFAULT NULL,
   `id_peserta` int DEFAULT NULL,
   `status_kehadiran` enum('belum_dikonfirmasi','hadir','tidak_hadir') DEFAULT 'belum_dikonfirmasi',
   `waktu_konfirmasi` datetime DEFAULT NULL
@@ -87,12 +94,25 @@ CREATE TABLE `tb_undangan` (
 --
 
 INSERT INTO `tb_undangan` (`id_undangan`, `id_rapat`, `id_peserta`, `status_kehadiran`, `waktu_konfirmasi`) VALUES
-(50, 1, 6, 'belum_dikonfirmasi', NULL),
-(51, 1, 7, 'belum_dikonfirmasi', NULL),
-(52, 1, 5, 'belum_dikonfirmasi', NULL),
-(53, 1, 8, 'belum_dikonfirmasi', NULL),
-(54, 1, 5, 'belum_dikonfirmasi', NULL),
-(55, 1, 8, 'belum_dikonfirmasi', NULL);
+(34, 4, 5, 'hadir', '2025-12-08 22:48:21'),
+(35, 4, 9, 'hadir', '2025-12-08 22:48:21'),
+(39, 3, 9, 'hadir', '2025-12-09 21:50:44'),
+(50, 8, 9, 'hadir', '2025-12-10 23:44:30'),
+(51, 8, 5, 'tidak_hadir', '2025-12-10 23:44:30'),
+(52, 8, 10, 'hadir', '2025-12-10 23:44:40'),
+(55, 9, 10, 'belum_dikonfirmasi', NULL),
+(60, 6, 10, 'hadir', '2025-12-10 23:43:07'),
+(61, 6, 9, 'belum_dikonfirmasi', NULL),
+(65, 10, 5, 'belum_dikonfirmasi', NULL),
+(66, 10, 10, 'belum_dikonfirmasi', NULL),
+(67, 10, 9, 'belum_dikonfirmasi', NULL),
+(68, 11, 10, 'belum_dikonfirmasi', NULL),
+(69, 11, 9, 'belum_dikonfirmasi', NULL),
+(70, 12, 10, 'belum_dikonfirmasi', NULL),
+(73, 13, 9, 'belum_dikonfirmasi', NULL),
+(74, 13, 11, 'belum_dikonfirmasi', NULL),
+(77, 12, 9, 'belum_dikonfirmasi', NULL),
+(78, 12, 11, 'belum_dikonfirmasi', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,14 +134,17 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `nama`, `username`, `email`, `password`, `role`) VALUES
-(1, 'Putra', 'ptr', 'palamsyah120@gmail.com', '202cb962ac59075b964b07152d234b70', 'admin'),
-(2, 'Zikri', 'zikri', 'zikri@gmail.com', 'zikri123', 'peserta'),
-(3, 'Parker', 'putra', 'asasas@gmail.com', '202cb962ac59075b964b07152d234b70', 'peserta'),
+(1, 'Putra Alamsyah', 'peterparker', 'palamsyah120@gmail.com', '202cb962ac59075b964b07152d234b70', 'admin'),
+(3, 'PeterParker', '3312511128', 'asasas@gmail.com', '202cb962ac59075b964b07152d234b70', 'admin'),
 (4, 'PTR', 'ptr', 'asdadsa@gmail.com', 'c03a8569863ec5fcb93609df7f87d0b3', 'admin'),
 (5, 'PTR', 'ptrparker', 'asdadsa@gmail.com', '4d9ad2b37053671b594b237bd061b3f2', 'peserta'),
 (6, 'Putra Alamsyah', 'ptrparka', 'palamsyah120@gmail.com', '21f1256217c52a6cdaa51f34bf1b4131', 'admin'),
-(7, 'Putra Alamsyah', 'ptrptr06', 'palamsyah120@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'admin'),
-(8, 'ptr', 'goblog', 'ptr@gmail.com', '0a8389b3cda3f89844b70f0528bed50c', 'admin');
+(8, 'ptr', 'goblog', 'ptr@gmail.com', '0a8389b3cda3f89844b70f0528bed50c', 'admin'),
+(9, 'Peter P', '3312511127', 'palamsyah120@gmail.com', '32791dfdfd48eea8c6ef24ef683c94b5', 'peserta'),
+(10, 'OM Yoda Pratama Putra ', '3312511126', 'palamsyah2006@gmail.com', '149e4b4d2b802e07faea933f168fd877', 'peserta'),
+(11, 'Yoda Pratama Putra', '3312511120', 'twittergw30@gmail.com', '310d4975a80a40fe066ef330d2a1254f', 'peserta'),
+(12, 'Admin', 'admin', 'admin@polibatam.ac.id', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
+(13, 'User', 'user', 'user@polibatam.ac.id', 'ee11cbb19052e40b07aac0ca060c23ee', 'peserta');
 
 --
 -- Indexes for dumped tables
@@ -145,8 +168,8 @@ ALTER TABLE `tb_rapat`
 --
 ALTER TABLE `tb_undangan`
   ADD PRIMARY KEY (`id_undangan`),
-  ADD KEY `id_rapat` (`id_rapat`),
-  ADD KEY `id_peserta` (`id_peserta`);
+  ADD KEY `id_rapat` (`id_rapat`,`id_peserta`),
+  ADD KEY `fk_undangan_peserta` (`id_peserta`);
 
 --
 -- Indexes for table `tb_user`
@@ -168,19 +191,19 @@ ALTER TABLE `tb_contact`
 -- AUTO_INCREMENT for table `tb_rapat`
 --
 ALTER TABLE `tb_rapat`
-  MODIFY `id_rapat` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rapat` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_undangan`
 --
 ALTER TABLE `tb_undangan`
-  MODIFY `id_undangan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_undangan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -196,8 +219,8 @@ ALTER TABLE `tb_rapat`
 -- Constraints for table `tb_undangan`
 --
 ALTER TABLE `tb_undangan`
-  ADD CONSTRAINT `tb_undangan_ibfk_1` FOREIGN KEY (`id_rapat`) REFERENCES `tb_rapat` (`id_rapat`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_undangan_ibfk_2` FOREIGN KEY (`id_peserta`) REFERENCES `tb_user` (`id_user`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_undangan_peserta` FOREIGN KEY (`id_peserta`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_undangan_rapat` FOREIGN KEY (`id_rapat`) REFERENCES `tb_rapat` (`id_rapat`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
