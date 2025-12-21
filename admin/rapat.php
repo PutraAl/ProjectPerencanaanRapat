@@ -1,14 +1,12 @@
 <?php
 include "../connection/server.php";
 require_once "../action/data_rapat.php";
-require_once "../connection/middleware.php" ;
+require_once "../connection/middleware.php";
 middlewareAdmin();
-
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,69 +18,27 @@ middlewareAdmin();
 
   <!-- Select2 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-  <!-- Select2 Bootstrap 5 Theme -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
-
-  <style>
-    .select2-container {
-      width: 100% !important;
-    }
-
-    .select2-container--bootstrap-5 .select2-selection--multiple {
-      min-height: 38px;
-    }
-
-    .form-section {
-      background: white;
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
-
-    .form-section.show {
-      display: block;
-      animation: slideDown 0.3s ease-out;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .btn-toggle {
-      margin-bottom: 15px;
-    }
-  </style>
 </head>
 
 <body>
 
-  <!-- Tombol Hamburger -->
+  <!-- Hamburger Button -->
   <button class="hamburger" id="hamburgerBtn">☰</button>
 
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-
       <div class="logo-section">
         <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
         <hr class="divider">
       </div>
 
-      <div class="logo">Meeting Kampus</div>
+      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
       <ul class="menu">
         <li class="menu-item">
@@ -111,7 +67,6 @@ middlewareAdmin();
         </li>
       </ul>
     </div>
-    <!-- End Sidebar -->
 
     <div class="main-content">
 
@@ -144,27 +99,19 @@ middlewareAdmin();
         </div>
       </div>
 
-      <!-- Tombol Tambah / Batal -->
-      <button type="button" class="btn btn-primary btn-toggle" id="toggleFormBtn" onclick="toggleForm()">
-        <span id="btnText">
-          <?php
-          if ($absensiMode) {
-            echo '✅ Form Absensi';
-          } elseif ($editMode) {
-            echo '✏️ Edit Data Rapat';
-          } else {
-            echo '➕ Tambah Data Rapat';
-          }
-          ?>
-        </span>
-      </button>
+      <!-- Action Buttons -->
+      <div class="mb-3 d-flex gap-2">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formRapatModal" 
+          onclick="resetFormRapat()">
+          ➕ Tambah Data Rapat
+        </button>
+        <?php if ($absensiMode): ?>
+        <a href="rapat.php" class="btn btn-secondary">❌ Batal</a>
+        <?php endif; ?>
+      </div>
 
-      <?php if ($editMode || $absensiMode): ?>
-        <a href="rapat.php" class="btn btn-secondary btn-toggle">❌ Batal</a>
-      <?php endif; ?>
-
-      <!-- Form Filter/Search -->
-      <div class="card mb-3">
+      <!-- Filter Card -->
+      <div class="card mb-4">
         <div class="card-body">
           <h5 class="mb-3">🔍 Filter & Pencarian Rapat</h5>
           <form action="" method="GET" id="filterForm">
@@ -196,44 +143,129 @@ middlewareAdmin();
           </form>
 
           <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus)): ?>
-            <div class="alert alert-info mt-3 mb-0">
-              <strong>Filter Aktif:</strong>
-              <?php if (!empty($filterTanggalDari)): ?>
-                Dari: <?= date('d M Y', strtotime($filterTanggalDari)) ?>
-              <?php endif; ?>
-              <?php if (!empty($filterTanggalSampai)): ?>
-                Sampai: <?= date('d M Y', strtotime($filterTanggalSampai)) ?>
-              <?php endif; ?>
-              <?php if (!empty($filterStatus)): ?>
-                | Status: <span class="badge bg-primary"><?= ucfirst($filterStatus) ?></span>
-              <?php endif; ?>
-            </div>
+          <div class="alert alert-info mt-3 mb-0">
+            <strong>Filter Aktif:</strong>
+            <?php if (!empty($filterTanggalDari)): ?>
+            Dari: <?= date('d M Y', strtotime($filterTanggalDari)) ?>
+            <?php endif; ?>
+            <?php if (!empty($filterTanggalSampai)): ?>
+            Sampai: <?= date('d M Y', strtotime($filterTanggalSampai)) ?>
+            <?php endif; ?>
+            <?php if (!empty($filterStatus)): ?>
+            | Status: <span class="badge bg-primary"><?= ucfirst($filterStatus) ?></span>
+            <?php endif; ?>
+          </div>
           <?php endif; ?>
         </div>
       </div>
 
-      <!-- Form Tambah/Edit Rapat (Collapsible) -->
-      <div class="form-section <?php echo ($editMode || $absensiMode) ? 'show' : ''; ?>" id="formSection">
+      <!-- Modal Form Rapat (Tambah/Edit) -->
+      <div class="modal fade" id="formRapatModal" tabindex="-1" aria-labelledby="formRapatLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="formRapatLabel">Tambah Data Rapat Baru</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="../action/tambah_rapat.php" method="POST" id="meeting-form">
+                <input type="hidden" name="id_rapat" id="id_rapat_hidden" value="">
 
-        <?php if ($absensiMode): ?>
-          <!-- Form Absensi -->
-          <h4 class="mb-4">✅ Absensi Rapat: <?= $rapatAbsensi['judul'] ?></h4>
-          <div class="alert alert-info">
-            <strong>📅 Tanggal:</strong> <?= date('d M Y', strtotime($rapatAbsensi['tanggal'])) ?> |
-            <strong>⏰ Waktu:</strong> <?= date('H:i', strtotime($rapatAbsensi['waktu'])) ?> |
-            <strong>📍 Lokasi:</strong> <?= $rapatAbsensi['lokasi'] ?>
+                <div class="mb-3">
+                  <label for="meeting-title" class="form-label">Judul Rapat <span class="text-danger">*</span></label>
+                  <input type="text" name="judul" id="meeting-title" class="form-control" 
+                    placeholder="Masukkan judul rapat" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="meeting-desc" class="form-label">Deskripsi <span class="text-danger">*</span></label>
+                  <textarea name="deskripsi" id="meeting-desc" class="form-control" rows="3"
+                    placeholder="Masukkan deskripsi rapat" required></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="meeting-date" class="form-label">Tanggal <span class="text-danger">*</span></label>
+                    <input type="date" name="tanggal" id="meeting-date" class="form-control" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="meeting-time" class="form-label">Waktu <span class="text-danger">*</span></label>
+                    <input type="time" name="waktu" id="meeting-time" class="form-control" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="meeting-location" class="form-label">Lokasi / Platform <span class="text-danger">*</span></label>
+                  <input type="text" name="lokasi" id="meeting-location" class="form-control"
+                    placeholder="Ruang 101 / Zoom / Teams" required>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="meeting-status" class="form-label">Status <span class="text-danger">*</span></label>
+                    <select name="status" id="meeting-status" class="form-control">
+                      <option value="dijadwalkan">Dijadwalkan</option>
+                      <option value="selesai">Selesai</option>
+                      <option value="dibatalkan">Dibatalkan</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="peserta" class="form-label">Peserta <span class="text-danger">*</span></label>
+                    <select name="peserta[]" id="peserta" class="form-control" multiple="multiple" required>
+                      <?php
+                        $dataPeserta = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE role = 'peserta' ORDER BY nama ASC");
+                        while ($row = mysqli_fetch_array($dataPeserta)) {
+                      ?>
+                      <option value="<?= $row['id_user'] ?>"><?= $row['nama'] ?></option>
+                      <?php } ?>
+                    </select>
+                    <small class="form-text text-muted">Pilih satu atau lebih peserta</small>
+                  </div>
+                </div>
+
+                <div class="mb-3" id="notulenContainer" style="display: none;">
+                  <label for="notulen" class="form-label">Notulen Rapat</label>
+                  <textarea name="notulen" id="notulen" class="form-control" rows="4"
+                    placeholder="Masukkan notulen/catatan hasil rapat..."></textarea>
+                  <small class="form-text text-muted">Field ini hanya tersedia saat mengedit rapat</small>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" form="meeting-form" class="btn btn-primary" id="submitBtnModal">
+                💾 Simpan Data
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <form action="../action/konfirmasi_kehadiran.php" method="POST" id="absensi-form">
-            <input type="hidden" name="id_rapat" value="<?= $rapatAbsensi['id_rapat'] ?>">
+      <!-- Modal Absensi -->
+      <?php if ($absensiMode): ?>
+      <div class="modal fade show" id="absensiModal" tabindex="-1" aria-labelledby="absensiLabel" aria-hidden="false">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="absensiLabel">✅ Absensi Rapat: <?= $rapatAbsensi['judul'] ?></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="alert alert-info mb-3">
+                <strong>📅 Tanggal:</strong> <?= date('d M Y', strtotime($rapatAbsensi['tanggal'])) ?> |
+                <strong>⏰ Waktu:</strong> <?= date('H:i', strtotime($rapatAbsensi['waktu'])) ?> |
+                <strong>📍 Lokasi:</strong> <?= $rapatAbsensi['lokasi'] ?>
+              </div>
 
-            <div class="card">
-              <div class="card-body">
-                <h5 class="mb-3">Daftar Peserta</h5>
+              <form action="../action/konfirmasi_kehadiran.php" method="POST" id="absensi-form">
+                <input type="hidden" name="id_rapat" value="<?= $rapatAbsensi['id_rapat'] ?>">
+
+                <h6 class="mb-3">Daftar Peserta</h6>
                 <p class="text-muted mb-3">Centang peserta yang hadir pada rapat ini</p>
 
                 <div class="table-responsive">
-                  <table class="table table-hover">
+                  <table class="table table-hover table-sm">
                     <thead>
                       <tr>
                         <th width="50">No</th>
@@ -244,139 +276,47 @@ middlewareAdmin();
                     </thead>
                     <tbody>
                       <?php
-                      $no = 1;
-                      while ($peserta = mysqli_fetch_array($dataPesertaRapat)) {
-                        $checked = ($peserta['status_kehadiran'] == 'hadir') ? 'checked' : '';
+                        $no = 1;
+                        while ($peserta = mysqli_fetch_array($dataPesertaRapat)) {
+                          $checked = ($peserta['status_kehadiran'] == 'hadir') ? 'checked' : '';
                       ?>
-                        <tr>
-                          <td><?= $no++ ?></td>
-                          <td>
-                            <strong><?= $peserta['nama'] ?></strong>
-                          </td>
-                          <td><?= $peserta['email'] ?></td>
-                          <td class="text-center">
-                            <div class="form-check form-switch d-flex justify-content-center">
-                              <input class="form-check-input" type="checkbox"
-                                name="kehadiran[]"
-                                value="<?= $peserta['id_undangan'] ?>"
-                                id="kehadiran_<?= $peserta['id_undangan'] ?>"
-                                <?= $checked ?>>
-                              <label class="form-check-label ms-2" for="kehadiran_<?= $peserta['id_undangan'] ?>">
-                                <span class="badge bg-success" id="badge_<?= $peserta['id_undangan'] ?>" style="<?= !$checked ? 'display:none;' : '' ?>">Hadir</span>
-                                <span class="badge bg-danger" id="badge_tidak_<?= $peserta['id_undangan'] ?>" style="<?= $checked ? 'display:none;' : '' ?>">Tidak Hadir</span>
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
+                      <tr>
+                        <td><?= $no++ ?></td>
+                        <td><strong><?= $peserta['nama'] ?></strong></td>
+                        <td><?= $peserta['email'] ?></td>
+                        <td class="text-center">
+                          <div class="form-check form-switch d-flex justify-content-center">
+                            <input class="form-check-input" type="checkbox" name="kehadiran[]"
+                              value="<?= $peserta['id_undangan'] ?>" id="kehadiran_<?= $peserta['id_undangan'] ?>"
+                              <?= $checked ?>>
+                            <label class="form-check-label ms-2" for="kehadiran_<?= $peserta['id_undangan'] ?>">
+                              <span class="badge bg-success" id="badge_<?= $peserta['id_undangan'] ?>"
+                                style="<?= !$checked ? 'display:none;' : '' ?>">Hadir</span>
+                              <span class="badge bg-danger" id="badge_tidak_<?= $peserta['id_undangan'] ?>"
+                                style="<?= $checked ? 'display:none;' : '' ?>">Tidak Hadir</span>
+                            </label>
+                          </div>
+                        </td>
+                      </tr>
                       <?php } ?>
                     </tbody>
                   </table>
                 </div>
-              </div>
+              </form>
             </div>
-
-            <div class="d-flex gap-2 mt-3">
-              <button type="submit" name="absen_admin" class="btn btn-success">💾 Simpan Absensi</button>
-              <a href="rapat.php" class="btn btn-secondary">❌ Batal</a>
-            </div>
-          </form>
-
-        <?php else: ?>
-          <!-- Form Tambah/Edit Rapat -->
-          <h4 class="mb-4"><?php echo $editMode ? 'Edit Data Rapat' : 'Tambah Data Rapat Baru'; ?></h4>
-
-          <form action="<?php echo $editMode ? '../action/proses_edit_rapat.php' : '../action/tambah_rapat.php'; ?>" method="POST" id="meeting-form">
-
-            <?php if ($editMode): ?>
-              <input type="hidden" name="id_rapat" value="<?= $rapatEdit['id_rapat'] ?>">
-            <?php endif; ?>
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="meeting-title" class="form-label">Judul Rapat <span class="text-danger">*</span></label>
-                <input type="text" name="judul" id="meeting-title" class="form-control"
-                  placeholder="Masukkan judul rapat" value="<?php echo $editMode ? $rapatEdit['judul'] : ''; ?>" required>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="meeting-desc" class="form-label">Deskripsi <span class="text-danger">*</span></label>
-                <textarea name="deskripsi" id="meeting-desc" class="form-control" rows="3"
-                  placeholder="Masukkan deskripsi rapat" required><?php echo $editMode ? $rapatEdit['deskripsi'] : ''; ?></textarea>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="meeting-date" class="form-label">Tanggal <span class="text-danger">*</span></label>
-                <input type="date" name="tanggal" id="meeting-date" class="form-control"
-                  value="<?php echo $editMode ? $rapatEdit['tanggal'] : ''; ?>" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="meeting-time" class="form-label">Waktu <span class="text-danger">*</span></label>
-                <input type="time" name="waktu" id="meeting-time" class="form-control"
-                  value="<?php echo $editMode ? $rapatEdit['waktu'] : ''; ?>" required>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="meeting-location" class="form-label">Lokasi / Platform <span class="text-danger">*</span></label>
-                <input type="text" name="lokasi" id="meeting-location" class="form-control"
-                  placeholder="Ruang 101 / Zoom / Teams" value="<?php echo $editMode ? $rapatEdit['lokasi'] : ''; ?>" required>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="meeting-status" class="form-label">Status <span class="text-danger">*</span></label>
-                <select name="status" id="meeting-status" class="form-control">
-                  <option value="dijadwalkan" <?php echo ($editMode && $rapatEdit['status'] == 'dijadwalkan') ? 'selected' : ''; ?>>Dijadwalkan</option>
-                  <option value="selesai" <?php echo ($editMode && $rapatEdit['status'] == 'selesai') ? 'selected' : ''; ?>>Selesai</option>
-                  <option value="dibatalkan" <?php echo ($editMode && $rapatEdit['status'] == 'dibatalkan') ? 'selected' : ''; ?>>Dibatalkan</option>
-                </select>
-              </div>
-
-              <div class="col-md-6 mb-3">
-                <label for="peserta" class="form-label">Peserta <span class="text-danger">*</span></label>
-                <select name="peserta[]" id="peserta" class="form-control" multiple="multiple" required>
-                  <?php
-                  $dataPeserta = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE role = 'peserta' ORDER BY nama ASC");
-                  while ($row = mysqli_fetch_array($dataPeserta)) {
-                    $selected = ($editMode && in_array($row['id_user'], $pesertaTerpilih)) ? 'selected' : '';
-                  ?>
-                    <option value="<?= $row['id_user'] ?>" <?= $selected ?>><?= $row['nama'] ?></option>
-                  <?php } ?>
-                </select>
-                <small class="form-text text-muted">Pilih satu atau lebih peserta</small>
-              </div>
-            </div>
-
-            <?php if ($editMode): ?>
-              <div class="row">
-                <div class="col-md-12 mb-3">
-                  <label for="notulen" class="form-label">Notulen Rapat</label>
-                  <textarea name="notulen" id="notulen" class="form-control" rows="5"
-                    placeholder="Masukkan notulen/catatan hasil rapat..."><?php echo $editMode ? $rapatEdit['notulen'] : ''; ?></textarea>
-                  <small class="form-text text-muted">Field ini hanya tersedia saat mengedit rapat untuk menambahkan catatan hasil rapat</small>
-                </div>
-              </div>
-            <?php endif; ?>
-
-            <div class="d-flex gap-2 mt-3">
-              <button type="submit" class="btn btn-primary">
-                <?php echo $editMode ? '💾 Update Data' : '💾 Simpan Data'; ?>
+            <div class="modal-footer">
+              <a href="rapat.php" class="btn btn-secondary">Batal</a>
+              <button type="submit" form="absensi-form" name="absen_admin" class="btn btn-success">
+                💾 Simpan Absensi
               </button>
-              <button type="button" class="btn btn-secondary" onclick="toggleForm()">❌ Batal</button>
             </div>
-
-          </form>
-        <?php endif; ?>
+          </div>
+        </div>
       </div>
+      <?php endif; ?>
 
-      <!-- Manajemen Jadwal Rapat -->
-      <div class="card">
+      <!-- Meeting Schedule Card -->
+      <div class="card mb-4">
         <div class="card-title">
           Manajemen Jadwal Rapat
           <span class="badge bg-secondary"><?= mysqli_num_rows($dataRapat) ?> Data</span>
@@ -386,62 +326,77 @@ middlewareAdmin();
           <?php
           if (mysqli_num_rows($dataRapat) > 0) {
             while ($row = $dataRapat->fetch_array()) {
-              // Hitung jumlah peserta
-              $id_rapat = $row['id_rapat'];
-              $countPeserta = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_undangan WHERE id_rapat = '$id_rapat'");
-              $jumlahPeserta = mysqli_fetch_array($countPeserta)['total'];
+             $id_rapat = $row['id_rapat'];
+            $countPeserta = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_undangan WHERE id_rapat = '$id_rapat'");
+            $jumlahPeserta = mysqli_fetch_array($countPeserta)['total'];
+            
+            // Dapatkan peserta IDs
+            $queryPeserta = mysqli_query($mysqli, "SELECT GROUP_CONCAT(CAST(id_peserta AS CHAR)) as peserta_ids FROM tb_undangan WHERE id_rapat = '$id_rapat'");
+            $pesertaData = mysqli_fetch_assoc($queryPeserta);
+            $peserta_ids = $pesertaData['peserta_ids'] ?: '';
           ?>
-              <div class="meeting-card">
-                <div class="meeting-header"><?= $row['judul'] ?></div>
-                <div class="meeting-body">
-                  <div class="meeting-detail">
-                    <i>📅</i> <?= date('d M Y', strtotime($row['tanggal'])) ?>, <?= date('H:i', strtotime($row['waktu'])) ?>
-                  </div>
-                  <div class="meeting-detail">
-                    <i>📍</i> <?= $row['lokasi'] ?>
-                  </div>
-                  <div class="meeting-detail">
-                    <i>👥</i> <?= $jumlahPeserta ?> Peserta
-                  </div>
-                  <div class="meeting-detail">
-                    <i>📊</i> Status:
-                    <?php
+          <div class="meeting-card">
+            <div class="meeting-header"><?= $row['judul'] ?></div>
+            <div class="meeting-body">
+              <div class="meeting-detail">
+                <i>📅</i> <?= date('d M Y', strtotime($row['tanggal'])) ?>, <?= date('H:i', strtotime($row['waktu'])) ?>
+              </div>
+              <div class="meeting-detail">
+                <i>📍</i> <?= $row['lokasi'] ?>
+              </div>
+              <div class="meeting-detail">
+                <i>👥</i> <?= $jumlahPeserta ?> Peserta
+              </div>
+              <div class="meeting-detail">
+                <i>📊</i> Status:
+                <?php
                     $badgeClass = '';
                     if ($row['status'] == 'dijadwalkan') $badgeClass = 'bg-primary';
                     elseif ($row['status'] == 'selesai') $badgeClass = 'bg-success';
                     elseif ($row['status'] == 'dibatalkan') $badgeClass = 'bg-danger';
                     ?>
-                    <span class="badge <?= $badgeClass ?>"><?= ucfirst($row['status']) ?></span>
-                  </div>
-                  <?php if (!empty($row['notulen'])): ?>
-                    <div class="meeting-detail">
-                      <i>📝</i> <strong>Notulen:</strong> <?= substr($row['notulen'], 0, 100) ?><?= strlen($row['notulen']) > 100 ? '...' : '' ?>
-                    </div>
-                  <?php endif; ?>
-                  <div class="button-group">
-                    <a href="?edit=<?= $row['id_rapat'] ?><?= !empty($filterTanggalDari) ? '&tanggal_dari=' . $filterTanggalDari : '' ?><?= !empty($filterTanggalSampai) ? '&tanggal_sampai=' . $filterTanggalSampai : '' ?><?= !empty($filterStatus) ? '&status=' . $filterStatus : '' ?>" class="btn btn-primary">✏️ Edit</a>
-
-                    <?php if ($row['status'] == 'selesai'): ?>
-                      <a href="?absensi=<?= $row['id_rapat'] ?>" class="btn btn-success">✅ Absensi</a>
-                    <?php endif; ?>
-
-                    <button class="btn btn-outline" onclick="hapusRapat(<?= $row['id_rapat'] ?>)">🗑️ Hapus</button>
-                  </div>
-                </div>
+                <span class="badge <?= $badgeClass ?>"><?= ucfirst($row['status']) ?></span>
               </div>
+              <?php if (!empty($row['notulen'])): ?>
+              <div class="meeting-detail">
+                <i>📝</i> <strong>Notulen:</strong>
+                <?= substr($row['notulen'], 0, 80) ?><?= strlen($row['notulen']) > 80 ? '...' : '' ?>
+              </div>
+              <?php endif; ?>
+              <div class="button-group">
+                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formRapatModal"
+                onclick="loadEditDataFromButton(this)"
+                data-id_rapat="<?= $row['id_rapat'] ?>"
+                data-judul="<?= htmlspecialchars($row['judul']) ?>"
+                data-deskripsi="<?= htmlspecialchars($row['deskripsi']) ?>"
+                data-tanggal="<?= $row['tanggal'] ?>"
+                data-waktu="<?= $row['waktu'] ?>"
+                data-lokasi="<?= htmlspecialchars($row['lokasi']) ?>"
+                data-status="<?= $row['status'] ?>"
+                data-notulen="<?= htmlspecialchars($row['notulen'] ?: '') ?>"
+                 data-peserta_ids="<?= $peserta_ids ?>">
+                ✏️ Edit
+            </button>
+
+                <?php if ($row['status'] == 'selesai'): ?>
+                <a href="?absensi=<?= $row['id_rapat'] ?>" class="btn btn-success">✅ Absensi</a>
+                <?php endif; ?>
+
+                <button class="btn btn-outline" onclick="hapusRapat(<?= $row['id_rapat'] ?>)">🗑️ Hapus</button>
+              </div>
+            </div>
+          </div>
           <?php
             }
           } else {
-            echo '<div class="alert alert-warning text-center mb-0">
-                    <i>⚠️</i> Tidak ada data rapat ditemukan dengan filter yang dipilih
-                  </div>';
+            echo '<div class="alert alert-warning text-center mb-0">⚠️ Tidak ada data rapat ditemukan</div>';
           }
           ?>
         </div>
       </div>
 
-      <!-- Undangan & Konfirmasi Kehadiran -->
-      <div class="card">
+      <!-- Completed Meetings -->
+      <div class="card mb-4">
         <div class="card-title">Rapat yang telah selesai</div>
         <ul class="meeting-list">
           <?php 
@@ -459,134 +414,135 @@ middlewareAdmin();
         </ul>
       </div>
 
-      <!-- Notulen & Dokumentasi -->
+      <!-- Notulen -->
       <div class="card">
-        <div class="card-title">Notulen & Dokumentasi</div>
+        <div class="card-title">Notulen</div>
         <div class="meeting-grid">
+          <?php 
+          $query = mysqli_query($mysqli, "SELECT * FROM tb_rapat where status ='selesai'");
+          while($row = $query->fetch_array()) {
+          ?>
           <div class="meeting-card">
-            <div class="meeting-header">Rapat Akademik</div>
+            <div class="meeting-header fw-bold"><?= $row['judul'] ?></div>
             <div class="meeting-body">
-              <div class="meeting-detail"><i>📝</i> Notulen Tersedia</div>
-              <div class="meeting-detail"><i>📎</i> Dokumen Pendukung</div>
-              <div class="button-group">
-                <button class="btn btn-primary">👁️ Lihat</button>
-                <button class="btn btn-outline">⬇️ Download</button>
-              </div>
+              <div class="meeting-detail"><i>📝</i> <?= $row['notulen'] ?: 'Tidak ada notulen' ?></div>
             </div>
           </div>
-          <div class="meeting-card">
-            <div class="meeting-header">Rapat Penelitian</div>
-            <div class="meeting-body">
-              <div class="meeting-detail"><i>📝</i> Notulen Tersedia</div>
-              <div class="meeting-detail"><i>📎</i> Dokumen Pendukung</div>
-              <div class="button-group">
-                <button class="btn btn-primary">👁️ Lihat</button>
-                <button class="btn btn-outline">⬇️ Download</button>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- jQuery (harus dimuat sebelum Select2) -->
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Bootstrap Bundle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-  </script>
-
-  <!-- Select2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <script>
-    // Hamburger Menu
-    const btn = document.getElementById("hamburgerBtn");
-    const sidebar = document.querySelector(".sidebar");
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const formRapatModal = new bootstrap.Modal(document.getElementById('formRapatModal'));
+    const meetingForm = document.getElementById('meeting-form');
 
-    btn.addEventListener("click", () => {
-      sidebar.classList.toggle("active");
+    // Hamburger Menu
+    hamburgerBtn?.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      });
     });
 
-    // Toggle Form
-    function toggleForm() {
-      const formSection = document.getElementById('formSection');
-      const btnText = document.getElementById('btnText');
-
-      if (formSection.classList.contains('show')) {
-        formSection.classList.remove('show');
-        btnText.innerHTML = '➕ Tambah Data Rapat';
-        // Reset form jika bukan mode edit
-        <?php if (!$editMode): ?>
-          document.getElementById('meeting-form').reset();
-          $('#peserta').val(null).trigger('change');
-        <?php endif; ?>
-      } else {
-        formSection.classList.add('show');
-        btnText.innerHTML = '❌ Tutup Form';
-        // Scroll ke form
-        formSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
+    // Reset Form Rapat (Tambah Baru)
+    function resetFormRapat() {
+      meetingForm.action = '../action/tambah_rapat.php';
+      document.getElementById('id_rapat_hidden').value = '';
+      document.getElementById('formRapatLabel').textContent = 'Tambah Data Rapat Baru';
+      document.getElementById('submitBtnModal').innerHTML = '💾 Simpan Data';
+      document.getElementById('notulenContainer').style.display = 'none';
+      meetingForm.reset();
+      $('#peserta').val(null).trigger('change');
     }
 
-    // Inisialisasi Select2
-    $(document).ready(function() {
+    // Load Edit Data from AJAX endpoint
+   // Load Edit Data dari data attribute di button
+    function loadEditDataFromButton(button) {
+      // Ambil data dari data-* attributes
+      const data = {
+        id_rapat: button.getAttribute('data-id_rapat'),
+        judul: button.getAttribute('data-judul'),
+        deskripsi: button.getAttribute('data-deskripsi'),
+        tanggal: button.getAttribute('data-tanggal'),
+        waktu: button.getAttribute('data-waktu'),
+        lokasi: button.getAttribute('data-lokasi'),
+        status: button.getAttribute('data-status'),
+        notulen: button.getAttribute('data-notulen'),
+        peserta_ids: button.getAttribute('data-peserta_ids')
+      };
+      
+      // Isi form dengan data
+      document.getElementById('id_rapat_hidden').value = data.id_rapat;
+      document.getElementById('meeting-title').value = data.judul;
+      document.getElementById('meeting-desc').value = data.deskripsi;
+      document.getElementById('meeting-date').value = data.tanggal;
+      document.getElementById('meeting-time').value = data.waktu;
+      document.getElementById('meeting-location').value = data.lokasi;
+      document.getElementById('meeting-status').value = data.status;
+      document.getElementById('notulen').value = data.notulen;
+      
+      // Set action form untuk update
+      meetingForm.action = '../action/proses_edit_rapat.php';
+      document.getElementById('formRapatLabel').textContent = 'Edit Data Rapat';
+      document.getElementById('submitBtnModal').innerHTML = '💾 Update Data';
+      document.getElementById('notulenContainer').style.display = 'block';
+      
+      // Set peserta yang dipilih
+      const pesertaIds = data.peserta_ids ? data.peserta_ids.split(',') : [];
+      $('#peserta').val(pesertaIds).trigger('change');
+    }
+
+    // Initialize Select2
+    $(document).ready(() => {
       $('#peserta').select2({
         theme: 'bootstrap-5',
-        placeholder: "-- Pilih Peserta --",
+        placeholder: '-- Pilih Peserta --',
         allowClear: true,
         closeOnSelect: false,
-        width: '100%',
-        language: {
-          noResults: function() {
-            return "Tidak ada peserta ditemukan";
-          },
-          searching: function() {
-            return "Mencari...";
-          }
-        }
+        width: '100%'
       });
 
-      // Toggle badge kehadiran saat checkbox diubah
-      $('input[name="kehadiran[]"]').on('change', function() {
+      // Toggle attendance badge
+      $(document).on('change', 'input[name="kehadiran[]"]', function() {
         const id = $(this).val();
-        const badgeHadir = $('#badge_' + id);
-        const badgeTidakHadir = $('#badge_tidak_' + id);
-
+        const badgeHadir = $(`#badge_${id}`);
+        const badgeTidak = $(`#badge_tidak_${id}`);
+        
         if ($(this).is(':checked')) {
           badgeHadir.show();
-          badgeTidakHadir.hide();
+          badgeTidak.hide();
         } else {
           badgeHadir.hide();
-          badgeTidakHadir.show();
+          badgeTidak.show();
         }
       });
     });
 
-    // Fungsi Hapus Rapat
+    // Delete Meeting
     function hapusRapat(id) {
-      if (confirm('Apakah Anda yakin ingin menghapus data rapat ini?')) {
+      if (confirm('Yakin ingin menghapus rapat ini?')) {
         window.location.href = '../action/hapus_rapat.php?id=' + id;
       }
     }
 
-    // Auto scroll ke form saat mode edit atau absensi
-    <?php if ($editMode || $absensiMode): ?>
-      window.addEventListener('load', function() {
-        document.getElementById('formSection').scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      });
+    // Auto show absensi modal
+    <?php if ($absensiMode): ?>
+    const absensiModal = new bootstrap.Modal(document.getElementById('absensiModal'));
+    absensiModal.show();
     <?php endif; ?>
   </script>
 
 </body>
-
 </html>

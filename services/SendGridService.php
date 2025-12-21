@@ -150,7 +150,7 @@ class SendGridService {
                     <p>Terima kasih atas perhatian Anda.</p>
                     
                     <p style='margin-top: 30px;'>
-                        <strong>Salam,<br>Tim Meeting Kampus</strong>
+                        <strong>Salam,<br>PBL-2 IF MALAM E :D</strong>
                     </p>
                 </div>
                 
