@@ -126,33 +126,49 @@ $user = mysqli_fetch_assoc($dataUser);
     </a>
 
     </div>
-          <form action="" method="GET" id="filterForm">
-            <div class="row">
-              <div class="col-md-3 mb-3">
-                <label for="tanggal_dari" class="form-label">Tanggal Dari</label>
-                <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control"
-                  value="<?= $filterTanggalDari ?>">
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="tanggal_sampai" class="form-label">Tanggal Sampai</label>
-                <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control"
-                  value="<?= $filterTanggalSampai ?>">
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select name="status" id="status" class="form-control">
-                  <option value="">Semua Status</option>
-                  <option value="dijadwalkan" <?= $filterStatus == 'dijadwalkan' ? 'selected' : '' ?>>Dijadwalkan</option>
-                  <option value="selesai" <?= $filterStatus == 'selesai' ? 'selected' : '' ?>>Selesai</option>
-                  <option value="dibatalkan" <?= $filterStatus == 'dibatalkan' ? 'selected' : '' ?>>Dibatalkan</option>
-                </select>
-              </div>
-              <div class="col-md-3 mb-3 d-flex align-items-end gap-2">
-                <button type="submit" class="btn btn-primary flex-fill">Filter</button>
-                <a href="rapat.php" class="btn btn-secondary flex-fill">Reset</a>
-              </div>
-            </div>
-          </form>
+<form action="" method="GET" id="filterForm">
+  <div class="row align-items-end">
+
+    <div class="col-md-3 mb-3">
+      <label for="tanggal_dari" class="form-label">Tanggal Dari</label>
+      <input type="date" name="tanggal_dari" id="tanggal_dari"
+             class="form-control"
+             value="<?= $filterTanggalDari ?>">
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label for="tanggal_sampai" class="form-label">Tanggal Sampai</label>
+      <input type="date" name="tanggal_sampai" id="tanggal_sampai"
+             class="form-control"
+             value="<?= $filterTanggalSampai ?>">
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select name="status" id="status" class="form-control">
+        <option value="">Semua Status</option>
+        <option value="dijadwalkan" <?= $filterStatus == 'dijadwalkan' ? 'selected' : '' ?>>Dijadwalkan</option>
+        <option value="selesai" <?= $filterStatus == 'selesai' ? 'selected' : '' ?>>Selesai</option>
+        <option value="dibatalkan" <?= $filterStatus == 'dibatalkan' ? 'selected' : '' ?>>Dibatalkan</option>
+      </select>
+    </div>
+
+    <!-- KOLOM TOMBOL (ISI SPACE KOSONG) -->
+    <div class="col-md-3 mb-3 d-flex gap-2">
+      <button type="submit"
+        class="btn btn-outline-primary btn-sm icon-btn-text flex-fill">
+        <i class="fa-solid fa-filter"></i> Filter
+      </button>
+
+      <a href="rapat.php"
+        class="btn btn-outline-warning btn-sm icon-btn-text flex-fill">
+        <i class="fa-solid fa-rotate-left"></i> Reset
+      </a>
+    </div>
+
+  </div>
+</form>
+
 
           <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus)): ?>
             <div class="alert alert-info mt-3 mb-0">
