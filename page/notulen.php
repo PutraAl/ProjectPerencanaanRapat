@@ -115,7 +115,7 @@ if ($id_rapat) {
 
         <!-- Kanan: Download -->
     <a href="download_notulen.php?id=<?= $id_rapat ?>" 
-    class="btn btn-outline-primary btn-sm" 
+    class="btn btn-outline-success btn-sm" 
     title="Download Notulen"> 
     <i class="fa-solid fa-download"></i> </a>
 
@@ -143,7 +143,7 @@ if ($id_rapat) {
                                 </div>
 
                                 <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
-                                class="btn btn-outline-primary btn-sm icon-btn">
+                                class="btn btn-outline-success btn-sm icon-btn">
                                 <i class="fa-solid fa-file-lines"></i> Lihat Notulen
                                 </a>
 

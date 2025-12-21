@@ -290,6 +290,26 @@
         display: flex;
         justify-content: center;
     }
+
+    /* filter action */
+.filter-action .filter-btn {
+    min-width: 120px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .filter-action {
+        width: 100%;
+    }
+
+    .filter-action .filter-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 }
 
 
@@ -635,6 +655,27 @@
     color: var(--white);
 }
 
+.btn-warning {
+    background-color: var(--warning);
+    color: var(--white);
+}
+
+.btn-warning:hover:not(:disabled) {
+    background-color: var(--success);
+}
+
+.btn-outline-warning {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.btn-outline-warning:hover:not(:disabled) {
+    background-color: var(--warning);
+    color: var(--white);
+}
 
 .btn-outline {
     background-color: transparent;
@@ -872,7 +913,7 @@
 .notulen-card {
     border-radius: 12px;
     overflow: hidden;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--success);
 }
 
 .notulen-card .card-header {
