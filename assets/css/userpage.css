@@ -872,7 +872,7 @@
 .notulen-card {
     border-radius: 12px;
     overflow: hidden;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--success);
 }
 
 .notulen-card .card-header {
