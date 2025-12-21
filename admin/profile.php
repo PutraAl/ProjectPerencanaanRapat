@@ -78,7 +78,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             <h2 class="page-title">Profile</h2>
             <div class="user-info">
               <span>Admin</span>
-              <div class="use3r-avatar">A</div>
+              <div class="user-avatar">A</div>
             </div>
           </div>
 

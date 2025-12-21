@@ -74,8 +74,8 @@ middlewareAdmin();
       <div class="header">
         <div class="page-title">Pengelolaan Data Rapat</div>
         <div class="user-info">
+          <span>Admin</span>          
           <div class="user-avatar">A</div>
-          <span>Admin</span>
         </div>
       </div>
 
@@ -113,7 +113,7 @@ middlewareAdmin();
       <!-- Filter Card -->
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="mb-3">🔍 Filter & Pencarian Rapat</h5>
+          <h5 class="mb-3">Filter & Pencarian Rapat</h5>
           <form action="" method="GET" id="filterForm">
             <div class="row">
               <div class="col-md-3 mb-3">
