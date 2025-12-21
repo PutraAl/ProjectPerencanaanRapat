@@ -103,13 +103,16 @@ $user = mysqli_fetch_assoc($dataUser);
 
           <div class="top-bar d-flex align-items-center gap-2">
 
-    <!-- Search -->
-    <div class="search-box flex-grow-1">
-        <i class="bi bi-search search-icon"></i>
-        <input type="text" id="searchInput"
-            placeholder="Cari judul rapat..."
-            onkeyup="filterUndangan()">
-    </div>
+<!-- Search -->
+<div class="search-box flex-grow-1">
+    <i class="bi bi-search search-icon"></i>
+    <input type="text"
+           id="searchInput"
+           class="form-control"
+           placeholder="Cari judul rapat..."
+           onkeyup="filterUndangan()">
+</div>
+
 
     <!-- Button Jadwal -->
     <a href="jadwal.php"

@@ -270,9 +270,11 @@
 .top-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 0;
+    gap: 12px;
+    width: 100%;
+    flex-wrap: wrap;
 }
+
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -283,21 +285,14 @@
 
     .search-box {
         width: 100%;
+        max-width: 100%;
     }
 
     .icon-btn {
         width: 100%;
-        display: flex;
         justify-content: center;
     }
 
-    /* filter action */
-.filter-action .filter-btn {
-    min-width: 120px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
     .filter-action {
         width: 100%;
     }
@@ -310,33 +305,28 @@
     }
 }
 
-}
-
 
 /* -- search box -- */
 .search-box {
-    display: flex;
-    align-items: center;
-    background: white;
-    border: 1px solid var(--gray);
-    border-radius: 10px;
-    padding: 8px 14px;
-    width: 350px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-.search-icon {
-    font-size: 18px;
-    color: var();
-    margin-right: 10px;
+    position: relative;
+    flex: 1;
+    min-width: 0;
 }
 
 .search-box input {
-    border: none;
-    outline: none;
     width: 100%;
-    font-size: 15px;
+    padding-left: 40px;
+    border-radius: 10px;
 }
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+}
+
 
 
 /* -- notification icon -- */
@@ -924,5 +914,11 @@
 .notulen-meta {
     font-size: 0.9rem;
     color: var(--darkgray);
+}
+
+/* Calendar icon warna primary */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(53%) sepia(57%) saturate(430%) hue-rotate(166deg) brightness(95%) contrast(90%);
+    cursor: pointer;
 }
 
