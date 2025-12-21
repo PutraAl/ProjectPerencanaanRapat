@@ -53,15 +53,20 @@ if ($id_rapat) {
 
         <div class="logo">Meeting Kampus</div>
 
-        <ul class="menu">
+        <!-- <ul class="menu"> -->
             <li class="menu-item">
                 <i class="fa-solid fa-chart-line"></i>
                 <a href="dashboard.php">Dashboard</a>
             </li>
 
-            <li class="menu-item active">
+            <li class="menu-item">
                 <i class="fa-solid fa-envelope"></i>
                 <a href="undangan.php">Undangan Rapat</a>
+            </li>
+
+            <li class="menu-item active">
+                <i class="fa-solid fa-file-lines"></i>
+                <a href="notulen.php">Notulen</a>
             </li>
 
             <li class="menu-item">
@@ -73,7 +78,7 @@ if ($id_rapat) {
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <a href="logout.php">Keluar</a>
             </li>
-        </ul>
+        <!-- </ul> -->
     </div>
     <!-- End Sidebar -->
 
@@ -93,7 +98,7 @@ if ($id_rapat) {
 
 <!-- Detail Notulen -->
 <?php if (isset($rapat)) { ?>
-<div class="card mb-4 notulen-card">
+<div class="card mb-3 notulen-card">
 
     <div class="card-header d-flex justify-content-between align-items-center">
 
@@ -131,16 +136,17 @@ if ($id_rapat) {
 
                     <ul class="meeting-list">
                         <?php while ($row = mysqli_fetch_assoc($rapatSelesai)) { ?>
-                            <li class="meeting-item d-flex justify-content-between align-items-center">
+                            <li class="meeting-item d-flex justify-content-between">
                                 <div>
                                     <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
                                     <small><?= htmlspecialchars($row['tanggal']) ?>, <?= htmlspecialchars($row['waktu']) ?></small>
                                 </div>
 
-                                <a href="notulen.php?id=<?= $row['id_rapat'] ?>"
-                                class="btn btn-sm btn-outline-primary">
-                                    Lihat Notulen
+                                <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
+                                class="btn btn-outline-success btn-sm icon-btn">
+                                <i class="fa-solid fa-file-lines"></i> Lihat Notulen
                                 </a>
+
                             </li>
                         <?php } ?>
                     </ul>

@@ -160,11 +160,18 @@
         padding: 20px;
     }
 
-    .meeting-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
+.meeting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.meeting-item .btn {
+    align-self: flex-end;
+}
+
+
 
     /* Sidebar disembunyikan */
     .sidebar {
@@ -576,20 +583,58 @@
     transition: all 0.3s;
 }
 
+/* PRIMARY */
 .btn-primary {
     background-color: var(--primary);
     color: var(--white);
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: var(--primary);
-}
-
-.btn-outline-primary {
+    border: 1px solid var(--primary);
     border-radius: 20px;
     padding: 4px 14px;
     font-size: 0.8rem;
 }
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+/* OUTLINE PRIMARY */
+.btn-outline-primary {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-outline-primary:hover:not(:disabled) {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+
+.btn-success {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+.btn-success:hover:not(:disabled) {
+    background-color: var(--success);
+}
+
+.btn-outline-success {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.btn-outline-success:hover:not(:disabled) {
+    background-color: var(--success);
+    color: var(--white);
+}
+
 
 .btn-outline {
     background-color: transparent;
@@ -816,28 +861,27 @@
     background: var(--gray)
 }
 /* notulen page */
+.notulen-page {
+    padding: 0;
+}
+
+.notulen-wrapper {
+    padding: 20px;
+}
+
 .notulen-card {
     border-radius: 12px;
     overflow: hidden;
+    border-left: 4px solid var(--success);
 }
 
 .notulen-card .card-header {
-    background: linear-gradient(135deg,  var(--white));
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-bottom: none;
-}
-
-.notulen-card h3 {
-    font-weight: 600;
-    margin-bottom: 5px;
 }
 
 .notulen-meta {
     font-size: 0.9rem;
-    color:var(--darkgray)
+    color: var(--darkgray);
 }
 
-.notulen-content {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: var(--dark)
-}

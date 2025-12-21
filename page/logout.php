@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perencanaan Rapat - Logout</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/userpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -19,39 +19,41 @@
 
     <div class="container-fluid d-flex p-0">
 
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
+  <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+    <div class="logo-section">
+        <img src="../assets/img/polteklogo.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+    </div>
 
-            <div class="logo">Meeting Kampus</div>
+    <div class="logo">Meeting Kampus</div>
 
-            <ul class="menu">
-                <li class="menu-item">
-                    <i>📊</i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+    <!-- <ul class="menu"> -->
+        <li class="menu-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <a href="dashboard.php">Dashboard</a>
+        </li>
 
-                <li class="menu-item">
-                    <i>📨</i>
-                    <a href="undangan.php">Undangan Rapat</a>
-                </li>
+        <li class="menu-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="undangan.php">Undangan Rapat</a>
+        </li>
 
-                <li class="menu-item">
-                    <i>👤</i>
-                    <a href="profil.php">Profil</a>
-                </li>
+        <li class="menu-item">
+            <i class="fa-solid fa-user"></i>
+            <a href="profil.php">Profil</a>
+        </li>
 
-                <li class="menu-item active">
-                    <i>🚪</i>
-                    <a href="logout.php">Keluar</a>
-                </li>
-            </ul>
+        <li class="menu-item active">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <a href="logout.php">Keluar</a>
+        </li>
+    </ul>
 
-        </div>
+</div>
+
+
         <!-- End Sidebar -->
 
         <!-- Halaman Logout -->

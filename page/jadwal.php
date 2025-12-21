@@ -63,7 +63,7 @@ $rapatMendatang = mysqli_query($mysqli, "
 
         <div class="logo">Meeting Kampus</div>
 
-        <ul class="menu">
+        <!-- <ul class="menu"> -->
             <li class="menu-item">
                 <i class="fa-solid fa-chart-line"></i>
                 <a href="dashboard.php">Dashboard</a>
@@ -83,7 +83,11 @@ $rapatMendatang = mysqli_query($mysqli, "
                 <i class="fa-solid fa-user"></i>
                 <a href="profil.php">Profil</a>
             </li>
-        </ul>
+            <li class="menu-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a href="logout.php">Keluar</a>
+            </li>
+        <!-- </ul> -->
     </div>
 
     <!-- Main Content -->
