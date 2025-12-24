@@ -118,18 +118,18 @@ $user = mysqli_fetch_assoc($dataUser);
 
 
     <!-- Button Jadwal -->
-    <a href="jadwal.php"
+    <!-- <a href="jadwal.php"
        class="btn btn-outline-primary btn-sm icon-btn"
        title="Jadwal Rapat">
         <i class="bi bi-calendar-event"></i>
-    </a>
+    </a> -->
 
     <!-- Button Notulen -->
-    <a href="notulen.php"
+    <!-- <a href="notulen.php"
        class="btn btn-outline-success btn-sm icon-btn"
        title="Notulen Rapat">
         <i class="bi bi-journal-text"></i>
-    </a>
+    </a> -->
 
     </div>
 <form action="" method="GET" id="filterForm">
@@ -166,10 +166,11 @@ $user = mysqli_fetch_assoc($dataUser);
         <i class="fa-solid fa-filter"></i> Filter
       </button>
 
-      <a href="rapat.php"
-        class="btn btn-outline-warning btn-sm icon-btn-text flex-fill">
-        <i class="fa-solid fa-rotate-left"></i> Reset
-      </a>
+<a href="undangan.php"
+   class="btn btn-outline-warning btn-sm icon-btn-text flex-fill">
+   <i class="fa-solid fa-rotate-left"></i> Reset
+</a>
+
     </div>
 
   </div>

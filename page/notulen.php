@@ -187,6 +187,20 @@ if ($id_rapat) {
         btn.addEventListener("click", () => {
             sidebar.classList.toggle("active");
         });
+
+        function toggleNotulen() {
+    const content = document.getElementById("notulenContent");
+    const btn = document.getElementById("toggleNotulen");
+
+    content.classList.toggle("open");
+
+    if (content.classList.contains("open")) {
+        btn.innerText = "Sembunyikan";
+    } else {
+        btn.innerText = "Lihat Detail";
+    }
+}
+
     </script>
 <script src="../assets/js/userpage.js"></script>
 </body>
