@@ -457,11 +457,6 @@
     font-weight: 800;
     color: var(--primary);
     margin: 12px 0;
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover .value {
-    transform: scale(1.1);
 }
 
 .desc {

@@ -35,42 +35,43 @@ $user = mysqli_fetch_assoc($queryUser);
 
     <div class="container-fluid d-flex p-0">
 
-        <!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+     <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <img src="../assets/img/polteklogo.png" class="logo-img">
+            <hr class="divider">
+        </div>
 
-    <div class="logo-section">
-        <img src="../assets/img/polteklogo.png" alt="Logo" class="logo-img">
-        <hr class="divider">
+        <div class="logo">Meeting Kampus</div>
+
+        <!-- <ul class="menu"> -->
+            <li class="menu-item active">
+                <i class="fa-solid fa-chart-line"></i>
+                <a href="dashboard.php">Dashboard</a>
+            </li>
+
+            <li class="menu-item">
+                <i class="fa-solid fa-envelope"></i>
+                <a href="undangan.php">Rapat</a>
+            </li>
+
+            <li class="menu-item">
+                <i class="fa-solid fa-file-lines"></i>
+                <a href="notulen.php">Notulen</a>
+            </li>
+
+            <li class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <a href="profil.php">Profil</a>
+            </li>
+
+            <li class="menu-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a href="logout.php">Keluar</a>
+            </li>
+        <!-- </ul> -->
     </div>
-
-    <div class="logo">Meeting Kampus</div>
-
-    <!-- <ul class="menu"> -->
-        <li class="menu-item active">
-            <i class="fa-solid fa-chart-line"></i>
-            <a href="dashboard.php">Dashboard</a>
-        </li>
-
-        <li class="menu-item">
-            <i class="fa-solid fa-envelope"></i>
-            <a href="undangan.php">Undangan Rapat</a>
-        </li>
-
-        <li class="menu-item">
-            <i class="fa-solid fa-user"></i>
-            <a href="profil.php">Profil</a>
-        </li>
-
-        <li class="menu-item">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <a href="logout.php">Keluar</a>
-        </li>
-    </ul>
-
-</div>
-
-
-        <!-- End Sidebar -->
+    <!-- End Sidebar -->
 
         <!-- Main Content -->
         <main class="main-content">
@@ -93,7 +94,7 @@ $user = mysqli_fetch_assoc($queryUser);
             </div>
  
             <!-- Statistik -->
-            <!-- <div class="row g-3 mb-4">
+            <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="stat-card shadow-sm">
                         <div class="label">Rapat Hari Ini</div>
@@ -117,10 +118,10 @@ $user = mysqli_fetch_assoc($queryUser);
                         <span class="desc">Dalam beberapa hari ke depan</span>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
             <!-- Shortcut -->
-            <div class="row g-3 mb-4">
+            <!-- <div class="row g-3 mb-4">
                <div class="col-md-6">
                     <div class="shortcut-card shadow-sm">
                         <i class="fa-regular fa-calendar-days icon"></i>
@@ -136,7 +137,7 @@ $user = mysqli_fetch_assoc($queryUser);
                         <a href="notulen.php?list=1">Lihat Notulen →</a>
                     </div>
                 </div>
-</div>
+</div> -->
 
                 <!-- <div class="col-md-4">
                     <div class="shortcut-card shadow-sm">
@@ -149,7 +150,7 @@ $user = mysqli_fetch_assoc($queryUser);
 
 
             <!-- Rapat Mendatang -->
-            <!-- <div class="card mb-4 shadow-sm">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h4 class="card-title">Rapat Mendatang</h4>
                     <ul class="meeting-list">
@@ -166,9 +167,9 @@ $user = mysqli_fetch_assoc($queryUser);
                         <?php } ?>
                     </ul>
                 </div>
-            </div> -->
+            </div>
 
-            <!-- Rapat Terlaksana
+            <!-- Rapat Terlaksana -->
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h4 class="card-title">Rapat Terlaksana</h4>
@@ -187,7 +188,7 @@ $user = mysqli_fetch_assoc($queryUser);
                     <?php } ?>
                     </ul>
                 </div>
-            </div> -->
+            </div>
 
                      
 

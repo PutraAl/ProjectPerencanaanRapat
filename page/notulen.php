@@ -1,8 +1,17 @@
 <?php
 include "../connection/server.php";
+require_once "../connection/middleware.php";
+middlewareUser();
 
+$id_user = $_SESSION['id_user'];
 
+// Ambil data user (UNTUK HEADER)
+$userQuery = mysqli_query($mysqli, "
+    SELECT nama FROM tb_user WHERE id_user = '$id_user'
+");
+$user = mysqli_fetch_assoc($userQuery);
 
+// Ambil ID rapat
 $id_rapat = $_GET['id'] ?? null;
 
 // Ambil rapat selesai (UNTUK LIST)
@@ -20,12 +29,10 @@ if ($id_rapat) {
         FROM tb_rapat
         WHERE id_rapat = '$id_rapat'
     ");
-
     $rapat = mysqli_fetch_assoc($data);
 }
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -61,7 +68,7 @@ if ($id_rapat) {
 
             <li class="menu-item">
                 <i class="fa-solid fa-envelope"></i>
-                <a href="undangan.php">Undangan Rapat</a>
+                <a href="undangan.php">Rapat</a>
             </li>
 
             <li class="menu-item active">
@@ -85,13 +92,17 @@ if ($id_rapat) {
     <!-- Main Content -->
     <main class="main-content">
 
-            <!-- Tombol Kembali -->
-                <div class="page-header d-flex align-items-center mb-4">
-            <a href="undangan.php" class="back-link me-3">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-                <h2 class="page-title mb-0">Rapat Selesai</h2>
-</div>
+            <!-- Header -->
+            <div class="header">
+                <h2 class="page-title">Notulen</h2>
+
+            <div class="user-info">
+                <span><?= $user['nama'] ?></span>
+                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
+            </div>
+
+            </div>
+
 
 <div class="container-fluid mt-4 px-4">
 
@@ -121,9 +132,20 @@ if ($id_rapat) {
 
     </div>
 
-    <div class="card-body notulen-body">
+<div class="card-body">
+
+    <div class="notulen-preview" id="notulenContent">
         <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
     </div>
+
+    <button class="btn btn-link p-0 mt-2"
+            id="toggleNotulen"
+            onclick="toggleNotulen()">
+        Lihat Detail
+    </button>
+
+</div>
+
 
 </div>
 <?php } ?>
