@@ -346,35 +346,35 @@ $id_user = $_SESSION['id_user'];
 
       <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-      <ul class="menu">
+      <!-- <ul class="menu"> -->   
         <li class="menu-item">
-          <i>📊</i>
+          <i class="fa-solid fa-chart-line"></i>
           <a href="dashboard.php">Dashboard</a>
         </li>
 
         <li class="menu-item">
-          <i>📨</i>
+          <i class="fa-solid fa-envelope"></i>
           <a href="rapat.php">Rapat</a>
         </li>
 
         <li class="menu-item">
-          <i>👤</i>
+          <i class="fa-solid fa-user"></i>
           <a href="profile.php">Profil</a>
         </li>
 
         <li class="menu-item active">
-          <i>👥</i>
+          <i class="fa-solid fa-user"></i>
           <a href="user.php">User</a>
         </li>
 
         <li class="menu-item">
-          <i>🚪</i>
+          <i class="fa-solid fa-right-from-bracket"></i>
           <a href="../action/logout.php">Keluar</a>
         </li>
-
-      </ul>
+      <!-- </ul> -->
     </div>
     <!-- End Sidebar -->
+
     <!-- MAIN CONTENT -->
     <main class="main-content">
       <!-- Header -->

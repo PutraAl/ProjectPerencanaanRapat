@@ -40,33 +40,34 @@ middlewareAdmin();
 
       <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-      <ul class="menu">
+      <!-- <ul class="menu"> -->
         <li class="menu-item">
-          <i>📊</i>
+          <i class="fa-solid fa-chart-line"></i>
           <a href="dashboard.php">Dashboard</a>
         </li>
 
         <li class="menu-item active">
-          <i>📨</i>
-          <a href="rapat.php">Data Rapat</a>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="rapat.php">Rapat</a>
         </li>
 
         <li class="menu-item">
-          <i>👤</i>
+          <i class="fa-solid fa-user"></i>
           <a href="profile.php">Profil</a>
         </li>
 
         <li class="menu-item">
-          <i>👥</i>
+          <i class="fa-solid fa-user"></i>
           <a href="user.php">User</a>
         </li>
 
         <li class="menu-item">
-          <i>🚪</i>
+          <i class="fa-solid fa-right-from-bracket"></i>
           <a href="../action/logout.php">Keluar</a>
         </li>
-      </ul>
+      <!-- </ul> -->
     </div>
+    <!-- End Sidebar -->
 
     <div class="main-content">
 
@@ -136,8 +137,8 @@ middlewareAdmin();
                 </select>
               </div>
               <div class="col-md-3 mb-3 d-flex align-items-end gap-2">
-                <button type="submit" class="btn btn-primary flex-fill">🔍 Filter</button>
-                <a href="rapat.php" class="btn btn-secondary flex-fill">🔄 Reset</a>
+                <button type="submit" class="btn btn-primary flex-fill"> Filter</button>
+                <a href="rapat.php" class="btn btn-secondary flex-fill"> Reset</a>
               </div>
             </div>
           </form>
@@ -235,7 +236,7 @@ middlewareAdmin();
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
               <button type="submit" form="meeting-form" class="btn btn-primary" id="submitBtnModal">
-                💾 Simpan Data
+                 Simpan Data
               </button>
             </div>
           </div>
@@ -307,7 +308,7 @@ middlewareAdmin();
             <div class="modal-footer">
               <a href="rapat.php" class="btn btn-secondary">Batal</a>
               <button type="submit" form="absensi-form" name="absen_admin" class="btn btn-success">
-                💾 Simpan Absensi
+                 Simpan Absensi
               </button>
             </div>
           </div>
@@ -348,7 +349,7 @@ middlewareAdmin();
                 <i>👥</i> <?= $jumlahPeserta ?> Peserta
               </div>
               <div class="meeting-detail">
-                <i>📊</i> Status:
+                <i></i> Status:
                 <?php
                     $badgeClass = '';
                     if ($row['status'] == 'dijadwalkan') $badgeClass = 'bg-primary';
@@ -375,14 +376,14 @@ middlewareAdmin();
                 data-status="<?= $row['status'] ?>"
                 data-notulen="<?= htmlspecialchars($row['notulen'] ?: '') ?>"
                  data-peserta_ids="<?= $peserta_ids ?>">
-                ✏️ Edit
+                 Edit
             </button>
 
                 <?php if ($row['status'] == 'selesai'): ?>
                 <a href="?absensi=<?= $row['id_rapat'] ?>" class="btn btn-success">✅ Absensi</a>
                 <?php endif; ?>
 
-                <button class="btn btn-outline" onclick="hapusRapat(<?= $row['id_rapat'] ?>)">🗑️ Hapus</button>
+                <button class="btn btn-outline" onclick="hapusRapat(<?= $row['id_rapat'] ?>)"> Hapus</button>
               </div>
             </div>
           </div>
