@@ -12,14 +12,17 @@ $deskripsi = mysqli_real_escape_string($mysqli, $_POST['deskripsi']);
 $tanggal = mysqli_real_escape_string($mysqli, $_POST['tanggal']);
 $lokasi = mysqli_real_escape_string($mysqli, $_POST['lokasi']);
 $status = mysqli_real_escape_string($mysqli, $_POST['status']);
-$peserta = $_POST['peserta'];
-$waktu = $_POST['waktu'];
+$waktu = mysqli_real_escape_string($mysqli, $_POST['waktu']);
 $notulen = mysqli_real_escape_string($mysqli, $_POST['notulen']);
+
+// PERBAIKAN: Konversi peserta string menjadi array
+$pesertaString = isset($_POST['peserta']) ? trim($_POST['peserta']) : '';
+$peserta = !empty($pesertaString) ? array_map('intval', explode(',', $pesertaString)) : [];
 
 // Validasi data
 if (empty($id_rapat) || empty($judul) || empty($tanggal) || empty($waktu) || empty($lokasi) || empty($peserta)) {
     echo "<script>
-            alert('Semua field harus diisi!');
+            alert('Semua field harus diisi! Pastikan minimal 1 peserta dipilih.');
             window.history.back();
           </script>";
     exit;
@@ -43,7 +46,7 @@ if ($queryUpdate) {
     $pesertaLama = array();
 
     while ($row = mysqli_fetch_assoc($queryPesertaLama)) {
-        $pesertaLama[] = $row['id_peserta'];
+        $pesertaLama[] = (int)$row['id_peserta'];
     }
 
     // Cari peserta yang akan dihapus dan yang akan ditambah
@@ -62,6 +65,7 @@ if ($queryUpdate) {
     // Hapus hanya peserta yang tidak dipilih lagi
     if (!empty($pesertaHapus)) {
         foreach ($pesertaHapus as $id_user) {
+            $id_user = intval($id_user);
             $queryDelete = mysqli_query($mysqli, "DELETE FROM tb_undangan WHERE id_rapat = '$id_rapat' AND id_peserta = '$id_user'");
 
             if (!$queryDelete) {
@@ -74,6 +78,8 @@ if ($queryUpdate) {
     // Insert hanya peserta baru dan kirim email
     if ($successUpdate && !empty($pesertaBaru)) {
         foreach ($pesertaBaru as $id_user) {
+            $id_user = intval($id_user);
+            
             // Insert ke database
             $queryUndangan = mysqli_query($mysqli, "INSERT INTO tb_undangan VALUES (NULL, '$id_rapat', '$id_user', 'belum_dikonfirmasi', NULL)");
 

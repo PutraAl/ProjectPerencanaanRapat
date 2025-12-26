@@ -16,12 +16,14 @@ middlewareAdmin();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <!-- Select2 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
 
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
+
+  <style>
+  
+  </style>
 </head>
 
 <body>
@@ -213,15 +215,46 @@ middlewareAdmin();
 
                   <div class="col-md-6 mb-3">
                     <label for="peserta" class="form-label">Peserta <span class="text-danger">*</span></label>
-                    <select name="peserta[]" id="peserta" class="form-control" multiple="multiple" required>
-                      <?php
-                        $dataPeserta = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE role = 'peserta' ORDER BY nama ASC");
-                        while ($row = mysqli_fetch_array($dataPeserta)) {
-                      ?>
-                      <option value="<?= $row['id_user'] ?>"><?= $row['nama'] ?></option>
-                      <?php } ?>
-                    </select>
-                    <small class="form-text text-muted">Pilih satu atau lebih peserta</small>
+                    <div class="peserta-selector-container">
+                      <div class="peserta-input-field" id="pesertaInputField">
+                        <div class="peserta-tags" id="pesertaTags"></div>
+                        <i class="fas fa-chevron-down" id="pesertaChevron" style="color: #999;"></i>
+                      </div>
+                      
+                      <div class="peserta-dropdown" id="pesertaDropdown">
+                        <div class="peserta-search">
+                          <input type="text" id="pesertaSearch" placeholder="Cari peserta...">
+                        </div>
+
+                        <div class="peserta-actions">
+                          <button type="button" class="btn-select-all" id="btnSelectAll">
+                            <i class="fas fa-check"></i> Pilih Semua
+                          </button>
+                          <button type="button" class="btn-deselect-all" id="btnDeselectAll" style="display: none;">
+                            <i class="fas fa-times"></i> Hapus Semua
+                          </button>
+                        </div>
+
+                        <div class="peserta-list" id="pesertaList"></div>
+
+                        <div class="peserta-empty" id="pesertaEmpty" style="display: none;">
+                          Tidak ada peserta tersedia
+                        </div>
+
+                        <div class="peserta-add-new">
+                          <button type="button" id="btnAddNewPeserta">
+                            <i class="fas fa-plus"></i> Tambah Peserta Baru
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="peserta-selected-count" id="pesertaSelectedCount">
+                      Pilih satu atau lebih peserta
+                    </div>
+                    <div class="peserta-selected-list" id="pesertaSelectedList"></div>
+
+                    <input type="hidden" name="peserta" id="peserta-hidden" value="">
                   </div>
                 </div>
 
@@ -395,26 +428,6 @@ middlewareAdmin();
           ?>
         </div>
       </div>
-
-      <!-- Completed Meetings -->
-      <div class="card mb-4">
-        <div class="card-title">Rapat yang telah selesai</div>
-        <ul class="meeting-list">
-          <?php 
-          $data = mysqli_query($mysqli, "SELECT * FROM tb_rapat where status ='selesai'");
-          while($row = $data->fetch_array()) {
-          ?>
-          <li class="meeting-item">
-            <div>
-              <div class="meeting-title"><?= $row['judul'] ?></div>
-              <div class="meeting-time"><?= $row['tanggal'] ?>, <?= $row['waktu'] ?></div>
-            </div>
-            <span class="badge badge-success"><?= $row['status'] ?></span>
-          </li>
-          <?php } ?>
-        </ul>
-      </div>
-
       <!-- Notulen -->
       <div class="card">
         <div class="card-title">Notulen</div>
@@ -439,13 +452,38 @@ middlewareAdmin();
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <script>
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const sidebar = document.querySelector('.sidebar');
     const formRapatModal = new bootstrap.Modal(document.getElementById('formRapatModal'));
     const meetingForm = document.getElementById('meeting-form');
+
+    // Data Peserta dari Database
+    let allPeserta = [
+      <?php 
+        $dataPeserta = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE role = 'peserta' ORDER BY nama ASC");
+        $pesertaArray = [];
+        while ($row = mysqli_fetch_assoc($dataPeserta)) {
+          $pesertaArray[] = "{ id: {$row['id_user']}, nama: '{$row['nama']}' }";
+        }
+        echo implode(',', $pesertaArray);
+      ?>
+    ];
+
+    let selectedPesertaIds = [];
+    const pesertaInputField = document.getElementById('pesertaInputField');
+    const pesertaDropdown = document.getElementById('pesertaDropdown');
+    const pesertaTags = document.getElementById('pesertaTags');
+    const pesertaSearch = document.getElementById('pesertaSearch');
+    const pesertaList = document.getElementById('pesertaList');
+    const pesertaEmpty = document.getElementById('pesertaEmpty');
+    const btnSelectAll = document.getElementById('btnSelectAll');
+    const btnDeselectAll = document.getElementById('btnDeselectAll');
+    const btnAddNewPeserta = document.getElementById('btnAddNewPeserta');
+    const pesertaSelectedCount = document.getElementById('pesertaSelectedCount');
+    const pesertaSelectedList = document.getElementById('pesertaSelectedList');
+    const pesertaHidden = document.getElementById('peserta-hidden');
 
     // Hamburger Menu
     hamburgerBtn?.addEventListener('click', () => {
@@ -457,6 +495,147 @@ middlewareAdmin();
       });
     });
 
+    // Peserta Selector Functions
+    function renderPesertaList() {
+      pesertaList.innerHTML = '';
+      const searchTerm = pesertaSearch.value.toLowerCase();
+      const availablePeserta = allPeserta.filter(p => 
+        !selectedPesertaIds.includes(p.id) && 
+        p.nama.toLowerCase().includes(searchTerm)
+      );
+
+      if (availablePeserta.length === 0) {
+        pesertaEmpty.style.display = 'block';
+      } else {
+        pesertaEmpty.style.display = 'none';
+        availablePeserta.forEach(peserta => {
+          const item = document.createElement('div');
+          item.className = 'peserta-item';
+          item.innerHTML = `
+            <input type="checkbox" id="peserta_${peserta.id}" value="${peserta.id}">
+            <label for="peserta_${peserta.id}">${peserta.nama}</label>
+          `;
+          item.querySelector('input').addEventListener('change', () => togglePeserta(peserta.id));
+          pesertaList.appendChild(item);
+        });
+      }
+    }
+
+    function togglePeserta(pesertaId) {
+      const index = selectedPesertaIds.indexOf(pesertaId);
+      if (index > -1) {
+        selectedPesertaIds.splice(index, 1);
+      } else {
+        selectedPesertaIds.push(pesertaId);
+      }
+      updatePesertaDisplay();
+    }
+
+    function updatePesertaDisplay() {
+      // Update tags
+      pesertaTags.innerHTML = '';
+      selectedPesertaIds.forEach(id => {
+        const peserta = allPeserta.find(p => p.id === id);
+        if (peserta) {
+          const tag = document.createElement('div');
+          tag.className = 'peserta-tag';
+          tag.innerHTML = `
+            ${peserta.nama}
+            <span class="remove-btn" onclick="removePeserta(${id})">✕</span>
+          `;
+          pesertaTags.appendChild(tag);
+        }
+      });
+
+      // Update count
+      if (selectedPesertaIds.length === 0) {
+        pesertaSelectedCount.textContent = 'Pilih satu atau lebih peserta';
+        pesertaSelectedList.innerHTML = '';
+      } else {
+        pesertaSelectedCount.innerHTML = `<strong>${selectedPesertaIds.length}</strong> peserta dipilih`;
+        pesertaSelectedList.innerHTML = '';
+        selectedPesertaIds.forEach(id => {
+          const peserta = allPeserta.find(p => p.id === id);
+          if (peserta) {
+            const badge = document.createElement('span');
+            badge.className = 'peserta-badge';
+            badge.textContent = `✓ ${peserta.nama}`;
+            pesertaSelectedList.appendChild(badge);
+          }
+        });
+      }
+
+      // Update hidden input
+      pesertaHidden.value = selectedPesertaIds.join(',');
+
+      // Update button visibility
+      if (selectedPesertaIds.length > 0) {
+        btnDeselectAll.style.display = 'flex';
+      } else {
+        btnDeselectAll.style.display = 'none';
+      }
+
+      renderPesertaList();
+    }
+
+    function removePeserta(pesertaId) {
+      togglePeserta(pesertaId);
+    }
+
+    // Peserta Input Field Click
+    pesertaInputField.addEventListener('click', () => {
+      pesertaDropdown.classList.toggle('open');
+      pesertaInputField.classList.toggle('active');
+      if (pesertaDropdown.classList.contains('open')) {
+        pesertaSearch.focus();
+      }
+    });
+
+    // Search Filter
+    pesertaSearch.addEventListener('input', renderPesertaList);
+
+    // Select All Button
+    btnSelectAll.addEventListener('click', (e) => {
+      e.preventDefault();
+      const searchTerm = pesertaSearch.value.toLowerCase();
+      const availablePeserta = allPeserta.filter(p => 
+        !selectedPesertaIds.includes(p.id) && 
+        p.nama.toLowerCase().includes(searchTerm)
+      );
+      availablePeserta.forEach(p => {
+        if (!selectedPesertaIds.includes(p.id)) {
+          selectedPesertaIds.push(p.id);
+        }
+      });
+      updatePesertaDisplay();
+    });
+
+    // Deselect All Button
+    btnDeselectAll.addEventListener('click', (e) => {
+      e.preventDefault();
+      selectedPesertaIds = [];
+      updatePesertaDisplay();
+    });
+
+    // Add New Peserta
+    btnAddNewPeserta.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newName = prompt('Masukkan nama peserta baru:');
+      if (newName && newName.trim()) {
+        const newId = Math.max(...allPeserta.map(p => p.id), 0) + 1;
+        allPeserta.push({ id: newId, nama: newName.trim() });
+        renderPesertaList();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.peserta-selector-container')) {
+        pesertaDropdown.classList.remove('open');
+        pesertaInputField.classList.remove('active');
+      }
+    });
+
     // Reset Form Rapat (Tambah Baru)
     function resetFormRapat() {
       meetingForm.action = '../action/tambah_rapat.php';
@@ -465,13 +644,13 @@ middlewareAdmin();
       document.getElementById('submitBtnModal').innerHTML = '💾 Simpan Data';
       document.getElementById('notulenContainer').style.display = 'none';
       meetingForm.reset();
-      $('#peserta').val(null).trigger('change');
+      selectedPesertaIds = [];
+      pesertaSearch.value = '';
+      updatePesertaDisplay();
     }
 
-    // Load Edit Data from AJAX endpoint
-   // Load Edit Data dari data attribute di button
+    // Load Edit Data dari Button
     function loadEditDataFromButton(button) {
-      // Ambil data dari data-* attributes
       const data = {
         id_rapat: button.getAttribute('data-id_rapat'),
         judul: button.getAttribute('data-judul'),
@@ -501,35 +680,10 @@ middlewareAdmin();
       document.getElementById('notulenContainer').style.display = 'block';
       
       // Set peserta yang dipilih
-      const pesertaIds = data.peserta_ids ? data.peserta_ids.split(',') : [];
-      $('#peserta').val(pesertaIds).trigger('change');
+      selectedPesertaIds = data.peserta_ids ? data.peserta_ids.split(',').map(id => parseInt(id)) : [];
+      pesertaSearch.value = '';
+      updatePesertaDisplay();
     }
-
-    // Initialize Select2
-    $(document).ready(() => {
-      $('#peserta').select2({
-        theme: 'bootstrap-5',
-        placeholder: '-- Pilih Peserta --',
-        allowClear: true,
-        closeOnSelect: false,
-        width: '100%'
-      });
-
-      // Toggle attendance badge
-      $(document).on('change', 'input[name="kehadiran[]"]', function() {
-        const id = $(this).val();
-        const badgeHadir = $(`#badge_${id}`);
-        const badgeTidak = $(`#badge_tidak_${id}`);
-        
-        if ($(this).is(':checked')) {
-          badgeHadir.show();
-          badgeTidak.hide();
-        } else {
-          badgeHadir.hide();
-          badgeTidak.show();
-        }
-      });
-    });
 
     // Delete Meeting
     function hapusRapat(id) {
