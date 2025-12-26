@@ -115,7 +115,6 @@ if ($id_rapat) {
 
         <!-- Kiri: Judul & Meta -->
         <div>
-            <h3 class="mb-1">
                 Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?>
             </h3>
             <p class="notulen-meta mb-0">
@@ -132,7 +131,6 @@ if ($id_rapat) {
 
     </div>
 
-<div class="card-body">
 
     <div class="notulen-preview" id="notulenContent">
         <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
@@ -153,7 +151,6 @@ if ($id_rapat) {
             
             <!-- Rapat Terlaksana -->
             <div class="card shadow-sm">
-                <div class="card-body">
                     <h4 class="card-title mb-3">Rapat Terlaksana</h4>
 
                     <ul class="meeting-list">

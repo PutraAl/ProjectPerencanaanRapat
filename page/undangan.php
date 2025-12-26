@@ -1,15 +1,50 @@
-<?php 
+<?php
 include "../connection/server.php";
 require_once "../connection/middleware.php";
 middlewareUser();
+
 $id_user = $_SESSION['id_user'];
-$totalUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan where id_peserta = $id_user");
- 
-$dataUser = mysqli_query($mysqli, "SELECT nama FROM tb_user WHERE id_user = '$id_user'");
-$user = mysqli_fetch_assoc($dataUser);
 
+// Ambil nilai filter dari form (GET / POST)
+$filterTanggalDari   = $_GET['tanggal_dari']   ?? '';
+$filterTanggalSampai = $_GET['tanggal_sampai'] ?? '';
+$filterStatus        = $_GET['status']          ?? '';
 
- ?>
+// Ambil data user (UNTUK HEADER)
+$userQuery = mysqli_query($mysqli, "
+    SELECT nama FROM tb_user WHERE id_user = '$id_user'
+");
+$user = mysqli_fetch_assoc($userQuery);
+
+// ==========================
+// QUERY DI SINI ⬇⬇⬇
+// ==========================
+$query = "
+    SELECT * 
+    FROM tb_undangan a
+    JOIN tb_rapat b ON a.id_rapat = b.id_rapat
+    WHERE a.id_peserta = $id_user
+";
+
+if (!empty($filterTanggalDari)) {
+    $query .= " AND b.tanggal >= '$filterTanggalDari'";
+}
+
+if (!empty($filterTanggalSampai)) {
+    $query .= " AND b.tanggal <= '$filterTanggalSampai'";
+}
+
+if (!empty($filterStatus)) {
+    $query .= " AND b.status = '$filterStatus'";
+}
+
+$query .= " ORDER BY b.tanggal ASC";
+
+$data = mysqli_query($mysqli, $query);
+// ==========================
+
+?>
+
 
  <!DOCTYPE html>
  <html lang="id">
@@ -74,9 +109,10 @@ $user = mysqli_fetch_assoc($dataUser);
         <!-- Main Content -->
          <div class="main-content">
 
-        <!-- Header -->
+
+            <!-- Header -->
             <div class="header">
-                <h2 class="page-title">Pengelolaan Undangan Rapat</h2>
+                <h2 class="page-title">Rapat</h2>
 
             <div class="user-info">
                 <span><?= $user['nama'] ?></span>
@@ -206,10 +242,7 @@ $user = mysqli_fetch_assoc($dataUser);
                  <!-- </div> -->
                  <!-- Grid Undangan -->
                  <div class="meeting-grid" id="invitations-grid">
-                     <?php 
-                $data = mysqli_query($mysqli, "SELECT * FROM tb_undangan a JOIN tb_rapat b ON a.id_rapat = b.id_rapat where id_peserta = $id_user ORDER BY status ASC ");
-                while($row = mysqli_fetch_array($data)) {
-?>
+                     <?php while ($row = mysqli_fetch_assoc($data)) { ?>
                      <!-- Card 1 -->
                      <div class="meeting-card">
 
@@ -224,12 +257,27 @@ $user = mysqli_fetch_assoc($dataUser);
                          <div class="meeting-body">
                              <div class="meeting-detail-visible">
 
-                                 <div class="meeting-detail"><i>📅</i> <span><?= $row['tanggal'] ?></span></div>
-                                 <div class="meeting-detail"><i>⏰</i> <span><?= $row['waktu'] ?></span></div>
-                                 <div class="meeting-detail"><i>📍</i> <span><?= $row['lokasi'] ?></span></div>
+                    <div class="meeting-detail">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span><?= $row['tanggal'] ?></span>
+                    </div>
+
+                    <div class="meeting-detail">
+                       <i class="fa-solid fa-stopwatch"></i>
+
+                        <span><?= $row['waktu'] ?></span>
+                    </div>
+
+                    <div class="meeting-detail">
+                        <span class="icon-circle bg-location">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </span>
+                        <span><?= $row['lokasi'] ?></span>
+                    </div>
+
                                  <div class="meeting-detail"><i>Absensi :</i>
                                      <span><?= ($row['status_kehadiran'] == 'hadir') ? 'Hadir' :
-     (($row['status_kehadiran'] == 'tidak_hadir') ? 'Tidak Hadir' : 'Belum Dikonfirmasi');?></span></div>
+                                 (($row['status_kehadiran'] == 'tidak_hadir') ? 'Tidak Hadir' : 'Belum Dikonfirmasi');?></span></div>
                                  <div class="meeting-detail"><i>Status :</i> <span><?= ucfirst($row['status']) ?></span>
                                  </div>
 

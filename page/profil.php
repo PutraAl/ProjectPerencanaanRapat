@@ -10,45 +10,90 @@ $id = $_SESSION['id_user'];
 ======================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    /* =======================
+       UPLOAD FOTO
+    ======================= */
+    $fotoBaru = null;
+
+    if (!empty($_FILES['foto']['name'])) {
+        $folder = "../assets/uploads/profile/";
+
+        // pastikan folder ada
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+
+        $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+        $namaFile = "user_" . $id . "_" . time() . "." . $ext;
+
+        $allowed = ['jpg', 'jpeg', 'png'];
+        if (!in_array($ext, $allowed)) {
+            die("Format foto tidak valid");
+        }
+
+        if ($_FILES['foto']['size'] > 2 * 1024 * 1024) {
+            die("Ukuran foto maksimal 2MB");
+        }
+
+        if (!move_uploaded_file($_FILES['foto']['tmp_name'], $folder . $namaFile)) {
+            die("Upload gagal. Cek permission folder assets/uploads/profile");
+        }
+
+        // hapus foto lama
+        $qFoto = mysqli_query($mysqli, "SELECT foto FROM tb_user WHERE id_user = '$id'");
+        $old = mysqli_fetch_assoc($qFoto);
+        if (!empty($old['foto'])) {
+            $oldPath = $folder . $old['foto'];
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+        }
+
+        $fotoBaru = $namaFile;
+    }
+
+    /* =======================
+       DATA FORM
+    ======================= */
     $nama     = mysqli_real_escape_string($mysqli, $_POST['nama']);
     $username = mysqli_real_escape_string($mysqli, $_POST['username']);
     $email    = mysqli_real_escape_string($mysqli, $_POST['email']);
     $password = $_POST['password'];
 
-    // Jika password diisi → update dengan password
-    if (!empty($password)) {
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    /* =======================
+       BUILD QUERY UPDATE
+    ======================= */
+    $set = [];
+    $set[] = "nama = '$nama'";
+    $set[] = "username = '$username'";
+    $set[] = "email = '$email'";
 
-        $update = mysqli_query($mysqli, "
-            UPDATE tb_user SET
-                nama = '$nama',
-                username = '$username',
-                email = '$email',
-                password = '$passwordHash'
-            WHERE id_user = '$id'
-        ");
-    } 
-    // Jika password kosong → jangan update password
-    else {
-        $update = mysqli_query($mysqli, "
-            UPDATE tb_user SET
-                nama = '$nama',
-                username = '$username',
-                email = '$email'
-            WHERE id_user = '$id'
-        ");
-    }
+$set = [];
+$set[] = "nama = '$nama'";
+$set[] = "username = '$username'";
+$set[] = "email = '$email'";
+
+if (!empty($password)) {
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $set[] = "password = '$passwordHash'";
+}
+
+if (!empty($fotoBaru)) {
+    $set[] = "foto = '$fotoBaru'";
+}
+
+$sql = "UPDATE tb_user SET " . implode(", ", $set) . " WHERE id_user = '$id'";
+$update = mysqli_query($mysqli, $sql);
+
 
     if ($update) {
-        echo "<script>
-                alert('Profil berhasil diperbarui');
-                window.location.href='profil.php';
-              </script>";
+        echo "<script>alert('Profil berhasil diperbarui'); window.location='profil.php';</script>";
         exit;
     } else {
         echo "<script>alert('Gagal update profil');</script>";
     }
 }
+
 
 /* =======================
    AMBIL DATA USER
@@ -126,16 +171,25 @@ $row = mysqli_fetch_assoc($query);
         <!-- Main Content -->
 <div class="main-content">
 
-
 <!-- header -->
 <div class="header">
-    <h2 class="page-title">Profil User</h2>
+    <h2 class="page-title">Profil</h2>
 
-    <div class="user-info">
-        <span><?= htmlspecialchars($row['nama']) ?></span>
-        <div class="user-avatar"><?= substr($row['nama'], 0, 3) ?></div>
-    </div>
+<div class="user-info">
+    <span class="username"><?= htmlspecialchars($row['nama']) ?></span>
+
+    <?php if (!empty($row['foto'])): ?>
+        <img src="../assets/uploads/profile/<?= htmlspecialchars($row['foto']) ?>"
+             class="user-avatar-img"
+             alt="Avatar">
+    <?php else: ?>
+        <div class="user-avatar">
+            <?= strtoupper(substr($row['nama'], 0, 1)) ?>
+        </div>
+    <?php endif; ?>
 </div>
+</div>
+
 
           <!-- Form Profil -->
 <div class="card profile-card shadow-sm mt-4">
@@ -184,7 +238,7 @@ $row = mysqli_fetch_assoc($query);
         </div>
 
         <div class="modal-body">
-          <form action="../page/profil.php" method="post" id="editProfileForm">
+          <form action="../page/profil.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id_user" class="form-control" id="id_user" value="<?= $row['id_user'] ?>">
             <div class="mb-3">
               <label for="nameInput" class="form-label">Nama</label>
@@ -200,6 +254,12 @@ $row = mysqli_fetch_assoc($query);
               <input type="email" name="email" class="form-control" id="emailInput" value="<?= $row['email'] ?>"
                 required>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Foto Profil</label>
+                <input type="file" name="foto" class="form-control" accept="image/*">
+                <small class="text-muted">Format JPG / PNG, max 2MB</small>
+            </div>
+
             <div class="mb-3">
               <label for="emailInput" class="form-label">Password</label>
               <input type="text" class="form-control" name="password" id="password">

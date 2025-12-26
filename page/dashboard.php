@@ -84,7 +84,7 @@ $user = mysqli_fetch_assoc($queryUser);
 
             <!-- Header -->
             <div class="header">
-                <h2 class="page-title">Dashboard User</h2>
+                <h2 class="page-title">Dashboard</h2>
 
             <div class="user-info">
                 <span><?= $user['nama'] ?></span>
