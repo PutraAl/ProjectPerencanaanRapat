@@ -10,23 +10,30 @@ $id = $_SESSION['id_user'];
 ======================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    /* =======================
-       UPLOAD FOTO
-    ======================= */
+    // =======================
+    // DATA FORM
+    // =======================
+    $nama     = mysqli_real_escape_string($mysqli, $_POST['nama']);
+    $username = mysqli_real_escape_string($mysqli, $_POST['username']);
+    $email    = mysqli_real_escape_string($mysqli, $_POST['email']);
+    $password = trim($_POST['password']);
+
+    // =======================
+    // FOTO PROFIL
+    // =======================
     $fotoBaru = null;
 
     if (!empty($_FILES['foto']['name'])) {
+
         $folder = "../assets/uploads/profile/";
 
-        // pastikan folder ada
         if (!is_dir($folder)) {
             mkdir($folder, 0777, true);
         }
 
         $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
-        $namaFile = "user_" . $id . "_" . time() . "." . $ext;
+        $allowed = ['jpg','jpeg','png'];
 
-        $allowed = ['jpg', 'jpeg', 'png'];
         if (!in_array($ext, $allowed)) {
             die("Format foto tidak valid");
         }
@@ -35,62 +42,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Ukuran foto maksimal 2MB");
         }
 
-        if (!move_uploaded_file($_FILES['foto']['tmp_name'], $folder . $namaFile)) {
-            die("Upload gagal. Cek permission folder assets/uploads/profile");
+        $fotoBaru = "user_{$id}_" . time() . "." . $ext;
+
+        if (!move_uploaded_file($_FILES['foto']['tmp_name'], $folder.$fotoBaru)) {
+            die("Upload foto gagal");
         }
 
         // hapus foto lama
-        $qFoto = mysqli_query($mysqli, "SELECT foto FROM tb_user WHERE id_user = '$id'");
-        $old = mysqli_fetch_assoc($qFoto);
+        $q = mysqli_query($mysqli, "SELECT foto FROM tb_user WHERE id_user='$id'");
+        $old = mysqli_fetch_assoc($q);
         if (!empty($old['foto'])) {
-            $oldPath = $folder . $old['foto'];
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
-            }
+            $oldPath = $folder.$old['foto'];
+            if (file_exists($oldPath)) unlink($oldPath);
         }
-
-        $fotoBaru = $namaFile;
     }
 
-    /* =======================
-       DATA FORM
-    ======================= */
-    $nama     = mysqli_real_escape_string($mysqli, $_POST['nama']);
-    $username = mysqli_real_escape_string($mysqli, $_POST['username']);
-    $email    = mysqli_real_escape_string($mysqli, $_POST['email']);
-    $password = $_POST['password'];
-
-    /* =======================
-       BUILD QUERY UPDATE
-    ======================= */
+    // =======================
+    // BUILD QUERY
+    // =======================
     $set = [];
     $set[] = "nama = '$nama'";
     $set[] = "username = '$username'";
     $set[] = "email = '$email'";
 
-$set = [];
-$set[] = "nama = '$nama'";
-$set[] = "username = '$username'";
-$set[] = "email = '$email'";
+    if (!empty($password)) {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $set[] = "password = '$passwordHash'";
+    }
 
-if (!empty($password)) {
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $set[] = "password = '$passwordHash'";
-}
+    if (!empty($fotoBaru)) {
+        $set[] = "foto = '$fotoBaru'";
+    }
 
-if (!empty($fotoBaru)) {
-    $set[] = "foto = '$fotoBaru'";
-}
-
-$sql = "UPDATE tb_user SET " . implode(", ", $set) . " WHERE id_user = '$id'";
-$update = mysqli_query($mysqli, $sql);
-
+    $sql = "UPDATE tb_user SET ".implode(", ", $set)." WHERE id_user='$id'";
+    $update = mysqli_query($mysqli, $sql);
 
     if ($update) {
-        echo "<script>alert('Profil berhasil diperbarui'); window.location='profil.php';</script>";
+        header("Location: profil.php");
         exit;
     } else {
-        echo "<script>alert('Gagal update profil');</script>";
+        die("Gagal update profil");
     }
 }
 
@@ -100,9 +91,10 @@ $update = mysqli_query($mysqli, $sql);
 ======================= */
 $query = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE id_user = '$id'");
 $row = mysqli_fetch_assoc($query);
+
+// Judul halaman
+$pageTitle = "Profil";
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="id">
@@ -168,64 +160,100 @@ $row = mysqli_fetch_assoc($query);
     </div>
     <!-- End Sidebar -->
 
-        <!-- Main Content -->
+<!-- ================= MAIN CONTENT ================= -->
 <div class="main-content">
 
-<!-- header -->
-<div class="header">
+  <!-- ===== HEADER ===== -->
+  <div class="header">
     <h2 class="page-title">Profil</h2>
 
-<div class="user-info">
-    <span class="username"><?= htmlspecialchars($row['nama']) ?></span>
+    <div class="user-info">
+      <span class="username"><?= htmlspecialchars($row['nama']) ?></span>
 
-    <?php if (!empty($row['foto'])): ?>
+      <?php if (!empty($row['foto'])): ?>
         <img src="../assets/uploads/profile/<?= htmlspecialchars($row['foto']) ?>"
              class="user-avatar-img"
              alt="Avatar">
-    <?php else: ?>
+      <?php else: ?>
         <div class="user-avatar">
-            <?= strtoupper(substr($row['nama'], 0, 1)) ?>
+          <?= strtoupper(substr($row['nama'], 0, 1)) ?>
         </div>
-    <?php endif; ?>
-</div>
-</div>
-
-
-          <!-- Form Profil -->
-<div class="card profile-card shadow-sm mt-4">
-  <div class="card-body text-center">
-
-    <!-- Avatar / Foto -->
-    <?php if (!empty($row['foto'])): ?>
-      <img src="../assets/uploads/profile/<?= htmlspecialchars($row['foto']) ?>" 
-           class="profile-img mb-3">
-    <?php else: ?>
-      <div class="profile-avatar mb-3 mx-auto">
-        <?= strtoupper(substr($row['nama'], 0, 1)) ?>
-      </div>
-    <?php endif; ?>
-
-    <h4 class="fw-bold"><?= htmlspecialchars($row['nama']) ?></h4>
-    <p class="text-muted"><?= htmlspecialchars($row['email']) ?></p>
-
-    <span class="badge bg-primary mb-3">
-      <?= htmlspecialchars($row['role']) ?>
-    </span>
-
-    <div class="mt-3">
-      <button class="btn btn-outline-primary btn-sm"
-        data-bs-toggle="modal" data-bs-target="#editProfileModal">
-        <i class="fa fa-pen"></i> Edit Profil
-      </button>
+      <?php endif; ?>
     </div>
+  </div>
+  <!-- ===== END HEADER ===== -->
 
+
+  <!-- ===== PROFILE CARD ===== -->
+  <div class="card profile-card shadow-sm mt-4">
+    <div class="card-body">
+
+      <div class="profile-wrapper">
+
+        <!-- FOTO PROFIL -->
+        <div class="profile-photo"
+             data-bs-toggle="modal"
+             data-bs-target="#photoModal">
+
+          <?php if (!empty($row['foto'])): ?>
+            <img src="../assets/uploads/profile/<?= htmlspecialchars($row['foto']) ?>"
+                 alt="Foto Profil">
+          <?php else: ?>
+            <div class="profile-photo-placeholder">
+              <?= strtoupper(substr($row['nama'], 0, 1)) ?>
+            </div>
+          <?php endif; ?>
+
+        </div>
+
+        <!-- INFO PROFIL -->
+        <div class="profile-info">
+          <h4><?= htmlspecialchars($row['nama']) ?></h4>
+          <p><?= htmlspecialchars($row['email']) ?></p>
+
+          <span class="badge bg-primary">
+            <?= htmlspecialchars($row['role']) ?>
+          </span>
+
+          <div class="mt-3">
+            <button class="btn btn-outline-primary btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editProfileModal">
+              <i class="fa fa-pen"></i> Edit Profil
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- ===== END PROFILE CARD ===== -->
+
+</div>
+<!-- ================= END MAIN CONTENT ================= -->
+
+
+<!-- ===== MODAL FOTO FULL ===== -->
+<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 bg-transparent">
+      <div class="modal-body text-center">
+
+        <?php if (!empty($row['foto'])): ?>
+          <img src="../assets/uploads/profile/<?= htmlspecialchars($row['foto']) ?>"
+               class="img-fluid rounded shadow"
+               style="max-height:80vh;"
+               alt="Foto Profil Besar">
+        <?php endif; ?>
+
+      </div>
+    </div>
   </div>
 </div>
+<!-- ===== END MODAL ===== -->
 
-    <!-- End Main Content -->
 
-
-  </div>
 
   <!-- Modal Edit Profile -->
   <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

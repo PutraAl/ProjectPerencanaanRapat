@@ -7,7 +7,7 @@ $id_user = $_SESSION['id_user'];
 
 // Ambil data user (UNTUK HEADER)
 $userQuery = mysqli_query($mysqli, "
-    SELECT nama FROM tb_user WHERE id_user = '$id_user'
+    SELECT nama, foto FROM tb_user WHERE id_user = '$id_user'
 ");
 $user = mysqli_fetch_assoc($userQuery);
 
@@ -31,6 +31,9 @@ if ($id_rapat) {
     ");
     $rapat = mysqli_fetch_assoc($data);
 }
+
+// Judul halaman
+$pageTitle = "Notulen";
 ?>
 
 
@@ -89,91 +92,68 @@ if ($id_rapat) {
     </div>
     <!-- End Sidebar -->
 
-    <!-- Main Content -->
-    <main class="main-content">
+<main class="main-content">
 
-            <!-- Header -->
-            <div class="header">
-                <h2 class="page-title">Notulen</h2>
+    <!-- 🔥 SATU WRAPPER UNTUK HEADER & CARD -->
+    <div class="content-wrapper">
 
-            <div class="user-info">
-                <span><?= $user['nama'] ?></span>
-                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
+        <!-- Header -->
+        <?php include "header.php"; ?>
+
+        <!-- Detail Notulen -->
+        <?php if (isset($rapat)) { ?>
+        <div class="card mb-3 notulen-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?></strong>
+                    <p class="notulen-meta mb-0">
+                        <?= htmlspecialchars($rapat['tanggal']) ?> |
+                        <?= htmlspecialchars($rapat['waktu']) ?>
+                    </p>
+                </div>
+<a href="download_notulen_pdf.php?id=<?= $id_rapat ?>"
+   class="btn btn-outline-success btn-sm">
+   <i class="fa-solid fa-download"></i>
+</a>
+
+
             </div>
 
+            <div class="notulen-preview" id="notulenContent">
+                <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
             </div>
 
+            <button class="btn btn-link p-0 mt-2"
+                    onclick="toggleNotulen()">
+                Lihat Detail
+            </button>
+        </div>
+        <?php } ?>
 
-<div class="container-fluid mt-4 px-4">
+        <!-- Rapat Terlaksana -->
+        <div class="card shadow-sm">
+            <h4 class="card-title mb-3">Rapat Terlaksana</h4>
 
+            <ul class="meeting-list">
+                <?php while ($row = mysqli_fetch_assoc($rapatSelesai)) { ?>
+                    <li class="meeting-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
+                            <small><?= htmlspecialchars($row['tanggal']) ?>, <?= htmlspecialchars($row['waktu']) ?></small>
+                        </div>
 
-<!-- Detail Notulen -->
-<?php if (isset($rapat)) { ?>
-<div class="card mb-3 notulen-card">
-
-    <div class="card-header d-flex justify-content-between align-items-center">
-
-        <!-- Kiri: Judul & Meta -->
-        <div>
-                Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?>
-            </h3>
-            <p class="notulen-meta mb-0">
-                <?= htmlspecialchars($rapat['tanggal']) ?> |
-                <?= htmlspecialchars($rapat['waktu']) ?>
-            </p>
+                        <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
+                           class="btn btn-outline-success btn-sm icon-btn">
+                            <i class="fa-solid fa-file-lines"></i> Lihat Notulen
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
         </div>
 
-        <!-- Kanan: Download -->
-    <a href="download_notulen.php?id=<?= $id_rapat ?>" 
-    class="btn btn-outline-success btn-sm" 
-    title="Download Notulen"> 
-    <i class="fa-solid fa-download"></i> </a>
-
     </div>
+</main>
 
-
-    <div class="notulen-preview" id="notulenContent">
-        <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
-    </div>
-
-    <button class="btn btn-link p-0 mt-2"
-            id="toggleNotulen"
-            onclick="toggleNotulen()">
-        Lihat Detail
-    </button>
-
-</div>
-
-
-</div>
-<?php } ?>
-
-            
-            <!-- Rapat Terlaksana -->
-            <div class="card shadow-sm">
-                    <h4 class="card-title mb-3">Rapat Terlaksana</h4>
-
-                    <ul class="meeting-list">
-                        <?php while ($row = mysqli_fetch_assoc($rapatSelesai)) { ?>
-                            <li class="meeting-item d-flex justify-content-between">
-                                <div>
-                                    <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
-                                    <small><?= htmlspecialchars($row['tanggal']) ?>, <?= htmlspecialchars($row['waktu']) ?></small>
-                                </div>
-
-                                <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
-                                class="btn btn-outline-success btn-sm icon-btn">
-                                <i class="fa-solid fa-file-lines"></i> Lihat Notulen
-                                </a>
-
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
-
-
-    </main>
     <!-- End Main Content -->
 
 </div>

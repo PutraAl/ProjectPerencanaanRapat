@@ -1,19 +1,22 @@
 <?php 
 include "../connection/server.php";
 require_once "../action/data_user.php";
-
-session_start();
+require_once "../connection/middleware.php";
+middlewareUser();
 
 $id_user = $_SESSION['id_user'];
 
+// Data user khusus header
 $queryUser = mysqli_query(
     $mysqli,
-    "SELECT nama FROM tb_user WHERE id_user = '$id_user'"
+    "SELECT nama, foto FROM tb_user WHERE id_user = '$id_user'"
 );
-
 $user = mysqli_fetch_assoc($queryUser);
 
+// Judul halaman
+$pageTitle = "Dashboard";
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -35,43 +38,44 @@ $user = mysqli_fetch_assoc($queryUser);
 
     <div class="container-fluid d-flex p-0">
 
-     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="logo-section">
-            <img src="../assets/img/polteklogo.png" class="logo-img">
-            <hr class="divider">
-        </div>
+          <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
 
-        <div class="logo">Meeting Kampus</div>
+            <div class="logo-section">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+                <hr class="divider">
+            </div>
 
-        <!-- <ul class="menu"> -->
-            <li class="menu-item active">
-                <i class="fa-solid fa-chart-line"></i>
-                <a href="dashboard.php">Dashboard</a>
-            </li>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-envelope"></i>
-                <a href="undangan.php">Rapat</a>
-            </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item active">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
+
+                <li class="menu-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="undangan.php">Rapat</a>
+                </li>
 
             <li class="menu-item">
                 <i class="fa-solid fa-file-lines"></i>
                 <a href="notulen.php">Notulen</a>
             </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-user"></i>
-                <a href="profil.php">Profil</a>
-            </li>
+                <li class="menu-item">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="profil.php">Profil</a>
+                </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="logout.php">Keluar</a>
-            </li>
-        <!-- </ul> -->
-    </div>
-    <!-- End Sidebar -->
+                <li class="menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
+            <!-- </ul> -->
+        </div>
+        <!-- End Sidebar -->
 
         <!-- Main Content -->
         <main class="main-content">
@@ -83,15 +87,8 @@ $user = mysqli_fetch_assoc($queryUser);
             </div>
 
             <!-- Header -->
-            <div class="header">
-                <h2 class="page-title">Dashboard</h2>
+            <?php include "header.php"; ?>
 
-            <div class="user-info">
-                <span><?= $user['nama'] ?></span>
-                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
-            </div>
-
-            </div>
  
             <!-- Statistik -->
             <div class="row g-3 mb-4">

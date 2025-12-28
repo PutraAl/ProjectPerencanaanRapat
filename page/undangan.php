@@ -12,7 +12,7 @@ $filterStatus        = $_GET['status']          ?? '';
 
 // Ambil data user (UNTUK HEADER)
 $userQuery = mysqli_query($mysqli, "
-    SELECT nama FROM tb_user WHERE id_user = '$id_user'
+   SELECT nama, foto FROM tb_user WHERE id_user = '$id_user'
 ");
 $user = mysqli_fetch_assoc($userQuery);
 
@@ -43,6 +43,8 @@ $query .= " ORDER BY b.tanggal ASC";
 $data = mysqli_query($mysqli, $query);
 // ==========================
 
+// Judul halaman
+$pageTitle = "Rapat";
 ?>
 
 
@@ -111,15 +113,7 @@ $data = mysqli_query($mysqli, $query);
 
 
             <!-- Header -->
-            <div class="header">
-                <h2 class="page-title">Rapat</h2>
-
-            <div class="user-info">
-                <span><?= $user['nama'] ?></span>
-                <div class="user-avatar"><?= substr($user['nama'], 0, 3) ?></div>
-            </div>
-
-            </div>
+            <?php include "header.php"; ?>
 
         <!-- undangan rapat -->
             <div id="invitations" class="page">
