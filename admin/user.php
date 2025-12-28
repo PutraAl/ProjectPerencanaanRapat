@@ -18,7 +18,7 @@ $id_user = $_SESSION['id_user'];
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
   /* -- Responsive Hamburger -- */
