@@ -5,6 +5,20 @@ include "../connection/server.php";
 // Delete user
 if(isset($_GET['id'])) {
     $id_user = $_GET['id'];
+    $checkID = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = $id_user");
+    if($checkID->num_rows>0) {
+    $query = mysqli_query($mysqli, "DELETE FROM tb_user where id_user = $id_user");
+     if($query) {
+        echo "
+        <script>
+        alert('Berhasil menghapus data');
+        window.location.href = '../admin/user.php';
+        </script>
+        ";
+        session_destroy();
+    }
+
+    }
     $query = mysqli_query($mysqli, "DELETE FROM tb_user where id_user = $id_user");
     if($query) {
         echo "
