@@ -30,43 +30,40 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+   <div class="sidebar" id="sidebar">
 
-      <div class="logo-section">
-        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-        <hr class="divider">
-      </div>
+            <div class="logo-section">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+                <hr class="divider">
+            </div>
 
-      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-      <!-- <ul class="menu"> --> 
-        <li class="menu-item">
-          <i class="fa-solid fa-chart-line"></i>
-          <a href="dashboard.php">Dashboard</a>
-        </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item ">
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
 
-        <li class="menu-item">
-          <i class="fa-solid fa-envelope"></i>
-          <a href="rapat.php">Rapat</a>
-        </li>
+                <li class="menu-item">
+                    <a href="rapat.php">Rapat</a>
+                </li>
 
-        <li class="menu-item active">
-          <i class="fa-solid fa-user"></i>
-          <a href="profilenew.php">Profil</a>
-        </li>
-
-        <li class="menu-item">
-          <i class="fa-solid fa-user"></i>
-          <a href="user.php">User</a>
-        </li>
-
-        <li class="menu-item">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <a href="../action/logout.php">Keluar</a>
-        </li>
-
-      <!-- </ul> -->
-    </div>
+                
+                <li class="menu-item">
+                    <a href="user.php">User</a>
+                </li>
+                <li class="menu-item">
+                    <a href="contact.php">Contact</a>
+                </li>
+                
+                <li class="menu-item active">
+                    <a href="profile.php">Profil</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
+            <!-- </ul> -->
+        </div>
     <!-- End Sidebar -->
 
     <!-- Main Content -->
@@ -77,10 +74,19 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
           <!-- Header -->
           <div class="header">
             <h2 class="page-title">Profile</h2>
-            <div class="user-info">
-              <span>Admin</span>
-              <div class="user-avatar">A</div>
-            </div>
+           <div class="user-info">
+      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+
+      <?php if (!empty($data['foto'])): ?>
+        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+             class="user-avatar-img"
+             alt="Avatar">
+      <?php else: ?>
+        <div class="user-avatar">
+          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+        </div>
+      <?php endif; ?>
+    </div>
           </div>
 
           <!-- Form Profil -->
@@ -117,7 +123,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
         </div>
 
         <div class="modal-body">
-          <form action="../action/edit_profile_admin.php" method="post" id="editProfileForm">
+          <form action="../action/edit_profile_admin.php" method="post" id="editProfileForm" enctype="multipart/form-data">
             <input type="hidden" name="id_user" class="form-control" id="id_user" value="<?= $data['id_user'] ?>">
             <div class="mb-3">
               <label for="nameInput" class="form-label">Nama</label>
@@ -138,8 +144,8 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
               <input type="text" class="form-control" name="password" id="password">
             </div>
             <div class="mb-3">
-              <label for="positionInput" class="form-label">Jabatan</label>
-              <input type="text" class="form-control" id="positionInput" value="<?= $data['role'] ?>" readonly>
+              <label for="positionInput" class="form-label">Gambar</label>
+              <input type="file" name="foto" class="form-control" id="positionInput" >
             </div>
         </div>
 

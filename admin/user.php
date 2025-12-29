@@ -3,6 +3,7 @@ include "../connection/server.php";
 require_once "../connection/middleware.php" ;
 middlewareAdmin();
 $id_user = $_SESSION['id_user'];
+$data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -32,42 +33,40 @@ $id_user = $_SESSION['id_user'];
 
 
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+   <div class="sidebar" id="sidebar">
 
-      <div class="logo-section">
-        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-        <hr class="divider">
-      </div>
+            <div class="logo-section">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+                <hr class="divider">
+            </div>
 
-      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-      <!-- <ul class="menu"> -->   
-        <li class="menu-item">
-          <i class="fa-solid fa-chart-line"></i>
-          <a href="dashboard.php">Dashboard</a>
-        </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item ">
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
 
-        <li class="menu-item">
-          <i class="fa-solid fa-envelope"></i>
-          <a href="rapat.php">Rapat</a>
-        </li>
+                <li class="menu-item">
+                    <a href="rapat.php">Rapat</a>
+                </li>
 
-        <li class="menu-item">
-          <i class="fa-solid fa-user"></i>
-          <a href="profile.php">Profil</a>
-        </li>
-
-        <li class="menu-item active">
-          <i class="fa-solid fa-user"></i>
-          <a href="user.php">User</a>
-        </li>
-
-        <li class="menu-item">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <a href="../action/logout.php">Keluar</a>
-        </li>
-      <!-- </ul> -->
-    </div>
+                
+                <li class="menu-item active">
+                    <a href="user.php">User</a>
+                </li>
+                <li class="menu-item">
+                    <a href="contact.php">Contact</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="profile.php">Profil</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
+            <!-- </ul> -->
+        </div>
     <!-- End Sidebar -->
 
     <!-- MAIN CONTENT -->
@@ -76,10 +75,19 @@ $id_user = $_SESSION['id_user'];
       <div class="header">
         <h2 class="page-title">User Management</h2>
 
-        <div class="user-info">
-          <span>Admin</span>
-          <div class="user-avatar">A</div>
+           <div class="user-info">
+      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+
+      <?php if (!empty($data['foto'])): ?>
+        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+             class="user-avatar-img"
+             alt="Avatar">
+      <?php else: ?>
+        <div class="user-avatar">
+          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
         </div>
+      <?php endif; ?>
+    </div>
       </div>
 
 
@@ -119,7 +127,7 @@ $id_user = $_SESSION['id_user'];
                         <span class="badge bg-primary"><?= $row['role'] ?></span>
                     </td>
                     <td>
-                        <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+                        <div >
                             <button class="view-btn btn btn-sm btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#edituser-<?= $row['id_user'] ?>">
                                 Edit

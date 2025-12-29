@@ -2,7 +2,8 @@
 include "../connection/server.php";
 require_once "../connection/middleware.php" ;
 middlewareAdmin();
-$username = $_SESSION['username'];
+$id_user = $_SESSION['id_user'];
+$data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = $id_user")->fetch_array();
 $allUser = mysqli_query($mysqli, "SELECT * FROM tb_user  ");
 $allRapat = mysqli_query($mysqli, "SELECT * FROM tb_rapat ");
 $allUndangan = mysqli_query($mysqli, "SELECT * FROM tb_undangan");
@@ -56,27 +57,25 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
 
             <!-- <ul class="menu"> -->   
                 <li class="menu-item active">
-                    <i class="fa-solid fa-chart-line"></i>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item">
-                    <i class="fa-solid fa-envelope"></i>
                     <a href="rapat.php">Rapat</a>
                 </li>
 
+                
                 <li class="menu-item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profile.php">Profil</a>
-                </li>
-
-                <li class="menu-item">
-                    <i class="fa-solid fa-user"></i>
                     <a href="user.php">User</a>
                 </li>
-
                 <li class="menu-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="contact.php">Contact</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="profile.php">Profil</a>
+                </li>
+                <li class="menu-item">
                     <a href="../action/logout.php">Keluar</a>
                 </li>
             <!-- </ul> -->
@@ -90,10 +89,19 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
             <div class="header">
                 <h2 class="page-title">Dashboard Admin</h2>
 
-                <div class="user-info">
-                    <span><?=  $username ?></span>
-                    <div class="user-avatar"><?= substr($username, 0, 3) ?></div>
-                </div>
+                 <div class="user-info">
+      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+
+      <?php if (!empty($data['foto'])): ?>
+        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+             class="user-avatar-img"
+             alt="Avatar">
+      <?php else: ?>
+        <div class="user-avatar">
+          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+        </div>
+      <?php endif; ?>
+    </div>
             </div>
 
             <!-- Stats -->

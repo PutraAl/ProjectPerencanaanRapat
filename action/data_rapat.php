@@ -1,4 +1,6 @@
 <?php 
+$id_user = $_SESSION['id_user'];
+$data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
 $today = date('y-m-d');
 $target = date('y-m-d', strtotime('+ 7 days'));
 $rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE tanggal >= '$today' AND status = 'dijadwalkan';");

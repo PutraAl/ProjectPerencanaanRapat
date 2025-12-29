@@ -35,41 +35,40 @@ middlewareAdmin();
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <div class="logo-section">
-        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-        <hr class="divider">
-      </div>
+   <div class="sidebar" id="sidebar">
 
-      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+            <div class="logo-section">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+                <hr class="divider">
+            </div>
 
-      <!-- <ul class="menu"> -->
-        <li class="menu-item">
-          <i class="fa-solid fa-chart-line"></i>
-          <a href="dashboard.php">Dashboard</a>
-        </li>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-        <li class="menu-item active">
-          <i class="fa-solid fa-envelope"></i>
-          <a href="rapat.php">Rapat</a>
-        </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item ">
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
 
-        <li class="menu-item">
-          <i class="fa-solid fa-user"></i>
-          <a href="profile.php">Profil</a>
-        </li>
+                <li class="menu-item active">
+                    <a href="rapat.php">Rapat</a>
+                </li>
 
-        <li class="menu-item">
-          <i class="fa-solid fa-user"></i>
-          <a href="user.php">User</a>
-        </li>
-
-        <li class="menu-item">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <a href="../action/logout.php">Keluar</a>
-        </li>
-      <!-- </ul> -->
-    </div>
+                
+                <li class="menu-item">
+                    <a href="user.php">User</a>
+                </li>
+                <li class="menu-item">
+                    <a href="contact.php">Contact</a>
+                </li>
+                
+                <li class="menu-item">
+                    <a href="profile.php">Profil</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
+            <!-- </ul> -->
+        </div>
     <!-- End Sidebar -->
 
     <div class="main-content">
@@ -77,10 +76,19 @@ middlewareAdmin();
       <!-- Header -->
       <div class="header">
         <div class="page-title">Pengelolaan Data Rapat</div>
-        <div class="user-info">
-          <span>Admin</span>          
-          <div class="user-avatar">A</div>
+          <div class="user-info">
+      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+
+      <?php if (!empty($data['foto'])): ?>
+        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+             class="user-avatar-img"
+             alt="Avatar">
+      <?php else: ?>
+        <div class="user-avatar">
+          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
         </div>
+      <?php endif; ?>
+    </div>
       </div>
 
       <!-- Stats Section -->
@@ -242,11 +250,7 @@ middlewareAdmin();
                           Tidak ada peserta tersedia
                         </div>
 
-                        <div class="peserta-add-new">
-                          <button type="button" id="btnAddNewPeserta">
-                            <i class="fas fa-plus"></i> Tambah Peserta Baru
-                          </button>
-                        </div>
+                     
                       </div>
                     </div>
 
@@ -430,59 +434,7 @@ middlewareAdmin();
         </div>
       </div>
  
-      <!-- PAGINATION -->
-        <?php if ($totalPages > 1): ?>
-        <div class="pagination-container">
-          <nav aria-label="Page navigation">
-            <ul class="pagination">
-              <!-- Previous Button -->
-              <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
-                <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus) ?>">
-                  ← Sebelumnya
-                </a>
-              </li>
-
-              <!-- Page Numbers -->
-              <?php
-              // Tentukan range halaman yang ditampilkan
-              $startPage = max(1, $currentPage - 2);
-              $endPage = min($totalPages, $currentPage + 2);
-
-              // Tampilkan halaman pertama jika tidak termasuk range
-              if ($startPage > 1) {
-                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">1</a></li>';
-                if ($startPage > 2) {
-                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                }
-              }
-
-              // Tampilkan range halaman
-              for ($page = $startPage; $page <= $endPage; $page++) {
-                $active = ($page === $currentPage) ? 'active' : '';
-                echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $page . '</a></li>';
-              }
-
-              // Tampilkan halaman terakhir jika tidak termasuk range
-              if ($endPage < $totalPages) {
-                if ($endPage < $totalPages - 1) {
-                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
-                }
-                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $totalPages . '</a></li>';
-              }
-              ?>
-            </ul>
-          </nav>
-
-          <!-- Info Pagination -->
-          <div class="pagination-info text-center mt-3 text-muted">
-            Menampilkan data <?= (($currentPage - 1) * $itemsPerPage) + 1 ?> - 
-            <?= min($currentPage * $itemsPerPage, $totalData) ?> 
-            dari <?= $totalData ?> data
-          </div>
-        </div>
-        <?php endif; ?>
-
-      </div>
+      
     
 
     </div>

@@ -280,8 +280,6 @@ html, body {
 
 /* ===== BUTTONS ===== */
 .btn {
-    padding: 10px 20px;
-    border-radius: 8px;
     border: none;
     cursor: pointer;
     font-weight: 600;
@@ -301,8 +299,6 @@ html, body {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: white;
     box-shadow: 0 2px 8px rgba(79, 152, 202, 0.3);
-    border-radius: 20px;
-    padding: 8px 16px;
     font-size: 14px;
 }
 
@@ -348,7 +344,6 @@ html, body {
     background: transparent;
     border: 1.5px solid var(--primary);
     color: var(--primary);
-    border-radius: 20px;
     padding: 6px 14px;
     font-size: 13px;
 }
@@ -647,7 +642,6 @@ html, body {
 .button-group .btn {
     flex: 1;
     justify-content: center;
-    padding: 9px 12px;
     font-size: 13px;
 }
 
