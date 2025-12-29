@@ -40,7 +40,6 @@ $pageTitle = "Dashboard";
 
           <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
-
             <div class="logo-section">
                 <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
                 <hr class="divider">

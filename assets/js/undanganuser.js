@@ -43,6 +43,6 @@
 
              content.classList.toggle('active');
              button.textContent = content.classList.contains('active') ?
-                 'Sembunyikan Notulen' :
-                 'Tampilkan Notulen';
+                 'Sembunyikan Deskripsi' :
+                 'Tampilkan Deskripsi';
          }

@@ -124,40 +124,40 @@ $pageTitle = "Profil";
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div class="logo-section">
-            <img src="../assets/img/polteklogo.png" class="logo-img">
-            <hr class="divider">
-        </div>
+            <div class="logo-section">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+                <hr class="divider">
+            </div>
 
-        <div class="logo">Meeting Kampus</div>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-        <!-- <ul class="menu"> -->
-            <li class="menu-item">
-                <i class="fa-solid fa-chart-line"></i>
-                <a href="dashboard.php">Dashboard</a>
-            </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item ">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-envelope"></i>
-                <a href="undangan.php">Rapat</a>
-            </li>
+                <li class="menu-item ">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="undangan.php">Rapat</a>
+                </li>
 
-            <li class="menu-item">
+            <li class="menu-item ">
                 <i class="fa-solid fa-file-lines"></i>
                 <a href="notulen.php">Notulen</a>
             </li>
 
-            <li class="menu-item active">
-                <i class="fa-solid fa-user"></i>
-                <a href="profil.php">Profil</a>
-            </li>
+                <li class="menu-item active">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="profil.php">Profil</a>
+                </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="logout.php">Keluar</a>
-            </li>
-        <!-- </ul> -->
-    </div>
+                <li class="menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
+            <!-- </ul> -->
+        </div>
     <!-- End Sidebar -->
 
 <!-- ================= MAIN CONTENT ================= -->
@@ -291,10 +291,6 @@ $pageTitle = "Profil";
             <div class="mb-3">
               <label for="emailInput" class="form-label">Password</label>
               <input type="text" class="form-control" name="password" id="password">
-            </div>
-            <div class="mb-3">
-              <label for="positionInput" class="form-label">Jabatan</label>
-              <input type="text" class="form-control" id="positionInput" value="<?= $row['role'] ?>" readonly>
             </div>
         </div>
 

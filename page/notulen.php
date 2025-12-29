@@ -57,39 +57,39 @@ $pageTitle = "Notulen";
     <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
+         <div class="sidebar" id="sidebar">
             <div class="logo-section">
-                <img src="../assets/img/polteklogo.png" class="logo-img">
+                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
                 <hr class="divider">
             </div>
 
-            <div class="logo">Meeting Kampus</div>
+            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->
-            <li class="menu-item">
-                <i class="fa-solid fa-chart-line"></i>
-                <a href="dashboard.php">Dashboard</a>
-            </li>
+            <!-- <ul class="menu"> -->   
+                <li class="menu-item ">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="dashboard.php">Dashboard</a>
+                </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-envelope"></i>
-                <a href="undangan.php">Rapat</a>
-            </li>
+                <li class="menu-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="undangan.php">Rapat</a>
+                </li>
 
             <li class="menu-item active">
                 <i class="fa-solid fa-file-lines"></i>
                 <a href="notulen.php">Notulen</a>
             </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-user"></i>
-                <a href="profil.php">Profil</a>
-            </li>
+                <li class="menu-item">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="profil.php">Profil</a>
+                </li>
 
-            <li class="menu-item">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="logout.php">Keluar</a>
-            </li>
+                <li class="menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <a href="../action/logout.php">Keluar</a>
+                </li>
             <!-- </ul> -->
         </div>
         <!-- End Sidebar -->
@@ -124,9 +124,6 @@ $pageTitle = "Notulen";
                         <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
                     </div>
 
-                    <button class="btn btn-link p-0 mt-2" onclick="toggleNotulen()">
-                        Lihat Detail
-                    </button>
                 </div>
                 <?php } ?>
 

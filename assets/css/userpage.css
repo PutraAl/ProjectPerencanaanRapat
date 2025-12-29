@@ -1184,7 +1184,7 @@ html, body {
 }
 
 .content-hidden::before {
-    content: "📝 Detail Notulen";
+    content: "Detail Deskripsi";
     display: block;
     font-weight: 600;
     font-size: 13px;
@@ -1194,7 +1194,6 @@ html, body {
 
 .content-hidden p {
     margin: 0;
-    white-space: pre-line;
 }
 
 .toggle-button {

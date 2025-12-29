@@ -35,7 +35,7 @@ middlewareAdmin();
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
-   <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
 
             <div class="logo-section">
                 <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
@@ -46,25 +46,31 @@ middlewareAdmin();
 
             <!-- <ul class="menu"> -->   
                 <li class="menu-item ">
+                    <i class="fa-solid fa-chart-line"></i>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item active">
+                    <i class="fa-solid fa-envelope"></i>
                     <a href="rapat.php">Rapat</a>
                 </li>
 
                 
                 <li class="menu-item">
+                    <i class="fa-solid fa-users"></i>
                     <a href="user.php">User</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item ">
+                <i class="fa-solid fa-file-lines"></i>
                     <a href="contact.php">Contact</a>
                 </li>
                 
                 <li class="menu-item">
+                    <i class="fa-solid fa-user"></i>
                     <a href="profile.php">Profil</a>
                 </li>
                 <li class="menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <a href="../action/logout.php">Keluar</a>
                 </li>
             <!-- </ul> -->

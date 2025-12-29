@@ -29,13 +29,6 @@
             <input type="password" name="password" class="form-control" placeholder="Password" required>
             <span class="input-icon">✓</span>
           </div>
-
-          <div class="register-section">
-            <label>Don't have an account? 
-              <a href="register.php">Register now</a>
-            </label>
-          </div>
-
           <button type="submit" class="btn-login w-100" name="login">Login</button>
         </form>
       </div>
