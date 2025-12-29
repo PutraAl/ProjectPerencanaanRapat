@@ -18,7 +18,7 @@ if($checkUsername->num_rows>0) {
     ";
 }
 else {
-    $query = mysqli_query($mysqli, "INSERT INTO tb_user VALUES (NULL, '$nama', '$username', '$email', '$password', '$role')");
+    $query = mysqli_query($mysqli, "INSERT INTO tb_user VALUES (NULL, '$nama', '$username', '$email', '$password', '$role', '')");
     if($query) {
         echo "
         <script>
