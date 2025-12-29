@@ -16,15 +16,8 @@ middlewareAdmin();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <!-- Font Awesome -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
-
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <style>
-  
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -35,40 +28,44 @@ middlewareAdmin();
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
-   <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
+      <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+      </div>
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+      <li class="menu-item active">
+        <i class="fa-solid fa-chart-line"></i>
+        <a href="dashboard.php">Dashboard</a>
+      </li>
 
-            <!-- <ul class="menu"> -->   
-                <li class="menu-item ">
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="rapat.php">Rapat</a>
+      </li>
 
-                <li class="menu-item active">
-                    <a href="rapat.php">Rapat</a>
-                </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-users"></i>
+        <a href="user.php">User</a>
+      </li>
 
-                
-                <li class="menu-item">
-                    <a href="user.php">User</a>
-                </li>
-                <li class="menu-item">
-                    <a href="contact.php">Contact</a>
-                </li>
-                
-                <li class="menu-item">
-                    <a href="profile.php">Profil</a>
-                </li>
-                <li class="menu-item">
-                    <a href="../action/logout.php">Keluar</a>
-                </li>
-            <!-- </ul> -->
-        </div>
+      <li class="menu-item">
+        <i class="fa-solid fa-file-lines"></i>
+        <a href="contact.php">Contact</a>
+      </li>
+
+      <li class="menu-item">
+        <i class="fa-solid fa-user"></i>
+        <a href="profile.php">Profil</a>
+      </li>
+
+      <li class="menu-item">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <a href="../action/logout.php">Keluar</a>
+      </li>
+    </div>
     <!-- End Sidebar -->
 
     <div class="main-content">
@@ -76,19 +73,10 @@ middlewareAdmin();
       <!-- Header -->
       <div class="header">
         <div class="page-title">Pengelolaan Data Rapat</div>
-          <div class="user-info">
-      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
-
-      <?php if (!empty($data['foto'])): ?>
-        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
-             class="user-avatar-img"
-             alt="Avatar">
-      <?php else: ?>
-        <div class="user-avatar">
-          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+        <div class="user-info">
+          <span>Admin</span>          
+          <div class="user-avatar">A</div>
         </div>
-      <?php endif; ?>
-    </div>
       </div>
 
       <!-- Stats Section -->
@@ -128,17 +116,22 @@ middlewareAdmin();
           <h5 class="mb-3">Filter & Pencarian Rapat</h5>
           <form action="" method="GET" id="filterForm">
             <div class="row">
-              <div class="col-md-3 mb-3">
+              <div class="col-md-2 mb-3">
+                <label for="search" class="form-label">Cari Rapat</label>
+                <input type="text" name="search" id="search" class="form-control"
+                  placeholder="Judul, lokasi..." value="<?= htmlspecialchars($filterSearch ?? '') ?>">
+              </div>
+              <div class="col-md-2 mb-3">
                 <label for="tanggal_dari" class="form-label">Tanggal Dari</label>
                 <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control"
                   value="<?= $filterTanggalDari ?>">
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-2 mb-3">
                 <label for="tanggal_sampai" class="form-label">Tanggal Sampai</label>
                 <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control"
                   value="<?= $filterTanggalSampai ?>">
               </div>
-              <div class="col-md-3 mb-3">
+              <div class="col-md-2 mb-3">
                 <label for="status" class="form-label">Status</label>
                 <select name="status" id="status" class="form-control">
                   <option value="">Semua Status</option>
@@ -147,16 +140,19 @@ middlewareAdmin();
                   <option value="dibatalkan" <?= $filterStatus == 'dibatalkan' ? 'selected' : '' ?>>Dibatalkan</option>
                 </select>
               </div>
-              <div class="col-md-3 mb-3 d-flex align-items-end gap-2">
-                <button type="submit" class="btn btn-primary flex-fill"> Filter</button>
-                <a href="rapat.php" class="btn btn-secondary flex-fill"> Reset</a>
+              <div class="col-md-4 mb-3 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary flex-fill"><i class="fa-solid fa-filter"></i> Filter</button>
+                <a href="rapat.php" class="btn btn-secondary flex-fill"><i class="fa-solid fa-rotate-left"></i> Reset</a>
               </div>
             </div>
           </form>
 
-          <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus)): ?>
+          <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus) || !empty($filterSearch)): ?>
           <div class="alert alert-info mt-3 mb-0">
             <strong>Filter Aktif:</strong>
+            <?php if (!empty($filterSearch)): ?>
+            Pencarian: <span class="badge bg-success"><?= htmlspecialchars($filterSearch) ?></span>
+            <?php endif; ?>
             <?php if (!empty($filterTanggalDari)): ?>
             Dari: <?= date('d M Y', strtotime($filterTanggalDari)) ?>
             <?php endif; ?>
@@ -198,7 +194,7 @@ middlewareAdmin();
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="meeting-date" class="form-label">Tanggal <span class="text-danger">*</span></label>
-                    <input type="date" name="tanggal" id="meeting-date" class="form-control" required>
+                    <input type="date" name="tanggal" id="meeting-date" class="form-control" min="<?= date('Y-m-d') ?>" required>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="meeting-time" class="form-label">Waktu <span class="text-danger">*</span></label>
@@ -249,8 +245,6 @@ middlewareAdmin();
                         <div class="peserta-empty" id="pesertaEmpty" style="display: none;">
                           Tidak ada peserta tersedia
                         </div>
-
-                     
                       </div>
                     </div>
 
@@ -283,18 +277,18 @@ middlewareAdmin();
 
       <!-- Modal Absensi -->
       <?php if ($absensiMode): ?>
-      <div class="modal fade show" id="absensiModal" tabindex="-1" aria-labelledby="absensiLabel" aria-hidden="false">
+      <div class="modal fade show" id="absensiModal" tabindex="-1" aria-labelledby="absensiLabel" aria-hidden="false" style="display: block;">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="absensiLabel">✅ Absensi Rapat: <?= $rapatAbsensi['judul'] ?></h5>
+              <h5 class="modal-title" id="absensiLabel">✅ Absensi Rapat: <?= htmlspecialchars($rapatAbsensi['judul']) ?></h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="alert alert-info mb-3">
                 <strong>📅 Tanggal:</strong> <?= date('d M Y', strtotime($rapatAbsensi['tanggal'])) ?> |
                 <strong>⏰ Waktu:</strong> <?= date('H:i', strtotime($rapatAbsensi['waktu'])) ?> |
-                <strong>📍 Lokasi:</strong> <?= $rapatAbsensi['lokasi'] ?>
+                <strong>📍 Lokasi:</strong> <?= htmlspecialchars($rapatAbsensi['lokasi']) ?>
               </div>
 
               <form action="../action/konfirmasi_kehadiran.php" method="POST" id="absensi-form">
@@ -316,13 +310,14 @@ middlewareAdmin();
                     <tbody>
                       <?php
                         $no = 1;
-                        while ($peserta = mysqli_fetch_array($dataPesertaRapat)) {
-                          $checked = ($peserta['status_kehadiran'] == 'hadir') ? 'checked' : '';
+                        if ($dataPesertaRapat && mysqli_num_rows($dataPesertaRapat) > 0) {
+                          while ($peserta = mysqli_fetch_assoc($dataPesertaRapat)) {
+                            $checked = ($peserta['status_kehadiran'] == 'hadir') ? 'checked' : '';
                       ?>
                       <tr>
                         <td><?= $no++ ?></td>
-                        <td><strong><?= $peserta['nama'] ?></strong></td>
-                        <td><?= $peserta['email'] ?></td>
+                        <td><strong><?= htmlspecialchars($peserta['nama']) ?></strong></td>
+                        <td><?= htmlspecialchars($peserta['email']) ?></td>
                         <td class="text-center">
                           <div class="form-check form-switch d-flex justify-content-center">
                             <input class="form-check-input" type="checkbox" name="kehadiran[]"
@@ -337,7 +332,12 @@ middlewareAdmin();
                           </div>
                         </td>
                       </tr>
-                      <?php } ?>
+                      <?php
+                          }
+                        } else {
+                          echo '<tr><td colspan="4" class="text-center text-muted">Tidak ada peserta untuk rapat ini</td></tr>';
+                        }
+                      ?>
                     </tbody>
                   </table>
                 </div>
@@ -352,36 +352,36 @@ middlewareAdmin();
           </div>
         </div>
       </div>
+      <div class="modal-backdrop fade show" id="absensiBackdrop"></div>
       <?php endif; ?>
 
       <!-- Meeting Schedule Card -->
       <div class="card mb-4">
         <div class="card-title">
           Manajemen Jadwal Rapat
-          <span class="badge bg-secondary"><?= mysqli_num_rows($dataRapat) ?> Data</span>
+          <span class="badge bg-secondary"><?= $totalData ?> Data</span>
         </div>
 
         <div class="meeting-grid">
           <?php
           if (mysqli_num_rows($dataRapat) > 0) {
             while ($row = $dataRapat->fetch_array()) {
-            $id_rapat = $row['id_rapat'];
+             $id_rapat = $row['id_rapat'];
             $countPeserta = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_undangan WHERE id_rapat = '$id_rapat'");
             $jumlahPeserta = mysqli_fetch_array($countPeserta)['total'];
             
-            // Dapatkan peserta IDs
             $queryPeserta = mysqli_query($mysqli, "SELECT GROUP_CONCAT(CAST(id_peserta AS CHAR)) as peserta_ids FROM tb_undangan WHERE id_rapat = '$id_rapat'");
             $pesertaData = mysqli_fetch_assoc($queryPeserta);
             $peserta_ids = $pesertaData['peserta_ids'] ?: '';
           ?>
           <div class="meeting-card">
-            <div class="meeting-header"><?= $row['judul'] ?></div>
+            <div class="meeting-header"><?= htmlspecialchars($row['judul']) ?></div>
             <div class="meeting-body">
               <div class="meeting-detail">
                 <i>📅</i> <?= date('d M Y', strtotime($row['tanggal'])) ?>, <?= date('H:i', strtotime($row['waktu'])) ?>
               </div>
               <div class="meeting-detail">
-                <i>📍</i> <?= $row['lokasi'] ?>
+                <i>📍</i> <?= htmlspecialchars($row['lokasi']) ?>
               </div>
               <div class="meeting-detail">
                 <i>👥</i> <?= $jumlahPeserta ?> Peserta
@@ -413,12 +413,12 @@ middlewareAdmin();
                 data-lokasi="<?= htmlspecialchars($row['lokasi']) ?>"
                 data-status="<?= $row['status'] ?>"
                 data-notulen="<?= htmlspecialchars($row['notulen'] ?: '') ?>"
-                 data-peserta_ids="<?= $peserta_ids ?>">
+                 data-peserta_ids="<?= htmlspecialchars($peserta_ids) ?>">
                  Edit
             </button>
 
                 <?php if ($row['status'] == 'selesai'): ?>
-                <a href="?absensi=<?= $row['id_rapat'] ?>" class="btn btn-success">✅ Absensi</a>
+                <a href="<?= buildPaginationUrl($currentPage, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '&absensi=' . $row['id_rapat'] ?>" class="btn btn-success">✅ Absensi</a>
                 <?php endif; ?>
 
                 <button class="btn btn-outline" onclick="hapusRapat(<?= $row['id_rapat'] ?>)"> Hapus</button>
@@ -432,10 +432,53 @@ middlewareAdmin();
           }
           ?>
         </div>
+
+        <!-- PAGINATION -->
+        <?php if ($totalPages > 1): ?>
+        <div class="pagination-container">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) ?>">
+                  ← Sebelumnya
+                </a>
+              </li>
+
+              <?php
+              $startPage = max(1, $currentPage - 2);
+              $endPage = min($totalPages, $currentPage + 2);
+
+              if ($startPage > 1) {
+                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">1</a></li>';
+                if ($startPage > 2) {
+                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                }
+              }
+
+              for ($page = $startPage; $page <= $endPage; $page++) {
+                $active = ($page === $currentPage) ? 'active' : '';
+                echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">' . $page . '</a></li>';
+              }
+
+              if ($endPage < $totalPages) {
+                if ($endPage < $totalPages - 1) {
+                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                }
+                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">' . $totalPages . '</a></li>';
+              }
+              ?>
+            </ul>
+          </nav>
+
+          <div class="pagination-info text-center mt-3 text-muted">
+            Menampilkan data <?= (($currentPage - 1) * $itemsPerPage) + 1 ?> - 
+            <?= min($currentPage * $itemsPerPage, $totalData) ?> 
+            dari <?= $totalData ?> data
+          </div>
+        </div>
+        <?php endif; ?>
+
       </div>
- 
-      
-    
 
     </div>
   </div>
@@ -450,7 +493,6 @@ middlewareAdmin();
     const formRapatModal = new bootstrap.Modal(document.getElementById('formRapatModal'));
     const meetingForm = document.getElementById('meeting-form');
 
-    // Data Peserta dari Database
     let allPeserta = [
       <?php 
         $dataPeserta = mysqli_query($mysqli, "SELECT * FROM tb_user WHERE role = 'peserta' ORDER BY nama ASC");
@@ -471,12 +513,10 @@ middlewareAdmin();
     const pesertaEmpty = document.getElementById('pesertaEmpty');
     const btnSelectAll = document.getElementById('btnSelectAll');
     const btnDeselectAll = document.getElementById('btnDeselectAll');
-    const btnAddNewPeserta = document.getElementById('btnAddNewPeserta');
     const pesertaSelectedCount = document.getElementById('pesertaSelectedCount');
     const pesertaSelectedList = document.getElementById('pesertaSelectedList');
     const pesertaHidden = document.getElementById('peserta-hidden');
 
-    // Hamburger Menu
     hamburgerBtn?.addEventListener('click', () => {
       sidebar.classList.toggle('active');
       document.addEventListener('click', (e) => {
@@ -486,7 +526,6 @@ middlewareAdmin();
       });
     });
 
-    // Peserta Selector Functions
     function renderPesertaList() {
       pesertaList.innerHTML = '';
       const searchTerm = pesertaSearch.value.toLowerCase();
@@ -523,7 +562,6 @@ middlewareAdmin();
     }
 
     function updatePesertaDisplay() {
-      // Update tags
       pesertaTags.innerHTML = '';
       selectedPesertaIds.forEach(id => {
         const peserta = allPeserta.find(p => p.id === id);
@@ -538,7 +576,6 @@ middlewareAdmin();
         }
       });
 
-      // Update count
       if (selectedPesertaIds.length === 0) {
         pesertaSelectedCount.textContent = 'Pilih satu atau lebih peserta';
         pesertaSelectedList.innerHTML = '';
@@ -556,10 +593,8 @@ middlewareAdmin();
         });
       }
 
-      // Update hidden input
       pesertaHidden.value = selectedPesertaIds.join(',');
 
-      // Update button visibility
       if (selectedPesertaIds.length > 0) {
         btnDeselectAll.style.display = 'flex';
       } else {
@@ -573,7 +608,6 @@ middlewareAdmin();
       togglePeserta(pesertaId);
     }
 
-    // Peserta Input Field Click
     pesertaInputField.addEventListener('click', () => {
       pesertaDropdown.classList.toggle('open');
       pesertaInputField.classList.toggle('active');
@@ -582,10 +616,8 @@ middlewareAdmin();
       }
     });
 
-    // Search Filter
     pesertaSearch.addEventListener('input', renderPesertaList);
 
-    // Select All Button
     btnSelectAll.addEventListener('click', (e) => {
       e.preventDefault();
       const searchTerm = pesertaSearch.value.toLowerCase();
@@ -601,25 +633,12 @@ middlewareAdmin();
       updatePesertaDisplay();
     });
 
-    // Deselect All Button
     btnDeselectAll.addEventListener('click', (e) => {
       e.preventDefault();
       selectedPesertaIds = [];
       updatePesertaDisplay();
     });
 
-    // Add New Peserta
-    btnAddNewPeserta.addEventListener('click', (e) => {
-      e.preventDefault();
-      const newName = prompt('Masukkan nama peserta baru:');
-      if (newName && newName.trim()) {
-        const newId = Math.max(...allPeserta.map(p => p.id), 0) + 1;
-        allPeserta.push({ id: newId, nama: newName.trim() });
-        renderPesertaList();
-      }
-    });
-
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.peserta-selector-container')) {
         pesertaDropdown.classList.remove('open');
@@ -627,7 +646,6 @@ middlewareAdmin();
       }
     });
 
-    // Reset Form Rapat (Tambah Baru)
     function resetFormRapat() {
       meetingForm.action = '../action/tambah_rapat.php';
       document.getElementById('id_rapat_hidden').value = '';
@@ -640,7 +658,6 @@ middlewareAdmin();
       updatePesertaDisplay();
     }
 
-    // Load Edit Data dari Button
     function loadEditDataFromButton(button) {
       const data = {
         id_rapat: button.getAttribute('data-id_rapat'),
@@ -654,7 +671,6 @@ middlewareAdmin();
         peserta_ids: button.getAttribute('data-peserta_ids')
       };
       
-      // Isi form dengan data
       document.getElementById('id_rapat_hidden').value = data.id_rapat;
       document.getElementById('meeting-title').value = data.judul;
       document.getElementById('meeting-desc').value = data.deskripsi;
@@ -664,29 +680,30 @@ middlewareAdmin();
       document.getElementById('meeting-status').value = data.status;
       document.getElementById('notulen').value = data.notulen;
       
-      // Set action form untuk update
       meetingForm.action = '../action/proses_edit_rapat.php';
       document.getElementById('formRapatLabel').textContent = 'Edit Data Rapat';
       document.getElementById('submitBtnModal').innerHTML = '💾 Update Data';
       document.getElementById('notulenContainer').style.display = 'block';
       
-      // Set peserta yang dipilih
       selectedPesertaIds = data.peserta_ids ? data.peserta_ids.split(',').map(id => parseInt(id)) : [];
       pesertaSearch.value = '';
       updatePesertaDisplay();
     }
 
-    // Delete Meeting
     function hapusRapat(id) {
       if (confirm('Yakin ingin menghapus rapat ini?')) {
         window.location.href = '../action/hapus_rapat.php?id=' + id;
       }
     }
 
-    // Auto show absensi modal
     <?php if ($absensiMode): ?>
-    const absensiModal = new bootstrap.Modal(document.getElementById('absensiModal'));
-    absensiModal.show();
+    document.addEventListener('DOMContentLoaded', function() {
+      const absensiModalElement = document.getElementById('absensiModal');
+      if (absensiModalElement) {
+        const absensiModal = new bootstrap.Modal(absensiModalElement);
+        absensiModal.show();
+      }
+    });
     <?php endif; ?>
   </script>
 

@@ -30,7 +30,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
   <div class="container-fluid d-flex p-0">
 
     <!-- Sidebar -->
-   <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
 
             <div class="logo-section">
                 <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
@@ -41,25 +41,31 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
 
             <!-- <ul class="menu"> -->   
                 <li class="menu-item ">
+                    <i class="fa-solid fa-chart-line"></i>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
 
                 <li class="menu-item">
+                    <i class="fa-solid fa-envelope"></i>
                     <a href="rapat.php">Rapat</a>
                 </li>
 
                 
                 <li class="menu-item">
+                    <i class="fa-solid fa-users"></i>
                     <a href="user.php">User</a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item ">
+                <i class="fa-solid fa-file-lines"></i>
                     <a href="contact.php">Contact</a>
                 </li>
                 
                 <li class="menu-item active">
+                    <i class="fa-solid fa-user"></i>
                     <a href="profile.php">Profil</a>
                 </li>
                 <li class="menu-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <a href="../action/logout.php">Keluar</a>
                 </li>
             <!-- </ul> -->
@@ -141,7 +147,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             </div>
             <div class="mb-3">
               <label for="emailInput" class="form-label">Password</label>
-              <input type="text" class="form-control" name="password" id="password">
+              <input type="password" class="form-control" name="password" id="password">
             </div>
             <div class="mb-3">
               <label for="positionInput" class="form-label">Gambar</label>
@@ -163,52 +169,6 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
   </script>
   <script src="../assets/js/sidebar.js"></script>
-
-  <script>
-    // const btn = document.getElementById("hamburgerBtn");
-    // const sidebar = document.querySelector(".sidebar");
-
-    // btn.addEventListener("click", () => {
-    //     sidebar.classList.toggle("active");
-    // });
-
-    // // -------------------------------
-    // // Aksi tombol Simpan di Modal Edit
-    // // -------------------------------
-    // document.getElementById("saveProfileBtn").addEventListener("click", function () {
-
-    //     let id_user = document.getElementById("id_user").innerText; 
-    //     let nama     = document.getElementById("nameInput").value;
-    //     let email    = document.getElementById("emailInput").value;
-    //     let password = document.getElementById("password").value;
-
-    //     // Siapkan data
-    //     let formData = new FormData();
-    //     formData.append("id_user", id_user);
-    //     formData.append("nama", nama);
-    //     formData.append("email", email);
-    //     formData.append("password", password);
-
-    //     // Kirim menggunakan fetch
-    //     fetch("../action/edit_profile_admin.php", {
-    //         method: "POST",
-    //         body: formData
-    //     })
-    //     .then(response => response.text())
-    //     .then(result => {
-    //         console.log(result);
-
-    //         // Jika sukses, tutup modal dan refresh halaman
-    //         alert("Profil berhasil diperbarui!");
-    //         location.reload();
-    //     })
-    //     .catch(error => {
-    //         console.error("Error:", error);
-    //         alert("Terjadi kesalahan, coba lagi.");
-    //     });
-
-    // });
-  </script>
 
 
 </body>

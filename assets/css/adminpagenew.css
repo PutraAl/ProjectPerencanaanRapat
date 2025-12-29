@@ -1752,3 +1752,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(53%) sepia(57%) saturate(430%) hue-rotate(166deg) brightness(95%) contrast(90%);
     cursor: pointer;
 }
+
+ .pagination-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .pagination {
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .pagination-info {
+      font-size: 0.9rem;
+    }
