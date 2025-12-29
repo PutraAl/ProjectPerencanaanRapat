@@ -36,12 +36,12 @@ middlewareAdmin();
 
       <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-      <li class="menu-item active">
+      <li class="menu-item ">
         <i class="fa-solid fa-chart-line"></i>
         <a href="dashboard.php">Dashboard</a>
       </li>
 
-      <li class="menu-item">
+      <li class="menu-item active">
         <i class="fa-solid fa-envelope"></i>
         <a href="rapat.php">Rapat</a>
       </li>
@@ -194,7 +194,7 @@ middlewareAdmin();
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="meeting-date" class="form-label">Tanggal <span class="text-danger">*</span></label>
-                    <input type="date" name="tanggal" id="meeting-date" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <input type="date" name="tanggal" id="meeting-date" class="form-control" required>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="meeting-time" class="form-label">Waktu <span class="text-danger">*</span></label>

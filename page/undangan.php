@@ -9,7 +9,6 @@ $id_user = $_SESSION['id_user'];
 $filterTanggalDari   = $_GET['tanggal_dari']   ?? '';
 $filterTanggalSampai = $_GET['tanggal_sampai'] ?? '';
 $filterStatus        = $_GET['status']          ?? '';
-$filterSearch        = $_GET['search']          ?? ''; // TAMBAH INI
 
 // Ambil data user (UNTUK HEADER)
 $userQuery = mysqli_query($mysqli, "
@@ -39,12 +38,6 @@ if (!empty($filterStatus)) {
     $query .= " AND b.status = '$filterStatus'";
 }
 
-// TAMBAH FILTER SEARCH
-if (!empty($filterSearch)) {
-    $filterSearch = mysqli_real_escape_string($mysqli, $filterSearch); // SECURITY
-    $query .= " AND (b.judul LIKE '%$filterSearch%' OR b.deskripsi LIKE '%$filterSearch%' OR b.lokasi LIKE '%$filterSearch%')";
-}
-
 $query .= " ORDER BY b.tanggal ASC";
 
 // ==================== PAGINATION ====================
@@ -69,12 +62,11 @@ $queryWithLimit = $query . " LIMIT $offset, $itemsPerPage";
 $data = mysqli_query($mysqli, $queryWithLimit);
 
 // Helper function untuk membuat URL dengan filter & pagination
-function buildPaginationUrl($page, $filterTanggalDari = '', $filterTanggalSampai = '', $filterStatus = '', $filterSearch = '') {
+function buildPaginationUrl($page, $filterTanggalDari = '', $filterTanggalSampai = '', $filterStatus = '') {
     $params = ['page' => $page];
     if (!empty($filterTanggalDari)) $params['tanggal_dari'] = $filterTanggalDari;
     if (!empty($filterTanggalSampai)) $params['tanggal_sampai'] = $filterTanggalSampai;
     if (!empty($filterStatus)) $params['status'] = $filterStatus;
-    if (!empty($filterSearch)) $params['search'] = $filterSearch; // TAMBAH INI
     return '?' . http_build_query($params);
 }
 
@@ -204,7 +196,7 @@ $pageTitle = "Rapat";
                                         id="searchInput"
                                         class="form-control"
                                         placeholder="Cari judul rapat..."
-                                        value="<?= htmlspecialchars($filterSearch) ?>">
+                                        onkeyup="filterUndangan()">
                                 </div>
                             </div>
                             <form action="" method="GET" id="filterForm">
@@ -249,12 +241,10 @@ $pageTitle = "Rapat";
                                     </div>
 
                                 </div>
-                                <!-- TAMBAH INPUT HIDDEN UNTUK SEARCH -->
-                                <input type="hidden" name="search" id="searchField" value="<?= htmlspecialchars($filterSearch) ?>">
                             </form>
 
 
-                            <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus) || !empty($filterSearch)): ?>
+                            <?php if (!empty($filterTanggalDari) || !empty($filterTanggalSampai) || !empty($filterStatus)): ?>
                                 <div class="alert alert-info mt-3 mb-0">
                                     <strong>Filter Aktif:</strong>
                                     <?php if (!empty($filterTanggalDari)): ?>
@@ -265,9 +255,6 @@ $pageTitle = "Rapat";
                                     <?php endif; ?>
                                     <?php if (!empty($filterStatus)): ?>
                                         | Status: <span class="badge bg-primary"><?= ucfirst($filterStatus) ?></span>
-                                    <?php endif; ?>
-                                    <?php if (!empty($filterSearch)): ?>
-                                        | Pencarian: <span class="badge bg-success"><?= htmlspecialchars($filterSearch) ?></span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
@@ -374,7 +361,7 @@ $pageTitle = "Rapat";
                             <ul class="pagination">
                                 <!-- Previous Button -->
                                 <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) ?>">
+                                    <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus) ?>">
                                         ← Sebelumnya
                                     </a>
                                 </li>
@@ -385,7 +372,7 @@ $pageTitle = "Rapat";
                                 $endPage = min($totalPages, $currentPage + 2);
 
                                 if ($startPage > 1) {
-                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">1</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">1</a></li>';
                                     if ($startPage > 2) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
@@ -393,14 +380,14 @@ $pageTitle = "Rapat";
 
                                 for ($page = $startPage; $page <= $endPage; $page++) {
                                     $active = ($page === $currentPage) ? 'active' : '';
-                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">' . $page . '</a></li>';
+                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $page . '</a></li>';
                                 }
 
                                 if ($endPage < $totalPages) {
                                     if ($endPage < $totalPages - 1) {
                                         echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
                                     }
-                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus, $filterSearch) . '">' . $totalPages . '</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $totalPages . '</a></li>';
                                 }
                                 ?>
                             </ul>
@@ -422,17 +409,6 @@ $pageTitle = "Rapat";
 
         <!-- JavaScript -->
         <script src="../assets/js/undanganuser.js"></script>
-        <script>
-            // SCRIPT UNTUK SEARCH OTOMATIS KE DATABASE
-            document.getElementById('searchInput').addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
-                    // Set nilai ke hidden field
-                    document.getElementById('searchField').value = this.value;
-                    // Submit form
-                    document.getElementById('filterForm').submit();
-                }
-            });
-        </script>
 
 </body>
 
