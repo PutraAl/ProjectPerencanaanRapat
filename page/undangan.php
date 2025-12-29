@@ -295,7 +295,7 @@ $pageTitle = "Rapat";
                                  onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
                                  Tampilkan Detail
                              </button>
-                             <?php } else if($row['status_kehadiran'] == NULL || $row['status_kehadiran'] == 'tidak_hadir' ) {?>
+                             <?php } else if($row['status_kehadiran'] == NULL || $row['status_kehadiran'] == 'tidak_hadir' || $row['status_kehadiran'] =='belum_dikonfirmasi' ) {?>
 
                              <form action="../action/konfirmasi_kehadiran.php" method="post">
                                  <input type="hidden" name="id_user" value="<?= $id_user ?>">
@@ -304,10 +304,9 @@ $pageTitle = "Rapat";
                              </form>
                              <?php }else if($row['status'] == 'selesai'){ ?>
 
-                             <button class="toggle-button"
-                                 onclick="toggleDetail('detail-notulen-<?= $row['id_undangan'] ?>')">
+                             <a href="notulen.php?id=<?= $row['id_rapat'] ?>" class="btn btn-primary w-100  ">
                                  Lihat Notulen
-                             </button>
+                             </a>
 
                              <?php  } ?>
                          </div>

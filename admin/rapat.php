@@ -361,7 +361,7 @@ middlewareAdmin();
           <?php
           if (mysqli_num_rows($dataRapat) > 0) {
             while ($row = $dataRapat->fetch_array()) {
-             $id_rapat = $row['id_rapat'];
+            $id_rapat = $row['id_rapat'];
             $countPeserta = mysqli_query($mysqli, "SELECT COUNT(*) as total FROM tb_undangan WHERE id_rapat = '$id_rapat'");
             $jumlahPeserta = mysqli_fetch_array($countPeserta)['total'];
             
@@ -429,23 +429,61 @@ middlewareAdmin();
           ?>
         </div>
       </div>
-      <!-- Notulen -->
-      <div class="card">
-        <div class="card-title">Notulen</div>
-        <div class="meeting-grid">
-          <?php 
-          $query = mysqli_query($mysqli, "SELECT * FROM tb_rapat where status ='selesai'");
-          while($row = $query->fetch_array()) {
-          ?>
-          <div class="meeting-card">
-            <div class="meeting-header fw-bold"><?= $row['judul'] ?></div>
-            <div class="meeting-body">
-              <div class="meeting-detail"><i>📝</i> <?= $row['notulen'] ?: 'Tidak ada notulen' ?></div>
-            </div>
+ 
+      <!-- PAGINATION -->
+        <?php if ($totalPages > 1): ?>
+        <div class="pagination-container">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <!-- Previous Button -->
+              <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus) ?>">
+                  ← Sebelumnya
+                </a>
+              </li>
+
+              <!-- Page Numbers -->
+              <?php
+              // Tentukan range halaman yang ditampilkan
+              $startPage = max(1, $currentPage - 2);
+              $endPage = min($totalPages, $currentPage + 2);
+
+              // Tampilkan halaman pertama jika tidak termasuk range
+              if ($startPage > 1) {
+                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">1</a></li>';
+                if ($startPage > 2) {
+                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                }
+              }
+
+              // Tampilkan range halaman
+              for ($page = $startPage; $page <= $endPage; $page++) {
+                $active = ($page === $currentPage) ? 'active' : '';
+                echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $page . '</a></li>';
+              }
+
+              // Tampilkan halaman terakhir jika tidak termasuk range
+              if ($endPage < $totalPages) {
+                if ($endPage < $totalPages - 1) {
+                  echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                }
+                echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $totalPages . '</a></li>';
+              }
+              ?>
+            </ul>
+          </nav>
+
+          <!-- Info Pagination -->
+          <div class="pagination-info text-center mt-3 text-muted">
+            Menampilkan data <?= (($currentPage - 1) * $itemsPerPage) + 1 ?> - 
+            <?= min($currentPage * $itemsPerPage, $totalData) ?> 
+            dari <?= $totalData ?> data
           </div>
-          <?php } ?>
         </div>
+        <?php endif; ?>
+
       </div>
+    
 
     </div>
   </div>

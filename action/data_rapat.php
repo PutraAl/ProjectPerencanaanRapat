@@ -5,6 +5,7 @@ $rapatMendatang = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE tanggal >=
 $rapatToday = mysqli_query($mysqli, "SELECT * FROM tb_rapat where tanggal ='$today' and status = 'dijadwalkan' ");
 $rapatMinggu = mysqli_query($mysqli, "SELECT * FROM tb_rapat WHERE tanggal >= '$today' and tanggal <= '$target' and status ='dijadwalkan'");
 $rapatBelumSelesai = mysqli_query($mysqli, "SELECT * FROM tb_rapat where status = 'dijadwalkan'");
+
 // Ambil parameter filter dari GET
 $filterTanggalDari = isset($_GET['tanggal_dari']) ? $_GET['tanggal_dari'] : '';
 $filterTanggalSampai = isset($_GET['tanggal_sampai']) ? $_GET['tanggal_sampai'] : '';
@@ -27,7 +28,35 @@ if (!empty($filterStatus)) {
 
 $queryString .= " ORDER BY id_rapat DESC";
 
-$dataRapat = mysqli_query($mysqli, $queryString);
+// PAGINATION SETUP
+$itemsPerPage = 10;
+$currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+
+// Hitung total data
+$totalResult = mysqli_query($mysqli, $queryString);
+$totalData = mysqli_num_rows($totalResult);
+$totalPages = ceil($totalData / $itemsPerPage);
+
+// Validasi halaman
+if ($currentPage > $totalPages && $totalPages > 0) {
+  $currentPage = $totalPages;
+}
+
+// Hitung offset
+$offset = ($currentPage - 1) * $itemsPerPage;
+
+// Query dengan LIMIT
+$queryWithLimit = $queryString . " LIMIT $offset, $itemsPerPage";
+$dataRapat = mysqli_query($mysqli, $queryWithLimit);
+
+// Helper function untuk membuat URL dengan filter & pagination
+function buildPaginationUrl($page, $filterTanggalDari = '', $filterTanggalSampai = '', $filterStatus = '') {
+  $params = ['page' => $page];
+  if (!empty($filterTanggalDari)) $params['tanggal_dari'] = $filterTanggalDari;
+  if (!empty($filterTanggalSampai)) $params['tanggal_sampai'] = $filterTanggalSampai;
+  if (!empty($filterStatus)) $params['status'] = $filterStatus;
+  return '?' . http_build_query($params);
+}
 
 // Cek apakah ada mode edit
 $editMode = false;

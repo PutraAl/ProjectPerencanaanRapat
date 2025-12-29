@@ -12,7 +12,8 @@ $tanggal = mysqli_real_escape_string($mysqli, $_POST['tanggal']);
 $waktu = mysqli_real_escape_string($mysqli, $_POST['waktu']);
 $lokasi = mysqli_real_escape_string($mysqli, $_POST['lokasi']);
 $status = mysqli_real_escape_string($mysqli, $_POST['status']);
-$peserta = $_POST['peserta'];
+$pesertaString = isset($_POST['peserta']) ? trim($_POST['peserta']) : '';
+$peserta = !empty($pesertaString) ? array_map('intval', explode(',', $pesertaString)) : [];
 
 // Validasi data
 if (empty($judul) || empty($tanggal) || empty($waktu) || empty($lokasi) || empty($peserta)) {
