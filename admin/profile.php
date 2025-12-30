@@ -102,9 +102,10 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             <h3 id="nameDisplay"><?= $data['nama'] ?></h3>
             <p id="emailDisplay"><?= $data['email'] ?></p>
             
-            <span class="badge bg-primary">
+            <span class="badge bg-primary mb-2">
             <?= htmlspecialchars($data['role']) ?>
           </span>
+          <br>
 
             <!-- Tombol Edit Profile di bawah tulisan Staff -->
             <button id="editProfileBtn" class="btn btn-primary" data-bs-toggle="modal"
