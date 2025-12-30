@@ -103,7 +103,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             <p id="emailDisplay"><?= $data['email'] ?></p>
             
             <span class="badge bg-primary">
-            <?= htmlspecialchars($row['role']) ?>
+            <?= htmlspecialchars($data['role']) ?>
           </span>
 
             <!-- Tombol Edit Profile di bawah tulisan Staff -->
