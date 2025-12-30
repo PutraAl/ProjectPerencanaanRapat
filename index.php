@@ -163,7 +163,7 @@
 
       <div class="row justify-content-center">
         <div class="col-12 col-md-8">
-          <form method="post" action="../action/insertcontact.php">
+          <form method="post" action="action/insertcontact.php">
             <div class="mb-3" data-aos="fade-up" data-aos-delay="100">
               <label for="email" class="form-label">Email</label>
               <input type="email" name="email" class="form-control" id="email" 

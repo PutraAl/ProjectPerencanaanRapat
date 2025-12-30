@@ -11,7 +11,7 @@ if($query) {
     echo "
     <script>
     alert('Berhasil Melapor, silahkan tunggu respon :)');
-    window.location.href = '../page/index.php';
+    window.location.href = '../index.php';
     </script>
     ";
 }
@@ -19,7 +19,7 @@ else {
         echo "
     <script>
     alert('Laporan gagal dikirim, pastikan isi form dengan benar');
-    window.location.href = '../page/index.php';
+    window.location.href = '../index.php';
     </script>
     ";
 }
