@@ -1,6 +1,6 @@
-<?php 
+<?php
 include "../connection/server.php";
-require_once "../connection/middleware.php" ;
+require_once "../connection/middleware.php";
 middlewareAdmin();
 $id_user = $_SESSION['id_user'];
 $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
@@ -19,11 +19,12 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
- 
+
 </style>
+
 <body>
 
   <!-- Tombol Hamburger -->
@@ -33,46 +34,46 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
 
 
     <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+      <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+      </div>
 
-            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->   
-                <li class="menu-item ">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+      <!-- <ul class="menu"> -->
+      <li class="menu-item ">
+        <i class="fa-solid fa-chart-line"></i>
+        <a href="dashboard.php">Dashboard</a>
+      </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="rapat.php">Rapat</a>
-                </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="rapat.php">Rapat</a>
+      </li>
 
-                
-                <li class="menu-item">
-                    <i class="fa-solid fa-users"></i>
-                    <a href="user.php">User</a>
-                </li>
-                <li class="menu-item active">
-                <i class="fa-solid fa-file-lines"></i>
-                    <a href="contact.php">Contact</a>
-                </li>
-                
-                <li class="menu-item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profile.php">Profil</a>
-                </li>
-                <li class="menu-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <a href="../action/logout.php">Keluar</a>
-                </li>
-            <!-- </ul> -->
-        </div>
+
+      <li class="menu-item">
+        <i class="fa-solid fa-users"></i>
+        <a href="user.php">User</a>
+      </li>
+      <li class="menu-item active">
+        <i class="fa-solid fa-file-lines"></i>
+        <a href="contact.php">Contact</a>
+      </li>
+
+      <li class="menu-item">
+        <i class="fa-solid fa-user"></i>
+        <a href="profile.php">Profil</a>
+      </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <a href="../action/logout.php">Keluar</a>
+      </li>
+      <!-- </ul> -->
+    </div>
     <!-- End Sidebar -->
 
     <!-- MAIN CONTENT -->
@@ -81,90 +82,90 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
       <div class="header">
         <h2 class="page-title">User Management</h2>
 
-           <div class="user-info">
-      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+        <div class="user-info">
+          <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
 
-      <?php if (!empty($data['foto'])): ?>
-        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
-             class="user-avatar-img"
-             alt="Avatar">
-      <?php else: ?>
-        <div class="user-avatar">
-          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+          <?php if (!empty($data['foto'])): ?>
+            <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+              class="user-avatar-img"
+              alt="Avatar">
+          <?php else: ?>
+            <div class="user-avatar">
+              <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+            </div>
+          <?php endif; ?>
         </div>
-      <?php endif; ?>
-    </div>
       </div>
 
 
-     <!-- Ganti bagian ini di file HTML Anda: -->
+      <!-- Ganti bagian ini di file HTML Anda: -->
 
-<div class="border bg-white rounded p-3">
-    <!-- Table Wrapper untuk Responsive -->
-    <div class="table-responsive-wrapper">
-        <table class="table table-hover table-striped" id="myTable">
+      <div class="border bg-white rounded p-3">
+        <!-- Table Wrapper untuk Responsive -->
+        <div class="table-responsive-wrapper">
+          <table class="table table-hover table-striped" id="myTable">
             <thead class="table-primary">
-                <tr>
-                    <th>No</th>
-                    <th>Email</th>
-                    <th>Nama</th>
-                    <th>Action</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th>Email</th>
+                <th>Nama</th>
+                <th>Action</th>
+              </tr>
             </thead>
 
             <tbody id="userTableBody">
-                <?php 
-                    $no = 1;
-                    $data = mysqli_query($mysqli, "SELECT * FROM tb_contact ORDER BY email ASC");
-                    while($row = $data->fetch_array()) {
-                    ?>
+              <?php
+              $no = 1;
+              $data = mysqli_query($mysqli, "SELECT * FROM tb_contact ORDER BY email ASC");
+              while ($row = $data->fetch_array()) {
+              ?>
                 <tr>
-                    <td><?= $no ?></td>
-                    <td><?= $row['email'] ?></td>
-                    <td><?= $row['nama'] ?></td>
-                    <td>
-                        <div >
-                            <button class="view-btn btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#detail-<?= $row['id_contact'] ?>">
-                                Detail
-                            </button>
-                            </div>
-                    </td>
+                  <td><?= $no ?></td>
+                  <td><?= $row['email'] ?></td>
+                  <td><?= $row['nama'] ?></td>
+                  <td>
+                    <div>
+                      <button class="view-btn btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#detail-<?= $row['id_contact'] ?>">
+                        Detail
+                      </button>
+                    </div>
+                  </td>
                 </tr>
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="detail-<?= $row['id_contact'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Keluhan</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <?= $row['keluhan'] ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         <a href="../action/delete_contact.php?id=<?= $row['id_contact'] ?>" name="delete"
-                                class="edit-btn btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">
-                                Delete
-                            </a>
-      </div>
-    </div>
-  </div>
-</div>
-              
+                <!-- Modal -->
+                <div class="modal fade" id="detail-<?= $row['id_contact'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Keluhan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <?= $row['keluhan'] ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="../action/delete_contact.php?id=<?= $row['id_contact'] ?>" name="delete"
+                          class="edit-btn btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">
+                          Delete
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <?php
-                    $no++;
-                    }
-                ?>
+
+              <?php
+                $no++;
+              }
+              ?>
             </tbody>
-        </table>
-    </div>
-</div>
+          </table>
+        </div>
+      </div>
 
 
 

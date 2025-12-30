@@ -1,6 +1,6 @@
-<?php 
+<?php
 include "../connection/server.php";
-require_once "../connection/middleware.php" ;
+require_once "../connection/middleware.php";
 middlewareAdmin();
 $id_user = $_SESSION['id_user'];
 $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
@@ -19,7 +19,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
   <link rel="stylesheet" href="../assets/css/adminpagenew.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -32,44 +32,44 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
 
-            <div class="logo-section">
-                <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
-                <hr class="divider">
-            </div>
+      <div class="logo-section">
+        <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
+        <hr class="divider">
+      </div>
 
-            <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
+      <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->   
-                <li class="menu-item ">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+      <!-- <ul class="menu"> -->
+      <li class="menu-item ">
+        <i class="fa-solid fa-chart-line"></i>
+        <a href="dashboard.php">Dashboard</a>
+      </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="rapat.php">Rapat</a>
-                </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="rapat.php">Rapat</a>
+      </li>
 
-                
-                <li class="menu-item">
-                    <i class="fa-solid fa-users"></i>
-                    <a href="user.php">User</a>
-                </li>
-                <li class="menu-item ">
-                <i class="fa-solid fa-file-lines"></i>
-                    <a href="contact.php">Contact</a>
-                </li>
-                
-                <li class="menu-item active">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profile.php">Profil</a>
-                </li>
-                <li class="menu-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <a href="../action/logout.php">Keluar</a>
-                </li>
-            <!-- </ul> -->
-        </div>
+
+      <li class="menu-item">
+        <i class="fa-solid fa-users"></i>
+        <a href="user.php">User</a>
+      </li>
+      <li class="menu-item ">
+        <i class="fa-solid fa-file-lines"></i>
+        <a href="contact.php">Contact</a>
+      </li>
+
+      <li class="menu-item active">
+        <i class="fa-solid fa-user"></i>
+        <a href="profile.php">Profil</a>
+      </li>
+      <li class="menu-item">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <a href="../action/logout.php">Keluar</a>
+      </li>
+      <!-- </ul> -->
+    </div>
     <!-- End Sidebar -->
 
     <!-- Main Content -->
@@ -80,19 +80,19 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
           <!-- Header -->
           <div class="header">
             <h2 class="page-title">Profile</h2>
-           <div class="user-info">
-      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+            <div class="user-info">
+              <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
 
-      <?php if (!empty($data['foto'])): ?>
-        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
-             class="user-avatar-img"
-             alt="Avatar">
-      <?php else: ?>
-        <div class="user-avatar">
-          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
-        </div>
-      <?php endif; ?>
-    </div>
+              <?php if (!empty($data['foto'])): ?>
+                <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+                  class="user-avatar-img"
+                  alt="Avatar">
+              <?php else: ?>
+                <div class="user-avatar">
+                  <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+                </div>
+              <?php endif; ?>
+            </div>
           </div>
 
           <!-- Form Profil -->
@@ -151,7 +151,7 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             </div>
             <div class="mb-3">
               <label for="positionInput" class="form-label">Gambar</label>
-              <input type="file" name="foto" class="form-control" id="positionInput" >
+              <input type="file" name="foto" class="form-control" id="positionInput">
             </div>
         </div>
 

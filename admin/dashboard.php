@@ -1,6 +1,6 @@
-<?php 
+<?php
 include "../connection/server.php";
-require_once "../connection/middleware.php" ;
+require_once "../connection/middleware.php";
 middlewareAdmin();
 $id_user = $_SESSION['id_user'];
 $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = $id_user")->fetch_array();
@@ -15,12 +15,23 @@ $bulan = [];
 $totalRapat = [];
 
 $namaBulan = [
-    "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    "",
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember"
 ];
 
 while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
-    $bulan[] = $namaBulan[$row['bulan']]; 
+    $bulan[] = $namaBulan[$row['bulan']];
     $totalRapat[] = (int)$row['total'];
 }
 ?>
@@ -54,35 +65,35 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
 
             <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->   
-                <li class="menu-item active">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+            <!-- <ul class="menu"> -->
+            <li class="menu-item active">
+                <i class="fa-solid fa-chart-line"></i>
+                <a href="dashboard.php">Dashboard</a>
+            </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="rapat.php">Rapat</a>
-                </li>
+            <li class="menu-item">
+                <i class="fa-solid fa-envelope"></i>
+                <a href="rapat.php">Rapat</a>
+            </li>
 
-                
-                <li class="menu-item">
-                    <i class="fa-solid fa-users"></i>
-                    <a href="user.php">User</a>
-                </li>
-                <li class="menu-item">
+
+            <li class="menu-item">
+                <i class="fa-solid fa-users"></i>
+                <a href="user.php">User</a>
+            </li>
+            <li class="menu-item">
                 <i class="fa-solid fa-file-lines"></i>
-                    <a href="contact.php">Contact</a>
-                </li>
-                
-                <li class="menu-item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profile.php">Profil</a>
-                </li>
-                <li class="menu-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <a href="../action/logout.php">Keluar</a>
-                </li>
+                <a href="contact.php">Contact</a>
+            </li>
+
+            <li class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <a href="profile.php">Profil</a>
+            </li>
+            <li class="menu-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a href="../action/logout.php">Keluar</a>
+            </li>
             <!-- </ul> -->
         </div>
         <!-- End Sidebar -->
@@ -94,19 +105,19 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
             <div class="header">
                 <h2 class="page-title">Dashboard Admin</h2>
 
-                 <div class="user-info">
-      <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
+                <div class="user-info">
+                    <span class="username"><?= htmlspecialchars($data['nama']) ?></span>
 
-      <?php if (!empty($data['foto'])): ?>
-        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
-             class="user-avatar-img"
-             alt="Avatar">
-      <?php else: ?>
-        <div class="user-avatar">
-          <?= strtoupper(substr($data['nama'], 0, 1)) ?>
-        </div>
-      <?php endif; ?>
-    </div>
+                    <?php if (!empty($data['foto'])): ?>
+                        <img src="../assets//uploads/profile/<?= htmlspecialchars($data['foto']) ?>"
+                            class="user-avatar-img"
+                            alt="Avatar">
+                    <?php else: ?>
+                        <div class="user-avatar">
+                            <?= strtoupper(substr($data['nama'], 0, 1)) ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <!-- Stats -->
@@ -143,9 +154,9 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../assets/js/sidebar.js"></script>
         <script>
-            const totalUser = <?= $allUser -> num_rows ?> ;
-            const totalRapat = <?= $allRapat -> num_rows ?> ;
-            const totalUndangan = <?= $allUndangan -> num_rows ?> ;
+            const totalUser = <?= $allUser->num_rows ?>;
+            const totalRapat = <?= $allRapat->num_rows ?>;
+            const totalUndangan = <?= $allUndangan->num_rows ?>;
             const labelBulan = <?= json_encode($bulan) ?>;
             const dataRapat = <?= json_encode($totalRapat) ?>;
             // Buat chart
@@ -162,7 +173,7 @@ while ($row = mysqli_fetch_assoc($rapatPerBulan)) {
                 }
             });
 
-          
+
 
             new Chart(document.getElementById('bulanChart'), {
                 type: 'line',
