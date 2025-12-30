@@ -2,6 +2,9 @@
 // ===================================
 // MENGAMBIL FILTER DARI GET REQUEST
 // ===================================
+$id_user = $_SESSION['id_user'];
+$data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
+
 $filterTanggalDari   = $_GET['tanggal_dari']   ?? '';
 $filterTanggalSampai = $_GET['tanggal_sampai'] ?? '';
 $filterStatus        = $_GET['status']          ?? '';

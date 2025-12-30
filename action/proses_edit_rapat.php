@@ -79,7 +79,7 @@ if ($queryUpdate) {
     if ($successUpdate && !empty($pesertaBaru)) {
         foreach ($pesertaBaru as $id_user) {
             $id_user = intval($id_user);
-            
+
             // Insert ke database
             $queryUndangan = mysqli_query($mysqli, "INSERT INTO tb_undangan VALUES (NULL, '$id_rapat', '$id_user', 'belum_dikonfirmasi', NULL)");
 
