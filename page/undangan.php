@@ -62,7 +62,8 @@ $queryWithLimit = $query . " LIMIT $offset, $itemsPerPage";
 $data = mysqli_query($mysqli, $queryWithLimit);
 
 // Helper function untuk membuat URL dengan filter & pagination
-function buildPaginationUrl($page, $filterTanggalDari = '', $filterTanggalSampai = '', $filterStatus = '') {
+function buildPaginationUrl($page, $filterTanggalDari = '', $filterTanggalSampai = '', $filterStatus = '')
+{
     $params = ['page' => $page];
     if (!empty($filterTanggalDari)) $params['tanggal_dari'] = $filterTanggalDari;
     if (!empty($filterTanggalSampai)) $params['tanggal_sampai'] = $filterTanggalSampai;
@@ -265,86 +266,86 @@ $pageTitle = "Rapat";
 
                     <!-- Grid Undangan -->
                     <div class="meeting-grid" id="invitations-grid">
-                        <?php 
+                        <?php
                         if (mysqli_num_rows($data) > 0) {
-                            while ($row = mysqli_fetch_assoc($data)) { 
+                            while ($row = mysqli_fetch_assoc($data)) {
                         ?>
-                            <!-- Card 1 -->
-                            <div class="meeting-card">
+                                <!-- Card 1 -->
+                                <div class="meeting-card">
 
-                                <div class="meeting-header">
-                                    <h3><?= $row['judul'] ?></h3>
-                                </div>
-
-                                <div class="rapat-item" data-judul="<?= strtolower($row['judul']) ?>"
-                                    data-tanggal="<?= strtolower($row['tanggal']) ?>" style="width: 330px;">
-                                </div>
-
-                                <div class="meeting-body">
-                                    <div class="meeting-detail-visible">
-
-                                        <div class="meeting-detail">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            <span><?= $row['tanggal'] ?></span>
-                                        </div>
-
-                                        <div class="meeting-detail">
-                                            <i class="fa-solid fa-stopwatch"></i>
-
-                                            <span><?= $row['waktu'] ?></span>
-                                        </div>
-
-                                        <div class="meeting-detail">
-                                            <span class="icon-circle bg-location">
-                                                <i class="fa-solid fa-map-location-dot"></i>
-                                            </span>
-                                            <span><?= $row['lokasi'] ?></span>
-                                        </div>
-
-                                        <div class="meeting-detail"><i>Absensi :</i>
-                                            <span><?= ($row['status_kehadiran'] == 'hadir') ? 'Hadir' : (($row['status_kehadiran'] == 'tidak_hadir') ? 'Tidak Hadir' : 'Belum Dikonfirmasi'); ?></span>
-                                        </div>
-                                        <div class="meeting-detail"><i>Status :</i> <span><?= ucfirst($row['status']) ?></span>
-                                        </div>
-
-                                        <div class="content-hidden" id="detail-wisuda-<?= $row['id_undangan'] ?>">
-                                            <p>
-                                                <?= $row['deskripsi'] ?>
-                                            </p>
-                                        </div>
-                                        <div class="content-hidden" id="detail-notulen-<?= $row['id_undangan'] ?>">
-                                            <p>
-                                                <?= $row['notulen'] ?>
-                                            </p>
-                                        </div>
-
+                                    <div class="meeting-header">
+                                        <h3><?= $row['judul'] ?></h3>
                                     </div>
 
-                                    <?php
-                                    if ($row['status'] != 'selesai') {
-                                    ?>
-                                        <button class="toggle-button"
-                                            onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
-                                            Tampilkan Detail
-                                        </button>
-                                    <?php } else if ($row['status_kehadiran'] == NULL || $row['status_kehadiran'] == 'tidak_hadir' || $row['status_kehadiran'] == 'belum_dikonfirmasi') { ?>
+                                    <div class="rapat-item" data-judul="<?= strtolower($row['judul']) ?>"
+                                        data-tanggal="<?= strtolower($row['tanggal']) ?>" style="width: 330px;">
+                                    </div>
 
-                                        <form action="../action/konfirmasi_kehadiran.php" method="post">
-                                            <input type="hidden" name="id_user" value="<?= $id_user ?>">
-                                            <input type="hidden" name="id_undangan" value="<?= $row['id_undangan'] ?>">
-                                            <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi Kehadiran</button>
-                                        </form>
-                                    <?php } else if ($row['status'] == 'selesai') { ?>
+                                    <div class="meeting-body">
+                                        <div class="meeting-detail-visible">
 
-                                        <a href="notulen.php?id=<?= $row['id_rapat'] ?>" class="btn btn-primary w-100  ">
-                                            Lihat Notulen
-                                        </a>
+                                            <div class="meeting-detail">
+                                                <i class="fa-solid fa-calendar-days"></i>
+                                                <span><?= $row['tanggal'] ?></span>
+                                            </div>
 
-                                    <?php  } ?>
+                                            <div class="meeting-detail">
+                                                <i class="fa-solid fa-stopwatch"></i>
+
+                                                <span><?= $row['waktu'] ?></span>
+                                            </div>
+
+                                            <div class="meeting-detail">
+                                                <span class="icon-circle bg-location">
+                                                    <i class="fa-solid fa-map-location-dot"></i>
+                                                </span>
+                                                <span><?= $row['lokasi'] ?></span>
+                                            </div>
+
+                                            <div class="meeting-detail"><i>Absensi :</i>
+                                                <span><?= ($row['status_kehadiran'] == 'hadir') ? 'Hadir' : (($row['status_kehadiran'] == 'tidak_hadir') ? 'Tidak Hadir' : 'Belum Dikonfirmasi'); ?></span>
+                                            </div>
+                                            <div class="meeting-detail"><i>Status :</i> <span><?= ucfirst($row['status']) ?></span>
+                                            </div>
+
+                                            <div class="content-hidden" id="detail-wisuda-<?= $row['id_undangan'] ?>">
+                                                <p>
+                                                    <?= $row['deskripsi'] ?>
+                                                </p>
+                                            </div>
+                                            <div class="content-hidden" id="detail-notulen-<?= $row['id_undangan'] ?>">
+                                                <p>
+                                                    <?= $row['notulen'] ?>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <?php
+                                        if ($row['status'] != 'selesai') {
+                                        ?>
+                                            <button class="toggle-button"
+                                                onclick="toggleDetail('detail-wisuda-<?= $row['id_undangan'] ?>')">
+                                                Tampilkan Detail
+                                            </button>
+                                        <?php } else if ($row['status_kehadiran'] == NULL || $row['status_kehadiran'] == 'tidak_hadir' || $row['status_kehadiran'] == 'belum_dikonfirmasi') { ?>
+
+                                            <form action="../action/konfirmasi_kehadiran.php" method="post">
+                                                <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                                                <input type="hidden" name="id_undangan" value="<?= $row['id_undangan'] ?>">
+                                                <button type="submit" name="absen_user" class="btn btn-success w-100 my-2">Konfirmasi Kehadiran</button>
+                                            </form>
+                                        <?php } else if ($row['status'] == 'selesai') { ?>
+
+                                            <a href="notulen.php?id=<?= $row['id_rapat'] ?>" class="btn btn-primary w-100  ">
+                                                Lihat Notulen
+                                            </a>
+
+                                        <?php  } ?>
+                                    </div>
                                 </div>
-                            </div>
 
-                        <?php 
+                        <?php
                             }
                         } else {
                             echo '<div class="alert alert-warning text-center col-12">⚠️ Tidak ada undangan rapat ditemukan</div>';
@@ -356,50 +357,50 @@ $pageTitle = "Rapat";
 
                     <!-- PAGINATION -->
                     <?php if ($totalPages > 1): ?>
-                    <div class="pagination-container">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <!-- Previous Button -->
-                                <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus) ?>">
-                                        ← Sebelumnya
-                                    </a>
-                                </li>
+                        <div class="pagination-container">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <!-- Previous Button -->
+                                    <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                                        <a class="page-link" href="<?= buildPaginationUrl(max(1, $currentPage - 1), $filterTanggalDari, $filterTanggalSampai, $filterStatus) ?>">
+                                            ← Sebelumnya
+                                        </a>
+                                    </li>
 
-                                <!-- Page Numbers -->
-                                <?php
-                                $startPage = max(1, $currentPage - 2);
-                                $endPage = min($totalPages, $currentPage + 2);
+                                    <!-- Page Numbers -->
+                                    <?php
+                                    $startPage = max(1, $currentPage - 2);
+                                    $endPage = min($totalPages, $currentPage + 2);
 
-                                if ($startPage > 1) {
-                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">1</a></li>';
-                                    if ($startPage > 2) {
-                                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                    if ($startPage > 1) {
+                                        echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl(1, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">1</a></li>';
+                                        if ($startPage > 2) {
+                                            echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                        }
                                     }
-                                }
 
-                                for ($page = $startPage; $page <= $endPage; $page++) {
-                                    $active = ($page === $currentPage) ? 'active' : '';
-                                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $page . '</a></li>';
-                                }
-
-                                if ($endPage < $totalPages) {
-                                    if ($endPage < $totalPages - 1) {
-                                        echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                    for ($page = $startPage; $page <= $endPage; $page++) {
+                                        $active = ($page === $currentPage) ? 'active' : '';
+                                        echo '<li class="page-item ' . $active . '"><a class="page-link" href="' . buildPaginationUrl($page, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $page . '</a></li>';
                                     }
-                                    echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $totalPages . '</a></li>';
-                                }
-                                ?>
-                            </ul>
-                        </nav>
 
-                        <!-- Info Pagination -->
-                        <div class="pagination-info text-center text-muted">
-                            Menampilkan data <?= (($currentPage - 1) * $itemsPerPage) + 1 ?> - 
-                            <?= min($currentPage * $itemsPerPage, $totalData) ?> 
-                            dari <?= $totalData ?> data
+                                    if ($endPage < $totalPages) {
+                                        if ($endPage < $totalPages - 1) {
+                                            echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                        }
+                                        echo '<li class="page-item"><a class="page-link" href="' . buildPaginationUrl($totalPages, $filterTanggalDari, $filterTanggalSampai, $filterStatus) . '">' . $totalPages . '</a></li>';
+                                    }
+                                    ?>
+                                </ul>
+                            </nav>
+
+                            <!-- Info Pagination -->
+                            <div class="pagination-info text-center text-muted">
+                                Menampilkan data <?= (($currentPage - 1) * $itemsPerPage) + 1 ?> -
+                                <?= min($currentPage * $itemsPerPage, $totalData) ?>
+                                dari <?= $totalData ?> data
+                            </div>
                         </div>
-                    </div>
                     <?php endif; ?>
 
                 </div>

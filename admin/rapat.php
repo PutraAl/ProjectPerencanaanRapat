@@ -1,7 +1,6 @@
 <?php
 include "../connection/server.php";
 require_once "../action/data_rapat.php";
-require_once "../action/js_rapat.php";
 require_once "../connection/middleware.php";
 middlewareAdmin();
 ?>
@@ -204,7 +203,7 @@ middlewareAdmin();
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="meeting-date" class="form-label">Tanggal <span class="text-danger">*</span></label>
-                    <input type="date" name="tanggal" id="meeting-date" class="form-control" required>
+                    <input type="date" name="tanggal" id="meeting-date" class="form-control" min="<?= date('Y-m-d') ?>" required>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="meeting-time" class="form-label">Waktu <span class="text-danger">*</span></label>
@@ -388,13 +387,16 @@ middlewareAdmin();
                 <div class="meeting-header"><?= htmlspecialchars($row['judul']) ?></div>
                 <div class="meeting-body">
                   <div class="meeting-detail">
-                    <i>📅</i> <?= date('d M Y', strtotime($row['tanggal'])) ?>, <?= date('H:i', strtotime($row['waktu'])) ?>
+                    <i class="fa-solid fa-calendar-days"></i>
+                  <?= date('d M Y', strtotime($row['tanggal'])) ?>, <?= date('H:i', strtotime($row['waktu'])) ?>
                   </div>
                   <div class="meeting-detail">
-                    <i>📍</i> <?= htmlspecialchars($row['lokasi']) ?>
+                  <i class="fa-solid fa-map-location-dot"></i>
+                   <?= htmlspecialchars($row['lokasi']) ?>
                   </div>
                   <div class="meeting-detail">
-                    <i>👥</i> <?= $jumlahPeserta ?> Peserta
+                    <i class="fa-solid fa-calendar-days"></i>
+                  <?= $jumlahPeserta ?> Peserta
                   </div>
                   <div class="meeting-detail">
                     <i></i> Status:
@@ -408,8 +410,9 @@ middlewareAdmin();
                   </div>
                   <?php if (!empty($row['notulen'])): ?>
                     <div class="meeting-detail">
-                      <i>📝</i> <strong>Notulen:</strong>
-                      <?= substr($row['notulen'], 0, 80) ?><?= strlen($row['notulen']) > 80 ? '...' : '' ?>
+                    <i class="fa-solid fa-book"></i> 
+                    <strong>Notulen:</strong>
+                      <?= substr(htmlspecialchars($row['notulen']), 0, 80) ?><?= strlen($row['notulen']) > 80 ? '...' : '' ?>
                     </div>
                   <?php endif; ?>
                   <div class="button-group">
@@ -497,9 +500,9 @@ middlewareAdmin();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-
-  </script>
+<?php 
+include "../action/js_rapat.php";
+?>
 
 </body>
 
