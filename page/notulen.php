@@ -57,7 +57,7 @@ $pageTitle = "Notulen";
     <div class="container-fluid d-flex p-0">
 
         <!-- Sidebar -->
-         <div class="sidebar" id="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="logo-section">
                 <img src="../assets/img/poltek.png" alt="Logo" class="logo-img">
                 <hr class="divider">
@@ -65,31 +65,31 @@ $pageTitle = "Notulen";
 
             <div class="logo fs-4 text-center fw-bold">Meeting Kampus</div>
 
-            <!-- <ul class="menu"> -->   
-                <li class="menu-item ">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
+            <!-- <ul class="menu"> -->
+            <li class="menu-item ">
+                <i class="fa-solid fa-chart-line"></i>
+                <a href="dashboard.php">Dashboard</a>
+            </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="undangan.php">Rapat</a>
-                </li>
+            <li class="menu-item">
+                <i class="fa-solid fa-envelope"></i>
+                <a href="undangan.php">Rapat</a>
+            </li>
 
             <li class="menu-item active">
                 <i class="fa-solid fa-file-lines"></i>
                 <a href="notulen.php">Notulen</a>
             </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profil.php">Profil</a>
-                </li>
+            <li class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <a href="profil.php">Profil</a>
+            </li>
 
-                <li class="menu-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <a href="../action/logout.php">Keluar</a>
-                </li>
+            <li class="menu-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a href="../action/logout.php">Keluar</a>
+            </li>
             <!-- </ul> -->
         </div>
         <!-- End Sidebar -->
@@ -104,54 +104,54 @@ $pageTitle = "Notulen";
 
                 <!-- Detail Notulen -->
                 <?php if (isset($rapat)) { ?>
-                <div class="card mb-3 notulen-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?></strong>
-                            <p class="notulen-meta mb-0">
-                                <?= htmlspecialchars($rapat['tanggal']) ?> |
-                                <?= htmlspecialchars($rapat['waktu']) ?>
-                            </p>
+                    <div class="card mb-3 notulen-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Notulen Rapat: <?= htmlspecialchars($rapat['judul']) ?></strong>
+                                <p class="notulen-meta mb-0">
+                                    <?= htmlspecialchars($rapat['tanggal']) ?> |
+                                    <?= htmlspecialchars($rapat['waktu']) ?>
+                                </p>
+                            </div>
+                            <a href="download_notulen_pdf.php?id=<?= $id_rapat ?>" class="btn btn-outline-success btn-sm">
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+
+
                         </div>
-                        <a href="download_notulen_pdf.php?id=<?= $id_rapat ?>" class="btn btn-outline-success btn-sm">
-                            <i class="fa-solid fa-download"></i>
-                        </a>
 
+                        <div class="notulen-preview" id="notulenContent">
+                            <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
+                        </div>
 
                     </div>
-
-                    <div class="notulen-preview" id="notulenContent">
-                        <?= nl2br(htmlspecialchars($rapat['notulen'])) ?>
-                    </div>
-
-                </div>
                 <?php } ?>
 
                 <!-- Rapat Terlaksana -->
                 <div class="card shadow-sm">
                     <h4 class="card-title mb-3">Rapat Terlaksana</h4>
-                    <?php 
-                    if($rapatSelesai->num_rows>0) {
+                    <?php
+                    if ($rapatSelesai->num_rows > 0) {
                     ?>
 
-                    <ul class="meeting-list">
-                        <?php while ($row = mysqli_fetch_assoc($rapatSelesai)) { ?>
-                        <li class="meeting-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
-                                <small><?= htmlspecialchars($row['tanggal']) ?>,
-                                    <?= htmlspecialchars($row['waktu']) ?></small>
-                            </div>
+                        <ul class="meeting-list">
+                            <?php while ($row = mysqli_fetch_assoc($rapatSelesai)) { ?>
+                                <li class="meeting-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong><?= htmlspecialchars($row['judul']) ?></strong><br>
+                                        <small><?= htmlspecialchars($row['tanggal']) ?>,
+                                            <?= htmlspecialchars($row['waktu']) ?></small>
+                                    </div>
 
-                            <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
-                                class="btn btn-outline-success btn-sm icon-btn">
-                                <i class="fa-solid fa-file-lines"></i> Lihat Notulen
-                            </a>
-                        </li>
-                        <?php } ?>
-                    </ul>
-                    <?php }else {?>
-                    Notulen rapat tidak tersedia
+                                    <a href="notulen.php?id=<?= $row['id_rapat']; ?>"
+                                        class="btn btn-outline-success btn-sm icon-btn">
+                                        <i class="fa-solid fa-file-lines"></i> Lihat Notulen
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    <?php } else { ?>
+                        Notulen rapat tidak tersedia
                     <?php } ?>
                 </div>
 
