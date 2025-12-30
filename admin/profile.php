@@ -101,7 +101,10 @@ $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'"
             <!-- <img src="https://via.placeholder.com/120" alt="Profile Picture"> -->
             <h3 id="nameDisplay"><?= $data['nama'] ?></h3>
             <p id="emailDisplay"><?= $data['email'] ?></p>
-            <p id="positionDisplay"><?= $data['role'] ?></p>
+            
+            <span class="badge bg-primary">
+            <?= htmlspecialchars($row['role']) ?>
+          </span>
 
             <!-- Tombol Edit Profile di bawah tulisan Staff -->
             <button id="editProfileBtn" class="btn btn-primary" data-bs-toggle="modal"

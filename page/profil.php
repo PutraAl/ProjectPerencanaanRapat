@@ -290,11 +290,7 @@ $pageTitle = "Profil";
 
             <div class="mb-3">
               <label for="emailInput" class="form-label">Password</label>
-              <input type="text" class="form-control" name="password" id="password">
-            </div>
-            <div class="mb-3">
-              <label for="positionInput" class="form-label">Jabatan</label>
-              <input type="text" class="form-control" id="positionInput" value="<?= $row['role'] ?>" readonly>
+              <input type="password" class="form-control" name="password" id="password">
             </div>
         </div>
 

@@ -4,15 +4,10 @@
 // ===================================
 $id_user = $_SESSION['id_user'];
 $data = mysqli_query($mysqli, "SELECT * FROM tb_user where id_user = '$id_user'")->fetch_array();
-
 $filterTanggalDari   = $_GET['tanggal_dari']   ?? '';
 $filterTanggalSampai = $_GET['tanggal_sampai'] ?? '';
 $filterStatus        = $_GET['status']          ?? '';
 $filterSearch        = $_GET['search']          ?? '';
-
-// ===================================
-// BUILD QUERY DENGAN FILTER & SEARCH
-// ===================================
 $query = "SELECT * FROM tb_rapat WHERE 1=1";
 
 // Filter tanggal dari
