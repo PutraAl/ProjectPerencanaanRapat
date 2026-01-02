@@ -12,5 +12,6 @@ Project Based Learning (PBL) Sistem Pengelolaan Rapat ini berfungsi sebagai Medi
 1. Clone repository
 2. Gunakan database yang telah disediakan
 3. Ke folder 'action/tambah_rapat.php' dan 'action/prosesedit_rapat.php'
-4. Setelah itu masukkan isi $SENDGRID_API_KEY = '' dengan  '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' agar notifikasi dapat terkirim melalui email
+4. Setelah itu masukkan isi $SENDGRID_API_KEY = '' dengan API yang ada (hubungi owner untuk meminta api) agar notifikasi dapat terkirim melalui email
 5. Selamat menggunakan :)
+
