@@ -3,7 +3,7 @@ include "../connection/server.php";
 require_once "../services/SendGridService.php";
 
 // API Key SendGrid 
-// $SENDGRID_API_KEY = '';
+$SENDGRID_API_KEY = '';
 
 // Ambil data dari form
 $id_rapat = mysqli_real_escape_string($mysqli, $_POST['id_rapat']);
